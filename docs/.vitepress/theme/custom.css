@@ -1,0 +1,309 @@
+/* NetworkMastery Custom Theme */
+
+:root {
+  /* 颜色方案 */
+  --vp-c-brand: #0066cc;
+  --vp-c-brand-light: #0088ff;
+  --vp-c-brand-lighter: #4da3ff;
+  --vp-c-brand-dark: #0052a3;
+  --vp-c-brand-darker: #003d7a;
+  
+  /* 背景颜色 */
+  --vp-c-bg: #ffffff;
+  --vp-c-bg-soft: #f9f9f9;
+  --vp-c-bg-mute: #f3f3f3;
+  
+  /* 文字颜色 */
+  --vp-c-text-1: #1e1e20;
+  --vp-c-text-2: #565656;
+  --vp-c-text-3: #8e8e93;
+  
+  /* 边框颜色 */
+  --vp-c-divider: #e5e5e7;
+}
+
+/* 暗色模式 */
+.dark {
+  --vp-c-bg: #1a1a1a;
+  --vp-c-bg-soft: #222;
+  --vp-c-bg-mute: #2a2a2a;
+  
+  --vp-c-text-1: #f5f5f5;
+  --vp-c-text-2: #d0d0d0;
+  --vp-c-text-3: #8a8a8a;
+}
+
+/* 首页英雄区域样式 */
+.VPHero {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.VPHero .name {
+  background: linear-gradient(to right, #00d4ff, #7928ca);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 900;
+  font-size: 3em;
+  letter-spacing: -0.02em;
+}
+
+.VPHero .text {
+  color: #ffffff;
+  font-size: 1.3em;
+  font-weight: 500;
+  margin-top: 0.5em;
+}
+
+/* 功能卡片样式 */
+.VPFeature {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border: none;
+  border-radius: 12px;
+  padding: 2em;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.VPFeature:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 24px rgba(102, 126, 234, 0.4);
+}
+
+.VPFeature .icon {
+  font-size: 2.5em;
+  margin-bottom: 1em;
+}
+
+.VPFeature .title {
+  font-size: 1.2em;
+  font-weight: 700;
+  margin-bottom: 0.5em;
+  color: #0066cc;
+}
+
+.VPFeature .details {
+  color: #565656;
+  line-height: 1.6;
+}
+
+.dark .VPFeature .title {
+  color: #4da3ff;
+}
+
+.dark .VPFeature .details {
+  color: #d0d0d0;
+}
+
+/* 导航栏样式 */
+.VPNav {
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.8));
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(0, 102, 204, 0.1);
+}
+
+.dark .VPNav {
+  background: linear-gradient(to bottom, rgba(26, 26, 26, 0.95), rgba(26, 26, 26, 0.8));
+  border-bottom: 1px solid rgba(77, 163, 255, 0.1);
+}
+
+/* 按钮样式 */
+.VPButton {
+  border-radius: 8px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  padding: 0.8em 2em;
+}
+
+.VPButton.brand {
+  background: linear-gradient(to right, #667eea, #764ba2);
+  border: none;
+  color: white;
+}
+
+.VPButton.brand:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(102, 126, 234, 0.4);
+}
+
+.VPButton.alt {
+  border: 2px solid #0066cc;
+  color: #0066cc;
+  background: transparent;
+}
+
+.VPButton.alt:hover {
+  background: rgba(0, 102, 204, 0.1);
+}
+
+/* 代码块样式 */
+.vp-code-block {
+  border-radius: 8px;
+  background: #1e1e20;
+  border: 1px solid #e5e5e7;
+}
+
+.dark .vp-code-block {
+  background: #222;
+  border: 1px solid #3a3a3a;
+}
+
+/* 链接样式 */
+a {
+  color: #0066cc;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: #0088ff;
+  text-decoration: underline;
+}
+
+.dark a {
+  color: #4da3ff;
+}
+
+.dark a:hover {
+  color: #7fb3ff;
+}
+
+/* 侧边栏样式 */
+.VPSidebarLink {
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.VPSidebarLink:hover,
+.VPSidebarLink.active {
+  background: rgba(0, 102, 204, 0.1);
+  color: #0066cc;
+}
+
+.dark .VPSidebarLink:hover,
+.dark .VPSidebarLink.active {
+  background: rgba(77, 163, 255, 0.1);
+  color: #4da3ff;
+}
+
+/* 标题样式 */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+h1 {
+  color: #0066cc;
+  font-size: 2em;
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
+}
+
+.dark h1 {
+  color: #4da3ff;
+}
+
+/* 引用块样式 */
+blockquote {
+  border-left: 4px solid #0066cc;
+  background: rgba(0, 102, 204, 0.05);
+  padding: 1em;
+  border-radius: 4px;
+}
+
+.dark blockquote {
+  background: rgba(77, 163, 255, 0.05);
+  border-left-color: #4da3ff;
+}
+
+/* 表格样式 */
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1em 0;
+}
+
+table th {
+  background: rgba(0, 102, 204, 0.1);
+  color: #0066cc;
+  font-weight: 700;
+  padding: 0.8em;
+  text-align: left;
+}
+
+table td {
+  border-bottom: 1px solid #e5e5e7;
+  padding: 0.8em;
+}
+
+table tr:hover {
+  background: rgba(0, 102, 204, 0.05);
+}
+
+.dark table th {
+  background: rgba(77, 163, 255, 0.1);
+  color: #4da3ff;
+}
+
+.dark table td {
+  border-bottom-color: #3a3a3a;
+}
+
+.dark table tr:hover {
+  background: rgba(77, 163, 255, 0.05);
+}
+
+/* Mermaid 图表样式 */
+.mermaid {
+  display: flex;
+  justify-content: center;
+  background: #f9f9f9;
+  padding: 2em;
+  border-radius: 8px;
+  margin: 1.5em 0;
+  border: 1px solid #e5e5e7;
+}
+
+.dark .mermaid {
+  background: #222;
+  border-color: #3a3a3a;
+}
+
+/* 主容器样式 */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2em;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .VPHero .name {
+    font-size: 2em;
+  }
+  
+  .VPHero .text {
+    font-size: 1em;
+  }
+  
+  .VPButton {
+    padding: 0.6em 1.5em;
+    font-size: 0.9em;
+  }
+}
+
+/* 动画效果 */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.VPHome {
+  animation: fadeIn 0.6s ease-out;
+}

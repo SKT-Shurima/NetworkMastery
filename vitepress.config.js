@@ -1,8 +1,8 @@
 import { defineConfig } from 'vitepress'
 
 export default defineConfig({
-  title: '网络知识详解',
-  description: '深入探讨网络架构与 SD-WAN 技术',
+  title: 'NetworkMastery',
+  description: '网络知识完全掌握 | 从 OSI 七层到 SD-WAN 智能路由的深度解析',
   lang: 'zh-CN',
   ignoreDeadLinks: true,
   
@@ -10,6 +10,13 @@ export default defineConfig({
     logo: '🌐',
     siteTitle: 'NetworkMastery',
     logoLink: '/',
+    
+    // 品牌色配置
+    colors: {
+      primary: '#0066cc',
+      secondary: '#00cc88',
+      danger: '#ff3333'
+    },
     
     nav: [
       { text: '首页', link: '/' },
