@@ -1,0 +1,49 @@
+site_name: 网络知识详解
+site_description: 深入探讨网络架构与 SD-WAN 技术
+theme:
+  name: material
+  language: zh
+  palette:
+    scheme: slate
+    primary: blue
+    accent: cyan
+  features:
+    - navigation.tabs
+    - navigation.instant
+    - toc.integrate
+
+nav:
+  - 首页: index.md
+  - 网络基础:
+    - OSI 七层模型: 1-basic/osi.md
+    - TCP/IP 协议栈: 1-basic/tcpip.md
+    - IP 寻址与路由: 1-basic/routing.md
+  - 企业网络架构:
+    - 传统网络架构演进: 2-enterprise/traditional.md
+    - 广域网 (WAN): 2-enterprise/wan.md
+    - 云网融合: 2-enterprise/cloud.md
+  - SD-WAN 深度分析:
+    - SD-WAN 概念与价值: 3-sdwan/concepts.md
+    - SD-WAN 架构与控制面: 3-sdwan/architecture.md
+    - 智能路由与流量优化: 3-sdwan/routing.md
+    - SD-WAN 安全设计: 3-sdwan/security.md
+    - SD-WAN 实战案例: 3-sdwan/cases.md
+  - 网络管理与运维:
+    - 网络监控与可观测性: 4-ops/monitoring.md
+    - 故障排查方法论: 4-ops/troubleshooting.md
+  - 常见问题解答: faq.md
+
+markdown_extensions:
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.emoji
+  - pymdownx.tasklist
+  - tables
+  - toc
+
+plugins:
+  - search
+  - minify
