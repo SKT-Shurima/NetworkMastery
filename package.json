@@ -1,0 +1,14 @@
+{
+  "name": "network-knowledge",
+  "version": "1.0.0",
+  "description": "Deep dive into network architecture and SD-WAN technology",
+  "scripts": {
+    "dev": "vitepress dev docs",
+    "build": "vitepress build docs",
+    "preview": "vitepress preview docs"
+  },
+  "devDependencies": {
+    "vitepress": "^1.0.0",
+    "vue": "^3.3.0"
+  }
+}
