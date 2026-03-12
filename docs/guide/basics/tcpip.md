@@ -1031,6 +1031,640 @@ TCP/IP 协议栈之所以统治了 30 年，核心在于：
 
 ---
 
+## 第七部分：TCP 滑动窗口深度机制
+
+### 为什么需要滑动窗口？
+
+想象两个人对话：
+
+```
+朴素方式（停等）：
+A: "你好"  ------>  B 接收并回复
+A: <------ "你好"
+A: "今天天气真好"  ------>  B 接收并回复
+A: <------ "是啊"
+
+效率：太低！每说一句都要等待。
+
+滑动窗口方式（批量发送）：
+A: "你好 / 今天天气真好 / 晚上见"  ------>  B 一次性接收
+B: <------ 一次性回复 "你好 / 是啊 / 好的"
+
+效率：高 3 倍！
+```
+
+**滑动窗口的核心概念**：
+
+```
+发送方缓冲区的四个区间：
+
+┌─────────────────────────────────────────────────┐
+│                                                 │
+│  ┌──────┬──────────┬──────────┬──────────────┐ │
+│  │ 已发 │ 已发未确 │ 未发可发 │  未发不可发  │ │
+│  │      │          │          │              │ │
+│  │ 数据 │  数据    │  数据    │    数据      │ │
+│  └──────┴──────────┴──────────┴──────────────┘ │
+│    ▲                ▲
+│    SND.UNA           SND.NXT
+│                      (window 指针)
+└─────────────────────────────────────────────────┘
+
+可用窗口大小 = SND.WND - (SND.NXT - SND.UNA)
+```
+
+### 滑动窗口工作机制详解
+
+**完整的发送-接收-确认流程**：
+
+```mermaid
+sequenceDiagram
+    participant Sender as 发送方
+    participant Recv as 接收方
+    
+    Note over Sender,Recv: 初始状态
+    Sender->>Recv: SYN, 初始 SEQ=1000
+    Recv->>Sender: SYN+ACK, ACK=1001, Window=10000
+    Sender->>Recv: ACK=1001
+    Note right of Sender: SND.WND=10000, SND.UNA=1001, SND.NXT=1001
+    
+    Note over Sender,Recv: 发送数据块 1 (1000 字节)
+    Sender->>Recv: SEQ=1001~2000, 1000 bytes
+    Note right of Sender: SND.NXT=2001, 可用窗口=9000
+    
+    Note over Sender,Recv: 继续发送数据块 2 (3000 字节)
+    Sender->>Recv: SEQ=2001~5000, 3000 bytes
+    Note right of Sender: SND.NXT=5001, 可用窗口=6000
+    
+    Note over Sender,Recv: 继续发送数据块 3 (6000 字节)
+    Sender->>Recv: SEQ=5001~11000, 6000 bytes
+    Note right of Sender: SND.NXT=11001, 可用窗口=0
+    Note right of Sender: ⚠️ 窗口耗尽！无法继续发送
+    
+    Note over Recv: 应用层太慢，只读取了 2000 字节
+    Recv->>Sender: ACK=3001, Window=8000
+    Note right of Sender: SND.UNA=3001, 可用窗口=8000
+    
+    Note right of Sender: 可以继续发送了！
+```
+
+### 接收方的滑动窗口
+
+```
+接收方缓冲区的三个区间：
+
+┌─────────────────────────────────┐
+│                                 │
+│  ┌──────┬────────┬────────────┐ │
+│  │ 已收 │ 已收   │  未收      │ │
+│  │ 已确 │ 未确认 │  可接收    │ │
+│  └──────┴────────┴────────────┘ │
+│                   ▲
+│                   RCV.NXT
+│                   (期望的下一个序列号)
+└─────────────────────────────────┘
+
+接收窗口大小 = RCV.WND - (已接收未确认的字节数)
+```
+
+**关键点**：
+- 发送方的 `SND.WND` 是由接收方通过 ACK 报文中的 Window 字段告知的
+- 接收方的 `RCV.WND` 是操作系统根据应用层消费速度动态调整的
+- 如果应用层处理太慢，`RCV.WND` 会不断缩小
+- 最终可能导致发送方窗口为 0（窗口关闭）
+
+### 窗口关闭的危险：死锁现象
+
+```
+场景：应用层处理速度极慢
+
+时间  发送方状态               接收方状态
+────  ─────────────            ─────────────
+T0    可用窗口=100            可接收=100
+      发送 100 字节数据   ──→  
+                          ←──  ACK, Window=0
+T1    可用窗口=0
+      ⚠️ 无法发送任何数据！    应用层进行处理...
+      
+T2    ⏳ 等待             应用层处理完 50 字节
+                          准备发送 ACK, Window=50
+                          
+      ✋ 但这个 ACK 丢失了！
+      
+T∞    ⚠️ 发送方永远等待
+      接收方不知道发送方在等待
+      
+      💀 死锁！互相等待，没人先动
+```
+
+**TCP 的解决方案：持续定时器（Persist Timer）**
+
+```mermaid
+graph TD
+    A["发送方收到 Window=0"] -->|启动持续定时器<br/>通常 5-60秒| B["发送窗口探测报文<br/>Window Probe"]
+    B -->|到达接收方| C["接收方响应 ACK<br/>报告最新 Window 值"]
+    C -->|Window > 0| D["发送方恢复发送"]
+    C -->|Window = 0| E["重新启动定时器<br/>继续探测"]
+    
+    F["3 次窗口探测后<br/>Window 仍为 0"] -->|某些实现| G["发送 RST<br/>关闭连接"]
+    
+    style A fill:#FFB6C1
+    style B fill:#FFA500
+    style D fill:#90EE90
+    style G fill:#FF6347
+```
+
+### 糊涂窗口综合症（Silly Window Syndrome）
+
+**问题定义**：
+
+接收方因为应用层缓慢消费，导致窗口不断缩小。每次只能发送几个字节的数据，但 TCP/IP 头部就占 40 字节。
+
+```
+场景：
+
+初始状态：
+  接收缓冲区大小 = 64,000 字节
+  应用层消费速度 = 1 字节/秒
+  
+流程：
+  T=0s:   接收 1000 字节，缓冲区剩余 63,000，Window=63,000
+  T=1s:   应用层读取 1 字节，缓冲区剩余 62,999，Window=62,999
+  T=2s:   应用层读取 1 字节，缓冲区剩余 62,998，Window=62,998
+  ...
+  
+发送方看到窗口在 62,999 → 62,998 → 62,997 变化
+每次只能发送 1 字节！
+
+数据利用率：
+  有效数据 = 1 字节
+  TCP/IP 头 = 40 字节
+  效率 = 1/(1+40) = 2.4% 🤦‍♂️
+```
+
+**Nagle 算法的救赎**（发送方解决方案）
+
+```javascript
+// Nagle 算法的伪代码
+if 尚有未确认的数据:
+    缓冲新数据，不立即发送
+else if 新数据大小 >= MSS:
+    立即发送
+else if 收到了一个 ACK:
+    发送缓冲中的数据
+else:
+    继续等待
+```
+
+**接收方的解决方案**
+
+```
+当接收窗口 < min(MSS, 缓冲区大小/2) 时：
+    向发送方通告 Window=0
+    
+等到：
+    接收窗口 >= MSS    或
+    接收缓冲区有 >= 50% 空间
+    
+才向发送方通告 Window > 0
+```
+
+**实际测试**：
+
+```bash
+# 禁用 Nagle 算法（用于像 SSH 这样需要低延迟的应用）
+setsockopt(sock, IPPROTO_TCP, TCP_NODELAY, 1)
+
+# 应用场景：
+# - SSH：需要按键即响应，否则卡顿难受
+# - Web 推送：需要立即响应客户端
+# 
+# 不应禁用的场景：
+# - HTTP 文件下载：Nagle 可以合并小数据包
+# - 数据库查询：可以等待数据积累再发送
+```
+
+---
+
+## 第八部分：拥塞控制的四个算法详解
+
+### 拥塞窗口 vs 接收窗口
+
+```
+发送窗口大小 = min(CWND, RWND)
+           ↑      ↑        ↑
+      实际      拥塞窗口  接收窗口
+      发送窗口  (我能发多少) (对方能收多少)
+```
+
+**类比**：
+
+```
+CWND = 自来水公司的流量限制（防止网络拥塞）
+RWND = 你家水桶的大小（防止淹没接收方）
+
+发送窗口 = min(流量限制, 水桶大小)
+```
+
+### 慢启动（Slow Start）
+
+**为什么叫"慢"？**
+
+```
+不是因为网络慢，而是因为：
+1. 新连接不知道网络状况
+2. 不敢一开始就发全速
+3. 谨慎地探测网络容量
+```
+
+**指数增长阶段**：
+
+```
+轮次  CWND    发送包数
+────  ─────   ────────
+1     1 MSS   1
+      收到 ACK → CWND = 1 + 1 = 2
+      
+2     2 MSS   2
+      收到 2 个 ACK → CWND = 2 + 2 = 4
+      
+3     4 MSS   4
+      收到 4 个 ACK → CWND = 4 + 4 = 8
+      
+4     8 MSS   8
+      收到 8 个 ACK → CWND = 8 + 8 = 16
+
+规律：CWND = CWND + 1 (对于每个 ACK)
+     相当于：CWND *= 2 (每个 RTT)
+```
+
+**可视化**：
+
+```
+CWND
+  │
+  │                    ╱╱
+  │                 ╱╱
+16├───────────  ╱╱
+  │           ╱╱
+  │        ╱╱
+ 8├──  ╱╱
+  │   ╱╱
+ 4├╱╱
+  │╱
+ 2├
+  │
+ 1├
+  │
+  └──────────────────────
+    1  2  3  4   RTT
+    
+    ↑
+    ssthresh 阈值
+    (当 CWND 达到时，转入拥塞避免)
+```
+
+### 拥塞避免（Congestion Avoidance）
+
+**从指数增长到线性增长**：
+
+```
+当 CWND >= ssthresh 时触发
+
+CWND 增长规则：
+  CWND = CWND + 1/CWND (对于每个 ACK)
+  
+相当于：
+  每个 RTT，CWND 只增加 1 MSS（线性！）
+```
+
+**为什么是 1/CWND？**
+
+```
+假设 CWND = 100 MSS
+
+收到 100 个 ACK（1 个 RTT）：
+  增量 = 100 * (1/100) = 1
+  新 CWND = 101 MSS
+  
+这样，无论 CWND 多大，每 RTT 只增加 1 个 MSS
+网络变得更稳定，不会暴增。
+```
+
+### 拥塞发生（Congestion Event）
+
+**触发条件**：
+
+1. **超时重传**（网络非常糟糕）
+2. **快速重传**（丢了几个包，但网络还活着）
+
+**超时重传时的激进处理**：
+
+```
+发生超时重传 →
+  ssthresh = CWND / 2
+  CWND = 1
+  
+效果：从 100 MSS 直接跌到 1 MSS
+       相当于网络被隔离了，要从头开始探测
+
+这就是为什么 "一个超时重传，回到解放前"
+```
+
+**快速重传的温和处理**：
+
+```
+收到 3 个重复 ACK →
+  ssthresh = CWND / 2
+  CWND = ssthresh + 3
+  进入快速恢复
+  
+效果：从 100 MSS 跌到 50+3 = 53 MSS
+     没有完全重置，给网络一个缓冲
+```
+
+### 快速恢复（Fast Recovery）
+
+```mermaid
+graph TD
+    A["发生快速重传<br/>CWND=53"] -->|继续接收 ACK| B["CWND 继续加 1<br/>54, 55, 56..."]
+    B -->|接收到新数据的 ACK| C["恢复完成<br/>CWND = ssthresh"]
+    C -->|进入拥塞避免阶段| D["线性增长"]
+```
+
+**核心思想**：
+
+```
+我们收到了 3 个重复 ACK，说明：
+  - 有 3 个包已经被接收方接到
+  - 只有 1 个包丢失了
+  - 网络不是完全破裂
+
+所以：
+  - 不用完全重启（不必 CWND=1）
+  - 也要谨慎（减少 50%）
+  - 继续发送新数据，同时重传丢失的包
+```
+
+**完整的拥塞控制状态机**：
+
+```mermaid
+graph TD
+    A["慢启动<br/>CWND 指数增长"]
+    B["拥塞避免<br/>CWND 线性增长"]
+    C["快速恢复<br/>CWND 稍微增长"]
+    
+    A -->|CWND >= ssthresh| B
+    A -->|超时重传| A
+    B -->|快速重传<br/>3 个重复 ACK| C
+    B -->|超时重传| A
+    C -->|恢复完成<br/>收到新 ACK| B
+    
+    style A fill:#FFB6C1
+    style B fill:#FFD700
+    style C fill:#87CEEB
+```
+
+---
+
+## 第九部分：TCP 粘包问题与解决方案
+
+### 什么是粘包？
+
+```
+发送方：
+  write(sock, "hello", 5)
+  write(sock, "world", 5)
+
+接收方期望：
+  read(sock) → "hello"
+  read(sock) → "world"
+
+实际接收：
+  read(sock) → "helloworld"  ❌ 粘在一起
+  
+  或者
+  
+  read(sock) → "hel"         ❌ 分开了
+  read(sock) → "loworld"
+```
+
+### 为什么会粘包？
+
+**原因 1：TCP 是字节流协议，不是消息流**
+
+```
+TCP 只负责可靠传输数据，不关心边界
+
+TCP 层：
+  │ 应用层说"发这 5 字节"  │ 应用层说"发这 5 字节"
+  │ hello                  │ world
+  └──────────────────────────────────┘
+              ↓
+  ┌──────────────────────────────────────────┐
+  │          helloworld (10 字节连续流)     │
+  │  TCP 不记录这里有两个边界！
+  └──────────────────────────────────────────┘
+```
+
+**原因 2：发送方缓冲**
+
+```
+write(sock, "hello") - 返回成功（但可能还在缓冲）
+write(sock, "world") - 返回成功（也在缓冲）
+
+TCP 发送缓冲：
+  [h e l l o w o r l d]
+  
+等到 TCP 决定发送时，会一起发送
+接收方收到的就是粘在一起的数据
+```
+
+**原因 3：接收方缓冲**
+
+```
+TCP 接收缓冲：
+  [h e l l o w o r l d]
+  
+应用层 read(sock, buf, 10)
+  会读取整个 "helloworld"
+  
+如果 read(sock, buf, 3)
+  会读取 "hel"
+  剩下 "loworld" 留在缓冲等下次 read
+```
+
+### 四种解决方案
+
+**方案 1：固定长度（简单但浪费）**
+
+```
+协议设计：
+  │ 长度 │ 内容          │
+  │ 4 B  │ 消息（补齐 4B）│
+  
+例子：
+  发送 "hi" →
+  │ 0x00000002 │ h i [0x00][0x00] │
+  
+接收端：
+  read(4) 字节得到长度 = 2
+  read(2) 字节得到 "hi"
+  
+问题：
+  - 如果每条消息平均 10 字节，但最多 1000 字节
+  - 每条消息都占用 1000 字节（浪费）
+```
+
+**方案 2：分隔符（简单但需转义）**
+
+```
+协议设计：使用 \n 作为分隔符
+
+发送 "hello\nworld\n"
+
+接收端：
+  read() 直到看到 \n
+  得到 "hello"
+  
+  read() 直到看到 \n
+  得到 "world"
+  
+问题：
+  如果消息本身包含 \n，需要转义
+  "hello\nworld" →  "hello\\nworld"
+  解析时需要反转义，增加复杂度
+```
+
+**方案 3：前缀长度（工业标准）** ⭐
+
+```
+协议设计：
+  │ 长度字段（4B）│ 消息内容（可变长） │
+  
+例子：
+  消息："hello world"（11 字节）
+  
+  发送：
+  │ 0x0000000B │ hello world │
+     长度=11    
+  
+  接收端：
+  1. read(4) → 得到 0x0000000B，知道消息长度 = 11
+  2. read(11) → 得到 "hello world"
+  
+优点：
+  - 完全避免粘包和分包
+  - 支持任意二进制数据（不需转义）
+  - 效率高（无冗余）
+```
+
+**代码实现（Go 语言）**：
+
+```go
+package main
+
+import (
+    "encoding/binary"
+    "net"
+)
+
+// 发送消息
+func SendMessage(conn net.Conn, msg []byte) error {
+    // 前 4 字节存储长度
+    header := make([]byte, 4)
+    binary.BigEndian.PutUint32(header, uint32(len(msg)))
+    
+    // 发送：长度 + 消息
+    _, err := conn.Write(append(header, msg...))
+    return err
+}
+
+// 接收消息
+func ReceiveMessage(conn net.Conn) ([]byte, error) {
+    // 先读长度字段
+    header := make([]byte, 4)
+    _, err := conn.Read(header)
+    if err != nil {
+        return nil, err
+    }
+    
+    // 解析长度
+    length := binary.BigEndian.Uint32(header)
+    
+    // 根据长度读取消息
+    msg := make([]byte, length)
+    _, err = conn.Read(msg)
+    return msg, err
+}
+```
+
+**方案 4：消息格式（Protobuf / MessagePack）**
+
+```
+使用序列化库，自动处理边界
+
+Protobuf 消息定义：
+  message User {
+    string name = 1;
+    int32 age = 2;
+  }
+
+序列化时，Protobuf 自动添加：
+  - 字段标签（哪个字段）
+  - 字段类型（字符串？整数？）
+  - 长度信息
+  
+接收端可以完美还原原始消息
+
+优点：
+  - 无需手工处理边界
+  - 自动支持版本升级
+  - 跨语言兼容
+  
+缺点：
+  - 性能略低（多了序列化开销）
+  - 需要引入外部库
+```
+
+### Socket 编程的注意事项
+
+```python
+# ❌ 错误：假设一个 send 对应一个 recv
+server.send(b"hello")
+server.send(b"world")
+
+client_data = client.recv(1024)  # 可能收到 "helloworld" 或 "hel"
+
+# ✅ 正确：使用前缀长度
+def send_msg(sock, msg):
+    length = len(msg).to_bytes(4, 'big')  # 长度前缀
+    sock.sendall(length + msg)
+
+def recv_msg(sock):
+    # 先读 4 字节的长度
+    length_data = b''
+    while len(length_data) < 4:
+        chunk = sock.recv(4 - len(length_data))
+        if not chunk:
+            return None
+        length_data += chunk
+    
+    length = int.from_bytes(length_data, 'big')
+    
+    # 再根据长度读消息
+    msg = b''
+    while len(msg) < length:
+        chunk = sock.recv(length - len(msg))
+        if not chunk:
+            return None
+        msg += chunk
+    
+    return msg
+```
+
+---
+
 ## 推荐阅读和参考
 
 - [TCP/IP Illustrated, Vol. 1](http://www.kohala.com/start/tcpipwork/)（经典教材）
