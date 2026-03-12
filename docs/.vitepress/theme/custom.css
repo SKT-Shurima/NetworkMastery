@@ -190,17 +190,27 @@
 
 
 /* ═══════════════════════════════════
-   7. 按钮
+   7. 按钮（统一大小对齐）
    ═══════════════════════════════════ */
+.VPButton.medium {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 160px;
+  height: 48px;
+  padding: 0 28px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  border-radius: 12px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-sizing: border-box;
+}
+
 .VPButton.medium.brand {
   background: linear-gradient(135deg, var(--nm-500), var(--nm-600)) !important;
   border: none !important;
   color: #fff !important;
-  font-weight: 600;
-  border-radius: 12px;
-  padding: 0.6rem 1.8rem;
   box-shadow: 0 4px 12px rgba(16, 185, 129, 0.25);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .VPButton.medium.brand:hover {
@@ -211,17 +221,28 @@
 
 .VPButton.medium.alt {
   border: 1px solid var(--vp-c-divider) !important;
-  border-radius: 12px;
   background: transparent !important;
-  font-weight: 500;
   backdrop-filter: blur(4px);
-  transition: all 0.3s ease;
 }
 
 .VPButton.medium.alt:hover {
   border-color: var(--nm-500) !important;
   color: var(--nm-500) !important;
   background: var(--vp-c-brand-soft) !important;
+}
+
+/* Hero 按钮容器对齐 */
+.VPHero .actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+}
+
+@media (min-width: 640px) {
+  .VPHero .actions {
+    justify-content: flex-start;
+  }
 }
 
 
@@ -591,4 +612,151 @@ html {
 
 .dark .vp-doc img {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+
+/* ═══════════════════════════════════
+   18. 功能卡片链接文字
+   ═══════════════════════════════════ */
+.VPFeature .link-text {
+  color: var(--nm-500);
+  font-weight: 600;
+  font-size: 0.875rem;
+  margin-top: 0.75rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: gap 0.2s ease;
+}
+
+.VPFeature:hover .link-text {
+  gap: 8px;
+}
+
+.VPFeature .link-text-value::after {
+  content: ' →';
+}
+
+
+/* ═══════════════════════════════════
+   19. Mermaid 图表暗色适配
+   ═══════════════════════════════════ */
+.dark .mermaid {
+  filter: invert(0.88) hue-rotate(180deg);
+}
+
+/* Mermaid 容器增强 */
+.vp-doc .mermaid-wrapper,
+.vp-doc pre:has(.mermaid) {
+  background: transparent !important;
+  border: none !important;
+}
+
+
+/* ═══════════════════════════════════
+   20. 右侧大纲（outline）样式
+   ═══════════════════════════════════ */
+.VPDocAsideOutline {
+  font-size: 0.85rem;
+}
+
+.VPDocAsideOutline .outline-title {
+  font-weight: 700;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--vp-c-text-3);
+  margin-bottom: 0.5rem;
+}
+
+.VPDocAsideOutline .outline-link {
+  color: var(--vp-c-text-2);
+  transition: color 0.2s;
+  line-height: 1.6;
+  padding: 2px 0;
+}
+
+.VPDocAsideOutline .outline-link:hover,
+.VPDocAsideOutline .outline-link.active {
+  color: var(--nm-500);
+}
+
+.VPDocAsideOutline .outline-marker {
+  background-color: var(--nm-500) !important;
+}
+
+
+/* ═══════════════════════════════════
+   21. 顶部导航下拉菜单
+   ═══════════════════════════════════ */
+.VPMenu {
+  border-radius: 12px !important;
+  border: 1px solid var(--vp-c-divider) !important;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08) !important;
+  backdrop-filter: blur(12px);
+  overflow: hidden;
+}
+
+.dark .VPMenu {
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3) !important;
+}
+
+.VPMenu .group-title {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--vp-c-text-3);
+  padding: 8px 12px 4px;
+}
+
+.VPMenu .link {
+  border-radius: 8px;
+  transition: all 0.2s;
+}
+
+.VPMenu .link:hover {
+  background: var(--vp-c-brand-soft);
+  color: var(--nm-500);
+}
+
+.VPMenu .link.active {
+  color: var(--nm-500);
+}
+
+
+/* ═══════════════════════════════════
+   22. 面包屑/翻页导航
+   ═══════════════════════════════════ */
+.VPDocFooter .pager-link {
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 12px;
+  padding: 12px 16px;
+  transition: all 0.3s ease;
+}
+
+.VPDocFooter .pager-link:hover {
+  border-color: var(--nm-500);
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.1);
+}
+
+.VPDocFooter .pager-link .title {
+  color: var(--nm-500);
+  font-weight: 600;
+}
+
+
+/* ═══════════════════════════════════
+   23. 搜索按钮
+   ═══════════════════════════════════ */
+.VPNavBarSearch .DocSearch-Button,
+.VPNavBarSearchButton .search {
+  border-radius: 10px !important;
+  border: 1px solid var(--vp-c-divider) !important;
+  transition: border-color 0.2s;
+}
+
+.VPNavBarSearch .DocSearch-Button:hover,
+.VPNavBarSearchButton .search:hover {
+  border-color: var(--nm-500) !important;
 }
