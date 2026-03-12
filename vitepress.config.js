@@ -7,8 +7,9 @@ export default defineConfig({
   ignoreDeadLinks: true,
   
   themeConfig: {
-    logo: '🍮',
-    siteTitle: '网络知识详解',
+    logo: '🌐',
+    siteTitle: 'NetworkMastery',
+    logoLink: '/',
     
     nav: [
       { text: '首页', link: '/' },
