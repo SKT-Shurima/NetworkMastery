@@ -247,11 +247,67 @@
 
 
 /* ═══════════════════════════════════
+   7.5 布局宽度与自适应
+   ═══════════════════════════════════ */
+
+/* 侧边栏宽度 */
+:root {
+  --vp-sidebar-width: 272px;
+}
+
+/* 整体布局：内容区域更宽 */
+@media (min-width: 960px) {
+  .VPDoc {
+    padding: 32px 32px 96px !important;
+  }
+
+  .VPDoc.has-sidebar .content-container {
+    max-width: 100% !important;
+  }
+
+  /* 内容+大纲的容器 */
+  .VPDoc .container {
+    max-width: 100% !important;
+  }
+}
+
+@media (min-width: 1280px) {
+  .VPDoc.has-aside .content-container {
+    max-width: 100% !important;
+  }
+}
+
+/* 大屏：让内容占更多空间 */
+@media (min-width: 1440px) {
+  .VPContent.has-sidebar {
+    padding-left: var(--vp-sidebar-width) !important;
+  }
+
+  .VPDoc {
+    padding: 32px 48px 96px !important;
+  }
+}
+
+/* 右侧大纲固定在右边 */
+@media (min-width: 1280px) {
+  .VPDocAside {
+    position: fixed;
+    right: 0;
+    top: var(--vp-nav-height);
+    width: 240px;
+    padding: 32px 24px 32px 16px;
+    max-height: calc(100vh - var(--vp-nav-height));
+    overflow-y: auto;
+  }
+}
+
+/* ═══════════════════════════════════
    8. 侧边栏
    ═══════════════════════════════════ */
 .VPSidebar {
   border-right: 1px solid var(--vp-c-divider) !important;
   font-size: 0.9rem;
+  width: var(--vp-sidebar-width) !important;
 }
 
 .VPSidebarItem.level-0 .text {
