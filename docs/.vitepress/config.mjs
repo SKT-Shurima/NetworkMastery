@@ -78,6 +78,8 @@ export default withMermaid(
             items: [
               { text: 'OSI 七层模型', link: '/guide/basics/osi' },
               { text: 'TCP/IP 协议栈', link: '/guide/basics/tcpip' },
+              { text: 'HTTP 协议详解', link: '/guide/basics/http' },
+              { text: 'NAT 网络地址转换', link: '/guide/basics/nat' },
               { text: 'IP 寻址与路由', link: '/guide/basics/routing' },
             ]
           },
@@ -108,6 +110,7 @@ export default withMermaid(
               { text: 'IPSec 协议详解', link: '/guide/security/ipsec' },
               { text: 'GRE 和网络隧道', link: '/guide/security/gre' },
               { text: 'MPLS 多协议标签交换', link: '/guide/advanced/mpls' },
+              { text: 'VXLAN 虚拟网络', link: '/guide/advanced/vxlan' },
             ]
           },
           {
@@ -142,6 +145,7 @@ export default withMermaid(
             items: [
               { text: '网络监控与可观测性', link: '/guide/ops/monitoring' },
               { text: '故障排查方法论', link: '/guide/ops/troubleshooting' },
+              { text: '网络诊断与抓包分析', link: '/guide/ops/packet-analysis' },
             ]
           },
         ],
