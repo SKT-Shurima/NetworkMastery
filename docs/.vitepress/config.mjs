@@ -7,6 +7,7 @@ export default withMermaid(
     titleTemplate: ':title - NetworkMastery',
     description: '从 OSI 七层到 SD-WAN 智能路由的网络知识深度解析',
     lang: 'zh-CN',
+    base: '/NetworkMastery/',
     ignoreDeadLinks: true,
     lastUpdated: true,
     cleanUrls: true,
