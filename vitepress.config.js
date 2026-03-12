@@ -48,6 +48,32 @@ export default defineConfig({
           ]
         },
         {
+          text: '安全与防御',
+          items: [
+            { text: 'IPSec 协议详解', link: '/guide/security/ipsec' },
+            { text: 'GRE 和网络隧道', link: '/guide/security/gre' },
+            { text: 'DDoS 攻击与防御', link: '/guide/attacks/ddos' },
+            { text: '网络安全架构', link: '/guide/attacks/security-arch' },
+            { text: '加密与身份认证', link: '/guide/attacks/encryption' }
+          ]
+        },
+        {
+          text: '高级主题',
+          items: [
+            { text: 'MPLS 多协议标签交换', link: '/guide/advanced/mpls' },
+            { text: '网络拓扑详解', link: '/guide/architecture/topology' },
+            { text: '骨干网与分支网络', link: '/guide/architecture/backbone' }
+          ]
+        },
+        {
+          text: 'QoS 与优化',
+          items: [
+            { text: '网络冗余与高可用', link: '/guide/qos/redundancy' },
+            { text: 'QoS 与流量工程', link: '/guide/qos/qos' },
+            { text: '网络性能优化', link: '/guide/qos/performance' }
+          ]
+        },
+        {
           text: '网络管理与运维',
           items: [
             { text: '网络监控与可观测性', link: '/guide/ops/monitoring' },
