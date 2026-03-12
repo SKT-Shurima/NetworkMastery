@@ -1,5 +1,9 @@
 import { defineConfig } from 'vitepress'
 import { withMermaid } from 'vitepress-plugin-mermaid'
+import markdownItMark from 'markdown-it-mark'
+import markdownItFootnote from 'markdown-it-footnote'
+import markdownItAnchor from 'markdown-it-anchor'
+import markdownItMathjax3 from 'markdown-it-mathjax3'
 
 export default withMermaid(
   defineConfig({
@@ -207,12 +211,32 @@ export default withMermaid(
       darkModeSwitchTitle: '切换到暗色模式',
     },
 
-    // ─── Markdown 配置 ───
+    // ─── Markdown 配置 - 集成高质量插件 ───
     markdown: {
       lineNumbers: true,
       image: {
         lazyLoading: true
       },
+      config: (md) => {
+        // 支持标记高亮 (==text==)
+        md.use(markdownItMark)
+        
+        // 支持脚注
+        md.use(markdownItFootnote)
+        
+        // 支持自动标题锚点
+        md.use(markdownItAnchor, {
+          permalink: markdownItAnchor.permalink.linkInsideHeader({
+            symbol: '🔗',
+            placement: 'after'
+          })
+        })
+        
+        // 支持数学公式 (LaTeX)
+        md.use(markdownItMathjax3)
+        
+        return md
+      }
     },
 
     // ─── Mermaid 配置 ───
