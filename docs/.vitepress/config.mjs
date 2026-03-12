@@ -9,7 +9,7 @@ export default withMermaid(
     lang: 'zh-CN',
     ignoreDeadLinks: true,
     lastUpdated: true,
-    cleanUrls: false,
+    cleanUrls: true,
 
     head: [
       ['link', { rel: 'icon', type: 'image/svg+xml', href: '/logo.svg' }],
