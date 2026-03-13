@@ -266,14 +266,7 @@
   flex: 1;
 }
 
-/* 确保内容容器宽度100% */
-.vp-doc {
-  width: 100%;
-  max-width: none !important;
-  margin: 0 !important;
-  padding: 0 !important;
-}
-
+/* 文档内容宽度处理 */
 .VPDocContainer {
   width: 100%;
 }
@@ -282,21 +275,13 @@
   width: 100%;
 }
 
-/* 响应式布局 */
+/* VitePress 默认布局，不强制覆盖宽度限制 */
+.vp-doc {
+  /* 保持 VitePress 默认的响应式宽度 */
+}
+
+/* 响应式布局 - 遵循框架布局 */
 @media (min-width: 960px) {
-  .VPDoc.has-sidebar,
-  .VPDoc.has-aside {
-    display: grid;
-    grid-template-columns: 1fr;
-    width: 100%;
-  }
-
-  .VPDoc.has-sidebar .content-container,
-  .VPDoc.has-aside .content-container {
-    max-width: 100% !important;
-    width: 100% !important;
-  }
-
   .VPDoc {
     padding: 32px 40px 96px !important;
   }
