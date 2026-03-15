@@ -1,614 +1,647 @@
-# 智能路由与流量优化：让数据走最优路径
+# 智能路由与流量优化
 
-## 导言
-
-SD-WAN 最神奇的地方，就在于它能让每一个数据包都走最优的路径。
-
-前一章我们了解了 Controller 和 CPE 如何协作。这一章深入讲解 **路由决策的核心逻辑**——如何在众多可选路径中智能地选择，以及如何优化流量以提升性能。
+> **学习目标**: 掌握 SD-WAN 的应用感知路由原理、路径选择算法、流量工程技术，能够设计和优化企业级流量策略。
 
 ---
 
-## 从静态路由到动态路由
+## 🤔 开场问题：为什么需要"智能"路由？
 
-### 传统网络的路由方式
+周一早上 9 点，某公司 IT 运维接到 3 个投诉：
 
+**场景 1**: 财务部经理："ERP 系统慢得要死！"  
+**场景 2**: 销售总监："Teams 视频会议一卡一卡的！"  
+**场景 3**: HR："下载员工简历附件超慢！"  
+
+你查了一下网络状况：
+- MPLS 专线：10Mbps，延迟 20ms，利用率 95% 🔥
+- 宽带链路：100Mbps，延迟 50ms，利用率 30%
+
+**问题出在哪？**
+
+传统路由器看到 MPLS "稳定"，把所有流量都往 MPLS 扔：
 ```
-传统路由表（静态配置）：
+ERP (关键业务)  ┐
+Teams (视频会议) ├─→ MPLS (10M) ← 拥塞！
+文件下载        ┘
 
-目标网络      下一跳          接口
-10.0.0.0/8    192.168.1.1    eth0
-172.16.0.0/12 192.168.1.1    eth0
-0.0.0.0/0     192.168.1.1    eth0  （默认路由）
-
-特点：
-✗ 无脑地转发 — 不管链路状况如何
-✗ 无法理解应用 — 无视流量的重要性
-✗ 故障不自愈 — 链路故障需要人工介入
-✗ 无法优化 — 永远按同样的方式转发
+宽带 (100M) ← 闲置 70%
 ```
 
-### SD-WAN 的动态路由
-
+**理想情况应该是**：
 ```
-SD-WAN 的路由决策：
-
-┌─────────────────────────────────────┐
-│        新的数据流量到达             │
-│        (比如 Zoom 视频会议)          │
-└─────────────────────────────────────┘
-         ↓
-┌─────────────────────────────────────┐
-│ 1️⃣ 应用识别                         │
-│    DPI 深度包检测                   │
-│    → 这是 Zoom，P1 优先级           │
-└─────────────────────────────────────┘
-         ↓
-┌─────────────────────────────────────┐
-│ 2️⃣ 链路评估                         │
-│    查询所有可用链路的实时性能：      │
-│    - 宽带 A：延迟 50ms, 丢包 0.1%  │
-│    - 宽带 B：延迟 80ms, 丢包 0.5%  │
-│    - 4G 备份：延迟 150ms, 丢包 3%  │
-│    - 专线：延迟 100ms（成本贵）    │
-└─────────────────────────────────────┘
-         ↓
-┌─────────────────────────────────────┐
-│ 3️⃣ 应用需求评估                     │
-│    Zoom 对什么敏感？                │
-│    - 延迟敏感（< 150ms 可接受）    │
-│    - 丢包敏感（< 5% 可接受）        │
-│    - 带宽需求：2-5 Mbps            │
-│    - 成本不敏感（通话很重要）       │
-└─────────────────────────────────────┘
-         ↓
-┌─────────────────────────────────────┐
-│ 4️⃣ 路径可行性筛选                    │
-│                                     │
-│    宽带 A: ✓ 延迟 OK, ✓ 丢包 OK    │
-│    宽带 B: ✓ 延迟 OK, ✓ 丢包 OK    │
-│    4G 备份: ✗ 延迟 NO, ✗ 丢包 NO   │
-│    专线: ✓ OK，但成本高             │
-│                                     │
-│    可行方案：宽带 A, 宽带 B          │
-└─────────────────────────────────────┘
-         ↓
-┌─────────────────────────────────────┐
-│ 5️⃣ 最优路径选择                      │
-│    在可行方案中选择最优的：          │
-│    优先级 1: 宽带 A（延迟最低）    │
-│    优先级 2: 宽带 B（延迟次低）    │
-│    优先级 3: 专线（如果 A/B 故障）  │
-└─────────────────────────────────────┘
-         ↓
-┌─────────────────────────────────────┐
-│ 6️⃣ 转发执行                         │
-│    将 Zoom 流量送上"宽带 A"         │
-│    开始转发                         │
-└─────────────────────────────────────┘
-         ↓
-┌─────────────────────────────────────┐
-│ 7️⃣ 持续监控与自适应                  │
-│    - 实时测量实际性能                │
-│    - 如果宽带 A 开始拥塞             │
-│      → 自动切换到宽带 B             │
-│    - 如果链路恢复                    │
-│      → 自动切换回首选路径             │
-└─────────────────────────────────────┘
+ERP (低延迟)     → MPLS (10M, 20ms)
+Teams (低延迟)   → MPLS (10M, 20ms)
+文件下载 (大带宽) → 宽带 (100M, 50ms)
 ```
+
+这就是 **应用感知路由** 的价值：**让合适的流量走合适的路径**。
+
+<ThinkingQuestion
+  question="为什么不能简单地把所有流量平均分到两条链路上？"
+  hint="想一下：视频会议的数据包如果分散到两条延迟不同的链路上，会发生什么？"
+  answer="**简单负载均衡的问题**：
+
+1. **TCP 乱序问题**
+   ```
+   包 1 → MPLS (20ms) → 先到达
+   包 2 → 宽带 (50ms) → 后到达
+   
+   接收端收到顺序：包 1 → 包 2 ✗ 乱序！
+   → TCP 认为包丢了，触发重传
+   → 吞吐量下降
+   ```
+
+2. **抖动问题（Jitter）**
+   - 视频会议需要稳定的数据流
+   - 包 1 延迟 20ms，包 2 延迟 50ms
+   - 抖动 = 30ms
+   - 播放缓冲区需要调大 → 卡顿
+
+3. **QoS 失效**
+   - MPLS 上给视频高优先级
+   - 宽带上没有 QoS
+   - 两条链路的包混在一起 → 优先级混乱
+
+**SD-WAN 的智能做法**：
+
+1. **按流分类**
+   - 同一个 TCP 连接的所有包走同一条链路
+   - 避免乱序
+
+2. **按应用分流**
+   - 视频会议 → 全部走 MPLS（低延迟）
+   - 文件下载 → 全部走宽带（大带宽）
+
+3. **动态调整**
+   - MPLS 拥塞时，次要业务切到宽带
+   - 保证关键业务的 SLA
+
+**类比**：
+- 简单负载均衡 = 左脚穿跑鞋，右脚穿高跟鞋（不协调）
+- 应用感知路由 = 跑步时穿跑鞋，跳舞时穿舞鞋（合适）"
+/>
 
 ---
 
-## 路由决策的四个核心要素
+## 🧠 应用感知路由的三大支柱
 
-### 1. 应用识别（Application Awareness）
+### 1. 应用识别 (DPI)
 
-#### DPI（Deep Packet Inspection）的工作原理
-
-```
-数据包中的线索：
-
-IP 包头：
-┌──────────────────────────┐
-│ 源 IP | 目标 IP | 协议    │
-└──────────────────────────┘
-信息太少，无法区分应用
-
-TCP/UDP 头：
-┌──────────────────────────┐
-│ 源端口 | 目标端口 | 端口号 │
-└──────────────────────────┘
-仍然不够。黑客可以用任意端口
-
-载荷数据（第一层过滤）：
-HTTP:  第一行是"GET / HTTP/1.1" → 识别为 HTTP
-HTTPS: 无法直接看（加密了），但可以看 TLS 握手信息
-DNS:   特殊的 UDP 包格式 → 识别为 DNS
-RTP:   特定的包大小和频率 → 识别为 VoIP
-
-特征库匹配（第二层过滤）：
-应用签名库中存储：
-  {
-    "应用名": "Zoom",
-    "协议": ["TCP", "UDP"],
-    "常用端口": [3389, 443, 8801-8810],
-    "TLS SNI": "zoom.us",
-    "载荷特征": ["User-Agent: Zoom/...", "...]
-  }
-
-即使端口被改变，也能通过：
-  - TLS Server Name Indication (SNI)
-  - 证书信息
-  - 载荷特征模式
-
-机器学习识别（第三层过滤）：
-对于新的加密应用或变种：
-  - 建立流量模式库
-    * 包大小分布
-    * 数据包间隔时间
-    * 双向流量比例
-    * 峰值模式
-  - 用 ML 模型匹配
-  - 实时学习新应用
-```
-
-#### 应用分类库
+**DPI (Deep Packet Inspection)** - 深度包检测
 
 ```
-企业常见应用分类：
+传统路由器看数据包：
+┌──────────────────┐
+│ 源 IP: 10.1.1.5  │
+│ 目的 IP: 52.x.x  │  ← 只看这些
+│ 协议: TCP        │
+└──────────────────┘
+判断：这是发往 52.x.x 的流量 → 查路由表 → 转发
 
-关键业务（Critical）：
-├─ ERP（SAP、Oracle、用友）
-├─ CRM（Salesforce、Siebel）
-├─ 数据库（Oracle、SQL Server）
-└─ 核心系统（金融交易、医疗系统）
-
-实时通信（Real-time）：
-├─ 视频会议（Zoom、Teams、Webex）
-├─ VoIP（SIP、3CX）
-├─ 实时消息（Slack、企业微信）
-└─ 在线协作（Figma、Miro）
-
-生产力应用（Productivity）：
-├─ SaaS（Office 365、Google Workspace）
-├─ 项目管理（Jira、Monday.com）
-├─ 代码库（GitHub、GitLab）
-└─ 企业云盘（Dropbox、OneDrive）
-
-互联网应用（Internet）：
-├─ Web 浏览
-├─ 流媒体（YouTube、Netflix）
-├─ 社交媒体（微博、抖音）
-└─ 在线游戏
-
-系统维护（Maintenance）：
-├─ 备份和同步
-├─ 日志上传
-├─ 系统更新
-└─ 远程管理（SSH、RDP）
-
-典型配置：
-优先级 P0：关键业务（100% 带宽保证）
-优先级 P1：实时通信（80% 带宽保证）
-优先级 P2：生产力应用（60% 带宽保证）
-优先级 P3：互联网应用（40% 带宽保证）
-优先级 P4：系统维护（10% 带宽保证）
+SD-WAN 设备看数据包（DPI）：
+┌──────────────────┐
+│ 源 IP: 10.1.1.5  │
+│ 目的 IP: 52.x.x  │
+│ 目的端口: 443    │
+│ TLS SNI: teams.microsoft.com  ← 看到应用层信息
+│ User-Agent: ... │
+└──────────────────┘
+判断：这是 Microsoft Teams 视频 → 查应用策略 → 选择最优链路
 ```
 
-### 2. 链路质量感知（Path Quality Awareness）
+**DPI 识别方法**：
 
-#### 关键性能指标（KPI）
+| 方法 | 准确率 | 速度 | 适用场景 |
+|------|--------|------|----------|
+| **端口号** | 50% | 极快 | HTTP (80), HTTPS (443) 基础判断 |
+| **协议特征** | 80% | 快 | SIP/RTP (VoIP), RTMP (直播) |
+| **TLS SNI** | 95% | 快 | HTTPS 流量，看域名 |
+| **流量模式** | 90% | 中 | 视频（大包连续），下载（单向大流量） |
+| **机器学习** | 98% | 慢 | 加密流量，行为分析 |
 
-```
-延迟（Latency）：
-  定义：从 A 点到 B 点的往返时间（Round Trip Time, RTT）
-  单位：毫秒（ms）
-  范围：
-    < 50ms：优秀（本地网络）
-    50-100ms：良好（同国）
-    100-200ms：可接受（跨国）
-    > 200ms：不可接受（VoIP、视频会议会有回声）
-  
-  测量方式：
-    - Ping 测试（ICMP）
-    - TCP 握手时间
-    - 应用层测量
+**示例：识别 Netflix 视频流**
 
-丢包率（Packet Loss）：
-  定义：发送的包中，有多少比例没有到达
-  单位：百分比
-  范围：
-    < 0.1%：优秀（用户无感知）
-    0.1-1%：可接受（可能有轻微重传）
-    1-5%：差（明显的断断续续）
-    > 5%：很差（通话中断、视频卡顿）
-  
-  测量方式：
-    - 周期性发送测试包，统计回复率
-    - 从应用层数据包重传率推导
-
-抖动（Jitter）：
-  定义：延迟的波动（标准差）
-  单位：毫秒
-  范围：
-    < 10ms：优秀
-    10-30ms：可接受
-    > 30ms：差（音视频会出现暂停）
-  
-  为什么重要？
-    即使平均延迟低，但波动大也会影响体验
-    例如：
-      方案 A：延迟恒定 50ms，抖动 0ms → 清晰
-      方案 B：延迟 40-60ms 波动，平均 50ms，抖动 20ms → 断断续续
+```python
+class ApplicationIdentifier:
+    def identify(self, packet):
+        # 方法 1: 端口号
+        if packet.dst_port == 443:
+            # 可能是 HTTPS，继续深入
+            
+            # 方法 2: TLS SNI
+            if packet.tls_sni and 'netflix.com' in packet.tls_sni:
+                return "Netflix"
+            
+            # 方法 3: 流量模式
+            if self.is_video_pattern(packet):
+                # 大包（>1400 字节）
+                # 连续发送
+                # 单向流量（服务器→客户端）
+                return "Video Streaming"
+        
+        return "Unknown"
     
-  RTP 缓冲应对：
-    接收端通常会缓冲 50-200ms 的数据
-    以平滑抖动
-    但缓冲越大，交互延迟越高
-
-可用带宽（Available Bandwidth）：
-  定义：链路当前还有多少空闲带宽
-  单位：Mbps
-  范围：
-    > 配置带宽 * 80%：充足
-    配置带宽 * 50-80%：中等
-    < 配置带宽 * 50%：拥塞
-  
-  测量方式：
-    - 主动发送测试流量测量
-    - 被动监测实际流量占用率
-
-成本（Cost）：
-  定义：链路的相对成本
-  标签：
-    "免费" — 内部网络
-    "低" — 宽带（通常按月付固定费用）
-    "中" — 4G/LTE（按流量计费）
-    "高" — MPLS VPN 专线（非常贵）
-  
-  使用场景：
-    成本不敏感应用：VoIP（质量优先）
-    成本敏感应用：备份（能便宜就便宜）
-```
-
-#### 链路评分算法
-
-```
-SD-WAN 会给每条链路打分，用于决策：
-
-基础得分计算：
-
-score = 
-    100 
-    - (延迟_评分 × 权重_延迟)
-    - (丢包_评分 × 权重_丢包)
-    - (抖动_评分 × 权重_抖动)
-    - (拥塞_评分 × 权重_拥塞)
-    + (冗余度_评分 × 权重_冗余)
-
-权重示例（应用敏感性）：
-
-VoIP 应用：
-  延迟权重: 40% (最敏感)
-  丢包权重: 30%
-  抖动权重: 20%
-  拥塞权重: 10%
-
-视频会议：
-  延迟权重: 30%
-  丢包权重: 30%
-  抖动权重: 30%
-  拥塞权重: 10%
-
-Web 浏览：
-  延迟权重: 20%
-  丢包权重: 30%
-  抖动权重: 0%
-  拥塞权重: 50%
-
-大文件传输：
-  延迟权重: 0%
-  丢包权重: 40%
-  抖动权重: 0%
-  拥塞权重: 40%
-  成本权重: 20% (能用便宜链路最好)
-
-示例计算：
-
-场景：Zoom 视频会议，选择链路
-
-链路 A（宽带）：
-  延迟 50ms → 得分 95 (接近完美)
-  丢包 0.1% → 得分 95
-  抖动 5ms → 得分 95
-  拥塞率 20% → 得分 80
-  score = 100 - (5×0.3) - (5×0.3) - (5×0.3) - (20×0.1) = 80
-
-链路 B（4G）：
-  延迟 150ms → 得分 70 (太高)
-  丢包 2% → 得分 80
-  抖动 20ms → 得分 75
-  拥塞率 10% → 得分 85
-  score = 100 - (30×0.3) - (20×0.3) - (25×0.3) - (15×0.1) = 57
-
-链路 C（专线）：
-  延迟 80ms → 得分 90
-  丢包 0% → 得分 100
-  抖动 2ms → 得分 98
-  拥塞率 5% → 得分 95
-  score = 100 - (10×0.3) - (0×0.3) - (2×0.3) - (5×0.1) = 94
-
-结论：
-  虽然专线得分最高，但成本太高
-  宽带（80分）是最优选择（性能好且成本低）
-```
-
-### 3. 策略驱动的路由
-
-#### 策略框架
-
-```
-策略由几个维度组成：
-
-1. 应用 + 目标 → 路由选择
-
-  if (应用 == Zoom && 目标地 == 云端) {
-    优先路径: 本地宽带
-    备份路径: 专线
-    禁用路径: 4G (成本太高)
-  }
-
-2. 用户 + 时间 → 优先级调整
-
-  if (时间 >= 09:00 && 时间 <= 11:00) {  // 早晨会议
-    priority[Zoom, Teams] = P0  // 最高优先级
-    priority[YouTube, Netflix] = P4  // 禁用
-  } else if (时间 >= 12:00 && 时间 <= 13:00) {  // 午餐时段
-    priority[*] = 正常
-  }
-
-3. 链路质量 → 自动切换
-
-  if (链路 A 的延迟 > 200ms || 丢包 > 5%) {
-    自动切换到备用路径
-    通知管理员
-  }
-
-4. 地理位置 → 本地出口
-
-  if (流量目标 == 互联网 && 分支 == 深圳) {
-    使用深圳的互联网出口
-    (不用回源北京再出去)
-  }
-
-策略示例：SD-WAN 策略语言（伪代码）
-
-rule "VoIP 优先级" {
-    match {
-        application = voip
-        time.hour in (09:00 to 18:00)  // 工作时间
-    }
-    action {
-        priority = P1
-        qos.bandwidth-guarantee = 2Mbps
-        path.preferred = [wan_a, wan_b]
-        path.avoid = [4g_backup]
-        firewall.allow = true
-    }
-}
-
-rule "备份低优先级" {
-    match {
-        application = backup
-        time.hour in (22:00 to 06:00)  // 晚间
-    }
-    action {
-        priority = P4
-        path.preferred = [cheapest_path]
-        rate-limit = 10Mbps  // 限速
-    }
-}
-
-rule "云应用本地出口" {
-    match {
-        destination.saas-app = true
-        application in (Office365, Salesforce, Slack)
-    }
-    action {
-        path.type = local-breakout
-        encryption = ipv6  // 本地加密
-        analytics = detailed  // 记录性能
-    }
-}
-```
-
-### 4. 故障转移与高可用
-
-#### 自动故障转移机制
-
-```
-监控流程（持续运行）：
-
-每 100ms：
-  对每条链路发送测试包
-  └─ 统计响应率、延迟、丢包
-  
-每 1s：
-  汇总性能数据
-  重新计算链路评分
-  └─ 如果评分下降 > 10%，触发告警
-  
-每 10s：
-  如果链路故障（得分降至 0 或无响应）：
-    1. 立即停止发送新流量到该链路
-    2. 现有流量无缝切换到备用链路
-    3. 通知 Controller："链路 A 故障"
-    4. Controller 重新规划全网流量
-
-恢复过程（链路恢复后）：
-
-链路恢复：
-  收到来自链路的测试包响应
-  性能开始改善
-  
-缓冲期（30s）：
-  观察链路是否稳定
-  防止频繁闪动（flapping）
-  
-判定恢复：
-  性能稳定 30s 且达到可用阈值
-  
-流量迁回：
-  新流量优先发往恢复的链路
-  现有流量逐步迁移回来（不中断）
-
-关键特性：
-✓ 自动 — 无需人工干预
-✓ 快速 — 故障检测 < 1s，切换 < 2s
-✓ 无缝 — 用户通常无感知
-✓ 智能 — 只切换受影响的流量
+    def is_video_pattern(self, packet):
+        # 视频流量特征：
+        # 1. 包大小接近 MTU (1500 字节)
+        # 2. 每秒包数稳定（如 30fps 视频）
+        # 3. 服务器→客户端流量 >> 客户端→服务器
+        if packet.size > 1400 and \
+           self.packet_rate_stable() and \
+           self.is_unidirectional():
+            return True
+        return False
 ```
 
 ---
 
-## 流量优化技术
+### 2. 链路质量监测
 
-### 本地断网（Local Breakout）
-
-```
-传统网络（所有互联网流量回源）：
-
-员工 (上海)
-  ↓ 访问 Office 365
-总部 (北京) — 审查、缓存、DPI
-  ↓
-互联网出口 (北京) — NAT、防火墙
-  ↓
-Microsoft 云端 (Azure 新加坡)
-
-延迟：上海 → 北京 (50ms) + 北京 → 新加坡 (150ms) = 200ms+
-成本：全部流量都走企业专线（贵）
-
-SD-WAN 本地断网（分类转发）：
-
-员工 (上海)
-  ↓ 访问 Office 365
-上海分支 SD-WAN CPE
-  ├─ 本地 DPI 识别：这是 Office 365
-  ├─ 查询策略：Office 365 → 本地出口
-  │
-  ├─ 方案 A（本地断网）：
-  │   直接从上海的互联网出口
-  │   → 上海宽带 → Microsoft Azure (新加坡)
-  │   延迟：上海 → 新加坡 (150ms)
-  │   成本：使用便宜的宽带（节省专线费用）
-  │
-  └─ 方案 B（安全增强）：
-      如果需要安全检查：
-      上海 CPE → 上海云防火墙 → 互联网
-      (防火墙在云端，不用回北京)
-
-配置示例：
-policy {
-    if (app.name == "Office365") {
-        routing.mode = "local-breakout"
-        firewall = "cloud-firewall-shanghai"
-        logging = "full"
-    }
-    if (app.name == "Salesforce") {
-        routing.mode = "local-breakout"
-        // Salesforce 有 DDoS 防护，无需额外安全
-    }
-    if (app.name == "SAP-ERP") {
-        routing.mode = "always-via-hq"
-        // 核心业务，必须走总部检查
-    }
-}
-```
-
-### 流量加速（Traffic Acceleration）
+**实时监测关键指标**：
 
 ```
-传统 TCP 在高延迟/高丢包网络中的问题：
+SD-WAN 设备间的探测机制：
 
-发送方            接收方
-  │                  │
-  ├─ 发送包 1 ────→  │
-  │                  │ (100ms 延迟)
-  │              接收包 1 ✓
-  │  ← 返回 ACK ─────┤
-  │                  │ (100ms 延迟)
-  │ 收到 ACK ✓       │
-  │                  │
-  ├─ 发送包 2 ────→  │
-  │                  │
-  总时间：包 1 往返 (200ms) + 包 2 往返 (200ms) = 400ms
+每 1-5 秒：
+┌────────────┐                    ┌────────────┐
+│  vEdge A   │─── 探测包 (BFD) ──→│  vEdge B   │
+│            │                    │            │
+│  记录:     │←── 响应包 ────────│  记录:     │
+│  RTT: 23ms │                    │  RTT: 23ms │
+└────────────┘                    └────────────┘
 
-在 100Mbps 链路上只能传 1200 字节 / 400ms = 3kB/s （极差）
+计算指标：
+- Latency (延迟): RTT / 2 = 11.5ms
+- Jitter (抖动): |RTT_current - RTT_avg|
+- Loss (丢包率): (发送包数 - 接收包数) / 发送包数
+- Bandwidth (可用带宽): 探测 + 实际流量统计
+```
 
-SD-WAN 加速技术：
+**链路评分算法**：
 
-方案 1：智能重排序（Intelligent Reordering）
-  发送方                  SD-WAN CPE (缓存和转发)
-    ├─ 发包 1 ────────→ CPE 缓存
-    ├─ 发包 2 ────────→ CPE 缓存
-    ├─ 发包 3 ────────→ CPE 缓存
-    │ (本地 ACK 立即返回，无需等待远端)
-    │
-    ← ACK（来自 CPE） ─ (几毫秒)
-    │ (发送方高兴，可以继续发)
+```python
+class LinkQuality:
+    def __init__(self, name):
+        self.name = name
+        self.metrics = {
+            'latency': [],      # 延迟历史
+            'jitter': [],       # 抖动历史
+            'loss': [],         # 丢包历史
+            'bandwidth_used': 0,
+            'bandwidth_total': 0
+        }
     
-  CPE 到接收方：
-    ├─ 转发包 1 ────→
-    ├─ 转发包 2 ────→  (并行发，不用等 ACK)
-    └─ 转发包 3 ────→
+    def calculate_score(self, app_requirements):
+        """
+        计算链路对特定应用的适配分数 (0-100)
+        """
+        score = 100
+        
+        # 延迟评分（权重 40%）
+        avg_latency = mean(self.metrics['latency'][-10:])  # 最近 10 次
+        if avg_latency > app_requirements['max_latency']:
+            score -= 40 * (avg_latency / app_requirements['max_latency'])
+        
+        # 抖动评分（权重 30%）
+        avg_jitter = mean(self.metrics['jitter'][-10:])
+        if avg_jitter > app_requirements['max_jitter']:
+            score -= 30
+        
+        # 丢包评分（权重 20%）
+        avg_loss = mean(self.metrics['loss'][-10:])
+        if avg_loss > app_requirements['max_loss']:
+            score -= 20 * (avg_loss / app_requirements['max_loss'])
+        
+        # 带宽可用性（权重 10%）
+        available_bw = self.metrics['bandwidth_total'] - self.metrics['bandwidth_used']
+        if available_bw < app_requirements['min_bandwidth']:
+            score -= 10
+        
+        return max(0, score)
 
-  结果：
-    - 发送方看到低延迟，可以快速发包
-    - CPE 在缓冲中管理失序和重传
-    - 实际吞吐量提升 5-10 倍
+# 示例：评估链路是否适合视频会议
+mpls_link = LinkQuality("MPLS")
+mpls_link.metrics['latency'] = [22, 23, 21, 24, 22]  # ms
+mpls_link.metrics['jitter'] = [2, 3, 1, 2, 2]        # ms
+mpls_link.metrics['loss'] = [0.1, 0.0, 0.1, 0.0, 0.0]  # %
 
-方案 2：TCP 优化（TCP Optimization）
-  - 增大 TCP 窗口大小（从 64KB 到几 MB）
-  - 启用 SACK（选择性确认）
-  - 使用 BBR 拥塞控制算法
-  - 自动调整 TCP 参数
+teams_requirements = {
+    'max_latency': 150,      # ms
+    'max_jitter': 30,        # ms
+    'max_loss': 5,           # %
+    'min_bandwidth': 2       # Mbps
+}
 
-方案 3：FEC（前向纠错）
-  发送方：
-    发送包 1, 包 2, 包 3
-    另外生成冗余包：包 1+2, 包 2+3, 包 1+2+3
-  
-  如果传输中丢失了包 2：
-    接收方可以用"包 1+2"和包 1 推导出包 2
-    无需重传，性能优化显著
-  
-  特别适合：丢包率 2-5% 的不可靠网络
+score = mpls_link.calculate_score(teams_requirements)
+# 结果: 98 分 （非常适合）
 ```
 
 ---
 
-## 总结
+### 3. 路径选择算法
 
-### SD-WAN 智能路由的优势总结
+**智能选择最优路径**：
 
-| 方面 | 传统网络 | SD-WAN |
-|-----|---------|--------|
-| 路由决策 | 基于目标 IP | 基于应用 + 链路质量 |
-| 自适应 | 静态，需要人工调整 | 动态，自动优化 |
-| 故障转移 | 手动，需要几分钟 | 自动，几秒钟 |
-| 应用体验 | 无可视性 | 实时可视化，逐应用监控 |
-| 链路利用 | 低效（链路故障备用不用） | 高效（充分聚合多条链路） |
-| 云应用性能 | 差（Hair Pinning） | 优秀（本地出口） |
+```python
+class PathSelector:
+    def __init__(self, controller):
+        self.controller = controller
+        self.links = []  # 所有可用链路
+    
+    def select_best_path(self, application, packet):
+        """
+        为应用选择最优链路
+        """
+        # 1. 过滤不可用链路
+        available_links = [
+            link for link in self.links 
+            if link.is_active() and link.has_capacity()
+        ]
+        
+        if not available_links:
+            return None  # 无可用链路
+        
+        # 2. 根据应用需求评分
+        app_policy = self.controller.get_policy(application)
+        
+        scored_links = []
+        for link in available_links:
+            score = link.calculate_score(app_policy.requirements)
+            scored_links.append((link, score))
+        
+        # 3. 按分数排序
+        scored_links.sort(key=lambda x: x[1], reverse=True)
+        
+        # 4. 选择最高分链路
+        best_link = scored_links[0][0]
+        
+        # 5. 如果最高分 < 阈值，尝试多路径
+        if scored_links[0][1] < 60:
+            # 链路质量都不理想，考虑负载均衡
+            return self.multipath_selection(scored_links)
+        
+        return best_link
+    
+    def multipath_selection(self, scored_links):
+        """
+        多路径选择（链路聚合）
+        """
+        # 选择分数 > 50 的链路
+        good_links = [link for link, score in scored_links if score > 50]
+        
+        if len(good_links) >= 2:
+            # 使用两条链路做负载均衡
+            return good_links[:2]
+        else:
+            # 只能用一条
+            return good_links[0]
+```
 
-### 关键洞察
+**决策流程图**：
 
-1. **应用优先，链路其次** — SD-WAN 先问"这是什么应用"，再问"用哪条链路"
-2. **主动感知，被动应对** — 不是等故障发生再反应，而是提前预测和优化
-3. **代价是复杂性** — 需要 DPI、机器学习、实时计算，但现代硬件已经足够强大
+```
+新数据流到达
+    ↓
+应用识别 (DPI)
+    ↓
+┌─────────────────────────────────┐
+│ 查询应用策略                     │
+│                                 │
+│ Microsoft Teams:                │
+│   max_latency: 150ms           │
+│   max_jitter: 30ms             │
+│   max_loss: 5%                 │
+│   min_bandwidth: 2Mbps         │
+│   preferred_link: MPLS         │
+└─────────────────────────────────┘
+    ↓
+评估所有链路
+    ↓
+┌─────────────┬─────────────┬─────────────┐
+│ MPLS        │ 宽带        │ 4G          │
+│ 延迟: 23ms  │ 延迟: 45ms  │ 延迟: 120ms │
+│ 抖动: 2ms   │ 抖动: 10ms  │ 抖动: 40ms  │
+│ 丢包: 0%    │ 丢包: 0.2%  │ 丢包: 2%    │
+│ 可用: 8M    │ 可用: 80M   │ 可用: 15M   │
+│ 分数: 98    │ 分数: 85    │ 分数: 60    │
+└─────────────┴─────────────┴─────────────┘
+    ↓
+选择 MPLS（分数最高 + 首选）
+    ↓
+建立流表项，后续包走 MPLS
+```
+
+<ThinkingQuestion
+  question="如果 MPLS 链路突然中断，SD-WAN 如何在秒级切换到备用链路？"
+  hint="关键词：BFD 快速故障检测 + 流表更新"
+  answer="**秒级故障切换流程**：
+
+**1. 故障检测（< 1 秒）**
+
+使用 BFD (Bidirectional Forwarding Detection)：
+- 探测间隔：100ms - 1s
+- 连续 3 次探测失败 → 判定链路故障
+- 检测时间：300ms - 3s
+
+```python
+# BFD 故障检测
+class BFDMonitor:
+    def __init__(self, link):
+        self.link = link
+        self.probe_interval = 1000  # ms
+        self.failure_threshold = 3
+        self.failures = 0
+    
+    def monitor(self):
+        while True:
+            if not self.send_probe():
+                self.failures += 1
+                if self.failures >= self.failure_threshold:
+                    self.link.mark_down()
+                    self.trigger_failover()
+            else:
+                self.failures = 0  # 重置计数
+            
+            sleep(self.probe_interval / 1000)
+```
+
+**2. 流量切换（< 100ms）**
+
+方法 A：预建隧道（推荐）
+```
+平时：
+流量 → MPLS 隧道（活跃）
+       宽带隧道（预建，待命）
+
+MPLS 故障后：
+流量 → 宽带隧道（立即激活）
+
+切换时间：< 100ms（仅更新转发表）
+```
+
+方法 B：现场建隧道
+```
+MPLS 故障 → 建立宽带 IPSec 隧道 → 切换流量
+
+切换时间：1-3 秒（包含隧道协商时间）
+```
+
+**3. 流表更新**
+
+```python
+class FlowTable:
+    def failover(self, failed_link, backup_link):
+        # 找出所有使用故障链路的流
+        affected_flows = [
+            flow for flow in self.flows 
+            if flow.current_link == failed_link
+        ]
+        
+        # 批量更新到备用链路
+        for flow in affected_flows:
+            flow.current_link = backup_link
+            flow.last_switch_time = now()
+        
+        log(f\"Switched {len(affected_flows)} flows from {failed_link} to {backup_link}\")
+```
+
+**4. 上层应用感知**
+
+| 应用类型 | TCP 重传超时 | 用户体验 |
+|---------|------------|----------|
+| 视频会议 | 200ms | 短暂卡顿 1-2 秒 |
+| Web 浏览 | 3s | 几乎无感知 |
+| 文件下载 | 5s | 速度短暂下降后恢复 |
+| 数据库查询 | 1s | 需要重试 |
+
+**优化技巧**：
+1. **预建所有隧道** - 减少切换延迟
+2. **BFD 快速检测** - 100ms 探测间隔
+3. **应用层重传** - 上层协议自动恢复
+4. **用户通知** - 严重故障时告警"
+/>
 
 ---
 
-## 推荐阅读
+## 🎯 流量工程技术
 
-- 下一章：[SD-WAN 安全设计](security.md)
-- 相关章节：[SD-WAN 架构与控制面](architecture.md)
+### 1. 按应用分类 (Application-Based Routing)
+
+**策略示例**：
+
+```yaml
+# SD-WAN 应用策略配置
+application_policies:
+  - name: "关键业务"
+    applications:
+      - "SAP ERP"
+      - "Oracle Database"
+      - "Microsoft Exchange"
+    requirements:
+      max_latency: 50
+      max_jitter: 10
+      max_loss: 0.5
+      min_bandwidth: 5
+    path_selection:
+      preferred: ["MPLS", "专线"]
+      fallback: ["宽带"]
+      mode: "active-standby"  # 主备模式
+
+  - name: "实时通信"
+    applications:
+      - "Microsoft Teams"
+      - "Zoom"
+      - "Webex"
+    requirements:
+      max_latency: 150
+      max_jitter: 30
+      max_loss: 5
+      min_bandwidth: 2
+    path_selection:
+      preferred: ["MPLS", "宽带"]
+      mode: "load-balance"  # 负载均衡
+
+  - name: "互联网访问"
+    applications:
+      - "HTTP"
+      - "HTTPS"
+      - "Email"
+    requirements:
+      min_bandwidth: 1
+    path_selection:
+      preferred: ["宽带", "4G"]
+      mode: "cost-optimized"  # 成本优先
+
+  - name: "批量传输"
+    applications:
+      - "FTP"
+      - "Backup"
+      - "Cloud Sync"
+    requirements:
+      min_bandwidth: 10
+    path_selection:
+      preferred: ["宽带"]
+      schedule: "off-peak"  # 仅在非高峰时段
+```
+
+### 2. 动态 QoS
+
+```python
+class QoSScheduler:
+    def __init__(self, link):
+        self.link = link
+        self.queues = {
+            'realtime': Queue(priority=7),    # 实时（VoIP）
+            'critical': Queue(priority=6),    # 关键业务
+            'high': Queue(priority=5),        # 重要
+            'medium': Queue(priority=4),      # 普通
+            'low': Queue(priority=3),         # 低优先级
+            'bulk': Queue(priority=2),        # 批量传输
+            'scavenger': Queue(priority=1)    # 垃圾流量
+        }
+    
+    def enqueue(self, packet, application):
+        # 根据应用策略决定队列
+        policy = get_policy(application)
+        queue_name = policy.qos_class
+        
+        self.queues[queue_name].push(packet)
+    
+    def dequeue(self):
+        # 严格优先级调度
+        for priority in [7, 6, 5, 4, 3, 2, 1]:
+            for queue_name, queue in self.queues.items():
+                if queue.priority == priority and not queue.empty():
+                    return queue.pop()
+        return None
+
+# 示例：
+# Teams 视频 → realtime 队列（优先级 7）
+# ERP 查询 → critical 队列（优先级 6）
+# 文件下载 → bulk 队列（优先级 2）
+```
+
+### 3. 链路聚合 (Bonding)
+
+**场景**: 单条链路带宽不足时，聚合多条链路
+
+```
+场景：下载 500MB 文件
+
+单链路：
+宽带 (100M) → 40 秒
+
+链路聚合：
+MPLS (10M) ┐
+宽带 (100M) ├─→ 并行传输 → 36 秒
+4G (20M)    ┘
+
+实现：
+1. 拆分文件为小块（如 1MB/块）
+2. 块 1 → MPLS
+3. 块 2 → 宽带
+4. 块 3 → 4G
+5. 接收端重组
+```
+
+**注意事项**：
+- 只适用于非实时应用（文件传输、备份）
+- 实时应用（视频）会因为抖动而卡顿
+- 需要接收端支持包重组
+
+---
+
+## 📊 真实案例：某金融企业优化实战
+
+### 背景
+
+- 200 个网点
+- 业务: 核心交易系统 + 视频会议 + 互联网访问
+- 链路: 每个网点 MPLS 10M + 宽带 100M
+
+### 问题
+
+早高峰（9:00-11:00）：
+- 交易系统响应慢（延迟 > 500ms）
+- 视频会议卡顿严重
+- 原因：所有流量都走 MPLS，拥塞
+
+### SD-WAN 优化方案
+
+**策略配置**：
+
+```yaml
+policies:
+  # P1: 核心交易（最高优先级）
+  - application: "交易系统"
+    path: MPLS
+    qos: realtime
+    guaranteed_bandwidth: 5M  # 保底 5M
+  
+  # P2: 视频会议（高优先级）
+  - application: "视频会议"
+    path: 
+      primary: MPLS
+      secondary: 宽带  # MPLS 拥塞时切到宽带
+    qos: high
+    latency_threshold: 150ms
+  
+  # P3: 互联网访问（普通）
+  - application: "HTTP/HTTPS"
+    path: 宽带  # 直接走宽带
+    qos: medium
+```
+
+### 效果
+
+| 指标 | 优化前 | 优化后 | 改善 |
+|------|--------|--------|------|
+| 交易系统延迟 | 500ms | 80ms | ↓ 84% |
+| 视频会议卡顿率 | 35% | 5% | ↓ 86% |
+| MPLS 利用率 | 95% | 60% | ↓ 35% |
+| 宽带利用率 | 10% | 70% | ↑ 600% |
+| 月度 WAN 成本 | 120万 | 50万 | ↓ 58% |
+
+**关键优化**：
+1. 核心业务独占 MPLS 带宽
+2. 视频会议溢出到宽带
+3. 互联网访问全部卸载到宽带
+4. 动态 QoS 保证关键业务 SLA
+
+---
+
+## 🎓 知识检查点
+
+确保你能回答：
+
+1. **应用识别**
+   - [ ] 说出 3 种 DPI 识别方法
+   - [ ] 解释为什么简单负载均衡会导致 TCP 乱序
+   - [ ] 描述视频流量的特征
+
+2. **链路选择**
+   - [ ] 画出路径选择算法的流程图
+   - [ ] 计算链路评分
+   - [ ] 解释 BFD 快速故障检测原理
+
+3. **流量优化**
+   - [ ] 设计一个企业的应用策略
+   - [ ] 配置 QoS 队列
+   - [ ] 说明链路聚合的适用场景
+
+---
+
+## 🚀 下一步
+
+掌握了智能路由后，接下来学习：
+
+→ **[SD-WAN 安全设计](/guide/sdwan/security)** - 加密隧道、微分段、零信任架构  
+→ **[SD-WAN 实战案例](/guide/sdwan/cases)** - 真实企业部署方案与踩坑经验  
+
+---
+
+<div style="text-align: center; margin-top: 3rem; padding: 2rem; background: rgba(10, 14, 39, 0.9); border: 2px solid var(--neon-green); border-radius: 12px;">
+  <p style="font-family: var(--font-display); font-size: 1.2rem; color: var(--neon-green); margin: 0;">
+    💡 智能路由 = 应用识别 + 链路评估 + 最优决策，三者缺一不可
+  </p>
+</div>
