@@ -1,13 +1,12 @@
 ---
 layout: home
-
 hero:
-  name: "Network"
-  text: "Mastery"
-  tagline: "从 OSI 七层到 SD-WAN 智能路由 — 网络知识的深度解析与完全掌握"
+  name: "NETWORK"
+  text: "MASTERY"
+  tagline: "从 OSI 七层到 SD-WAN 智能路由 — 深入赛博网络核心，掌握未来互联技术"
   actions:
     - theme: brand
-      text: 开始学习
+      text: 启动系统
       link: /guide/basics/osi
     - theme: alt
       text: SD-WAN 深度分析
@@ -50,3 +49,5 @@ features:
     link: /guide/qos/qos
     linkText: 了解优化
 ---
+
+<CyberpunkHome />

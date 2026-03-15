@@ -1,9 +1,11 @@
-import Theme from 'vitepress/theme'
-import './custom.css'
+// NetworkMastery Cyberpunk Theme
+import DefaultTheme from 'vitepress/theme'
+import CyberpunkHome from './components/CyberpunkHome.vue'
+import './style.css'
 
 export default {
-  extends: Theme,
+  extends: DefaultTheme,
   enhanceApp({ app }) {
-    // 可以在这里注册全局组件
+    app.component('CyberpunkHome', CyberpunkHome)
   }
 }

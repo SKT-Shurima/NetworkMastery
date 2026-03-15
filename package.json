@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "description": "Deep dive into network architecture and SD-WAN technology",
   "scripts": {
-    "dev": "vitepress dev docs",
+    "dev": "vitepress dev docs --host",
     "build": "vitepress build docs",
-    "preview": "vitepress preview docs"
+    "preview": "vitepress preview docs --host"
   },
   "devDependencies": {
     "excalidraw": "^0.6.4",
