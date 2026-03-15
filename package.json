@@ -8,6 +8,8 @@
     "preview": "vitepress preview docs"
   },
   "devDependencies": {
+    "excalidraw": "^0.6.4",
+    "vis-network": "^10.0.2",
     "vitepress": "^1.0.0",
     "vue": "^3.3.0"
   },
