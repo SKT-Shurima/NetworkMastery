@@ -19,7 +19,7 @@
 
 这就是 **控制平面与数据平面分离** 的本质。
 
-<!-- ThinkingQuestion
+<ThinkingQuestion
   question="传统路由器为什么无法做到全局最优路由？"
   hint="想一下：单个路由器能看到整个网络的拓扑吗？能知道其他路由器的链路质量吗？"
   answer="**传统路由器的视野局限**：
@@ -46,7 +46,7 @@ SD-WAN Controller：
 - 全局视野：知道所有设备、所有链路的状态
 - 实时决策：根据当前流量和链路质量动态调整
 - 应用感知：不同应用走不同最优路径"
--->
+/>
 
 ---
 
@@ -272,7 +272,7 @@ class LinkMonitor:
             sleep(5)  # 每 5 秒监测一次
 ```
 
-<!-- ThinkingQuestion
+<ThinkingQuestion
   question="如果 Controller 宕机了，数据平面还能工作吗？"
   hint="想一下：数据转发是谁在执行？vEdge 已经收到了策略，Controller 离线后，vEdge 能继续转发流量吗？"
   answer="**答案：能，但功能受限**
@@ -310,7 +310,7 @@ class LinkMonitor:
 - 红绿灯按原有配置继续工作（能通行，但不是最优）
 - 无法应对新的路况变化（如临时封路）
 - 无法全局协调（可能多个路口同时放行导致拥堵）"
--->
+/>
 
 ---
 
