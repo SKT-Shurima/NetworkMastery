@@ -53,6 +53,7 @@ onMounted(() => {
     updateProgress()
   }
 })
+</script>
 
 <template>
   <div class="cyberpunk-home">
