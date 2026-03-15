@@ -1,8 +1,58 @@
 <script setup>
-import { useData } from 'vitepress'
+import { ref, computed, onMounted } from 'vue'
+import { useData, useRouter } from 'vitepress'
+import { learningPaths, getProgress, getTotalHours, getTotalArticles, getNextRecommendation } from '../learningPath.js'
 
 const { frontmatter } = useData()
-</script>
+const router = useRouter()
+
+// 学习路径映射（首页 features → 学习路径）
+const pathMapping = {
+  0: 'basics',
+  1: 'security',
+  2: 'architecture',
+  3: 'defense',
+  4: 'sdwan',
+  5: 'qos'
+}
+
+// 响应式进度数据
+const pathProgress = ref({})
+const nextArticle = ref(null)
+const totalProgress = ref(0)
+
+// 更新进度
+function updateProgress() {
+  if (typeof window === 'undefined') return
+  
+  Object.keys(pathMapping).forEach(index => {
+    const pathId = pathMapping[index]
+    pathProgress.value[pathId] = getProgress(pathId)
+  })
+  
+  // 计算总进度
+  const totalArticles = getTotalArticles()
+  const completedCount = Object.values(learningPaths).reduce((sum, path) => {
+    return sum + path.articles.filter(article => {
+      const progress = JSON.parse(localStorage.getItem('learning-progress') || '{}')
+      return progress[article.path]?.completed
+    }).length
+  }, 0)
+  
+  totalProgress.value = Math.round((completedCount / totalArticles) * 100)
+  
+  // 获取下一篇推荐
+  nextArticle.value = getNextRecommendation()
+}
+
+onMounted(() => {
+  updateProgress()
+  
+  // 监听路由变化，更新进度
+  router.onAfterRouteChanged = () => {
+    updateProgress()
+  }
+})
 
 <template>
   <div class="cyberpunk-home">
@@ -67,17 +117,40 @@ const { frontmatter } = useData()
       <!-- 状态栏 -->
       <div class="cyber-status">
         <div class="status-item">
-          <span class="status-label">STATUS</span>
-          <span class="status-value status-online">ONLINE</span>
+          <span class="status-label">PROGRESS</span>
+          <span class="status-value status-progress">{{ totalProgress }}%</span>
         </div>
         <div class="status-item">
-          <span class="status-label">UPTIME</span>
-          <span class="status-value">{{ new Date().getFullYear() }}</span>
+          <span class="status-label">ARTICLES</span>
+          <span class="status-value">{{ getTotalArticles() }}</span>
         </div>
         <div class="status-item">
-          <span class="status-label">MODE</span>
-          <span class="status-value status-secure">SECURE</span>
+          <span class="status-label">HOURS</span>
+          <span class="status-value">{{ getTotalHours() }}h</span>
         </div>
+      </div>
+
+      <!-- 下一步推荐 -->
+      <div v-if="nextArticle" class="next-recommendation">
+        <div class="rec-header">
+          <span class="rec-icon">▶</span>
+          <span class="rec-label">NEXT MISSION</span>
+        </div>
+        <a :href="nextArticle.path" class="rec-card">
+          <div class="rec-path">
+            <span class="rec-path-icon">{{ nextArticle.pathIcon }}</span>
+            <span class="rec-path-title">{{ nextArticle.pathTitle }}</span>
+          </div>
+          <h4 class="rec-title">{{ nextArticle.title }}</h4>
+          <div class="rec-meta">
+            <span class="rec-topics">
+              <span v-for="topic in nextArticle.topics.slice(0, 3)" :key="topic" class="topic-tag">
+                {{ topic }}
+              </span>
+            </span>
+            <span class="rec-duration">{{ nextArticle.duration }} min</span>
+          </div>
+        </a>
       </div>
     </section>
 
@@ -108,8 +181,16 @@ const { frontmatter } = useData()
             <span class="card-id">{{ String(index + 1).padStart(2, '0') }}</span>
             <div class="card-status">
               <span class="status-dot"></span>
-              ACTIVE
+              {{ pathProgress[pathMapping[index]] || 0 }}%
             </div>
+          </div>
+          
+          <!-- 进度条 -->
+          <div class="card-progress-bar">
+            <div 
+              class="card-progress-fill" 
+              :style="{ width: (pathProgress[pathMapping[index]] || 0) + '%' }"
+            ></div>
           </div>
 
           <div class="card-icon">{{ feature.icon }}</div>
@@ -486,6 +567,122 @@ const { frontmatter } = useData()
   text-shadow: 0 0 15px rgba(0, 240, 255, 0.8);
 }
 
+.status-progress {
+  color: var(--neon-purple);
+  text-shadow: 0 0 15px rgba(139, 92, 246, 0.8);
+}
+
+/* ================================
+   下一步推荐
+================================ */
+.next-recommendation {
+  margin-top: 48px;
+  animation: slide-up 0.8s ease-out;
+}
+
+.rec-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+  justify-content: center;
+}
+
+.rec-icon {
+  color: var(--neon-cyan);
+  font-size: 1.2rem;
+  animation: blink 2s step-end infinite;
+}
+
+.rec-label {
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  color: var(--neon-cyan);
+  text-shadow: 0 0 10px rgba(0, 240, 255, 0.6);
+  letter-spacing: 0.15em;
+}
+
+.rec-card {
+  display: block;
+  background: rgba(10, 14, 39, 0.9);
+  border: 2px solid var(--neon-green);
+  border-radius: 12px;
+  padding: 24px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: 
+    0 0 25px rgba(0, 255, 65, 0.4),
+    inset 0 0 30px rgba(0, 255, 65, 0.05);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.rec-card:hover {
+  border-color: var(--neon-cyan);
+  box-shadow: 
+    0 0 40px rgba(0, 240, 255, 0.6),
+    inset 0 0 40px rgba(0, 240, 255, 0.1);
+  transform: translateY(-4px) scale(1.02);
+}
+
+.rec-path {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.rec-path-icon {
+  font-size: 1.2rem;
+}
+
+.rec-title {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--neon-green);
+  text-shadow: 0 0 15px rgba(0, 255, 65, 0.6);
+  margin: 0 0 16px 0;
+}
+
+.rec-card:hover .rec-title {
+  color: var(--neon-cyan);
+  text-shadow: 0 0 20px rgba(0, 240, 255, 0.8);
+}
+
+.rec-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.rec-topics {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.topic-tag {
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  padding: 4px 10px;
+  background: rgba(0, 240, 255, 0.1);
+  border: 1px solid rgba(0, 240, 255, 0.3);
+  border-radius: 4px;
+  color: var(--neon-cyan);
+}
+
+.rec-duration {
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
 /* ================================
    Features 网格
 ================================ */
@@ -702,6 +899,41 @@ const { frontmatter } = useData()
   background-size: 20px 20px;
   opacity: 0.3;
   pointer-events: none;
+}
+
+.card-progress-bar {
+  position: relative;
+  width: 100%;
+  height: 3px;
+  background: rgba(0, 240, 255, 0.2);
+  border-radius: 2px;
+  margin-bottom: 20px;
+  overflow: hidden;
+}
+
+.card-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--neon-green), var(--neon-cyan));
+  border-radius: 2px;
+  transition: width 0.6s ease;
+  box-shadow: 0 0 10px rgba(0, 240, 255, 0.8);
+  position: relative;
+}
+
+.card-progress-fill::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
 }
 
 /* ================================
