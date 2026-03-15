@@ -1,0 +1,132 @@
+<svg viewBox="0 0 1200 600" xmlns="http://www.w3.org/2000/svg" class="architecture-diagram">
+  <defs>
+    <style>
+      .bg { fill: #f8fafc; }
+      .dark .bg { fill: #1e293b; }
+      
+      .layer-title { font-size: 18px; font-weight: bold; fill: #0f172a; }
+      .dark .layer-title { fill: #f1f5f9; }
+      
+      .box { fill: #e0f2fe; stroke: #0284c7; stroke-width: 2; rx: 8; }
+      .dark .box { fill: #082f49; stroke: #0ea5e9; }
+      
+      .box-title { font-size: 16px; font-weight: 600; fill: #0c4a6e; }
+      .dark .box-title { fill: #7dd3fc; }
+      
+      .box-text { font-size: 13px; fill: #164e63; }
+      .dark .box-text { fill: #cffafe; }
+      
+      .arrow { stroke: #475569; stroke-width: 2; fill: none; marker-end: url(#arrowhead); }
+      .dark .arrow { stroke: #cbd5e1; }
+      
+      .arrow-label { font-size: 12px; fill: #475569; }
+      .dark .arrow-label { fill: #cbd5e1; }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#475569" />
+    </marker>
+    <marker id="arrowhead-dark" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#cbd5e1" />
+    </marker>
+  </defs>
+  
+  <!-- 背景 -->
+  <rect width="1200" height="600" class="bg" />
+  
+  <!-- Management Plane 层 -->
+  <g id="management">
+    <text x="50" y="40" class="layer-title">📊 管理平面 (Management Plane)</text>
+    
+    <rect x="100" y="70" width="300" height="100" class="box" />
+    <text x="120" y="100" class="box-title">Orchestrator (编排器)</text>
+    <text x="120" y="125" class="box-text">• 图形化 UI</text>
+    <text x="120" y="145" class="box-text">• 策略配置与下发</text>
+    
+    <!-- 箭头：Management → Control -->
+    <path d="M 250 170 L 250 220" class="arrow" />
+    <text x="260" y="200" class="arrow-label">API 调用</text>
+  </g>
+  
+  <!-- Control Plane 层 -->
+  <g id="control">
+    <text x="50" y="240" class="layer-title">🎮 控制平面 (Control Plane)</text>
+    
+    <rect x="100" y="270" width="300" height="130" class="box" />
+    <text x="120" y="300" class="box-title">SD-WAN Controller</text>
+    <text x="120" y="325" class="box-text">• 拓扑发现 & 设备注册</text>
+    <text x="120" y="345" class="box-text">• 应用策略管理</text>
+    <text x="120" y="365" class="box-text">• 路由决策算法</text>
+    <text x="120" y="385" class="box-text">• 链路质量监测</text>
+    
+    <!-- 箭头：Control → Data -->
+    <path d="M 250 400 L 250 450" class="arrow" />
+    <text x="210" y="430" class="arrow-label">OMP/NETCONF</text>
+  </g>
+  
+  <!-- Data Plane 层 -->
+  <g id="data">
+    <text x="50" y="485" class="layer-title">⚡ 数据平面 (Data Plane)</text>
+    
+    <!-- vEdge 1 -->
+    <rect x="80" y="510" width="140" height="70" class="box" />
+    <text x="95" y="535" class="box-title">vEdge 1</text>
+    <text x="95" y="555" class="box-text">分支 A</text>
+    <text x="95" y="570" class="box-text">• 流量转发</text>
+    
+    <!-- vEdge 2 -->
+    <rect x="300" y="510" width="140" height="70" class="box" />
+    <text x="315" y="535" class="box-title">vEdge 2</text>
+    <text x="315" y="555" class="box-text">分支 B</text>
+    <text x="315" y="570" class="box-text">• IPSec 隧道</text>
+    
+    <!-- vEdge 3 -->
+    <rect x="520" y="510" width="140" height="70" class="box" />
+    <text x="535" y="535" class="box-title">vEdge 3</text>
+    <text x="535" y="555" class="box-text">总部</text>
+    <text x="535" y="570" class="box-text">• QoS 调度</text>
+  </g>
+  
+  <!-- 右侧补充说明 -->
+  <g id="legend">
+    <text x="750" y="60" class="layer-title">架构对比</text>
+    
+    <!-- 传统路由器 -->
+    <rect x="750" y="100" width="200" height="150" fill="#fee2e2" stroke="#dc2626" stroke-width="2" rx="6" />
+    <text x="770" y="130" class="box-title" style="fill: #991b1b;">传统路由器</text>
+    <text x="770" y="155" class="box-text" style="fill: #7f1d1d;">❌ 分布式决策</text>
+    <text x="770" y="175" class="box-text" style="fill: #7f1d1d;">❌ 只知道邻居</text>
+    <text x="770" y="195" class="box-text" style="fill: #7f1d1d;">❌ 静态权重</text>
+    <text x="770" y="215" class="box-text" style="fill: #7f1d1d;">❌ 无应用感知</text>
+    
+    <!-- SD-WAN -->
+    <rect x="750" y="300" width="200" height="150" fill="#dbeafe" stroke="#0284c7" stroke-width="2" rx="6" />
+    <text x="770" y="330" class="box-title">SD-WAN</text>
+    <text x="770" y="355" class="box-text">✅ 集中式管理</text>
+    <text x="770" y="375" class="box-text">✅ 全局视野</text>
+    <text x="770" y="395" class="box-text">✅ 动态优化</text>
+    <text x="770" y="415" class="box-text">✅ 应用感知</text>
+  </g>
+  
+  <!-- 数据流示意 -->
+  <g id="data-flow">
+    <text x="1000" y="60" class="layer-title">关键特性</text>
+    
+    <!-- IPSec Mesh -->
+    <circle cx="1050" cy="120" r="25" fill="#c7d2e8" stroke="#4f46e5" stroke-width="2" />
+    <text x="1040" y="125" class="box-title">Mesh</text>
+    <text x="1000" y="160" class="box-text">所有 vEdge</text>
+    <text x="1000" y="180" class="box-text">点对点连接</text>
+    
+    <!-- 智能路由 -->
+    <circle cx="1050" cy="270" r="25" fill="#c8e6c9" stroke="#2e7d32" stroke-width="2" />
+    <text x="1035" y="280" class="box-title">智能</text>
+    <text x="1000" y="310" class="box-text">应用感知</text>
+    <text x="1000" y="330" class="box-text">路由优化</text>
+    
+    <!-- 故障快速转移 -->
+    <circle cx="1050" cy="420" r="25" fill="#ffe0b2" stroke="#f57f17" stroke-width="2" />
+    <text x="1030" y="425" class="box-title">快速</text>
+    <text x="1000" y="460" class="box-text">链路故障</text>
+    <text x="1000" y="480" class="box-text">毫秒级转移</text>
+  </g>
+</svg>

@@ -1,0 +1,227 @@
+<svg viewBox="0 0 1200 850" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      .box { fill: #f0f4f8; stroke: #333; stroke-width: 2; }
+      .header { fill: white; color: white; font-size: 14px; font-weight: bold; }
+      .title { fill: #1e3a8a; font-size: 18px; font-weight: bold; }
+      .text { fill: #333; font-size: 12px; }
+      .small { fill: #666; font-size: 10px; }
+      .line { stroke: #333; stroke-width: 2; fill: none; }
+      .dash { stroke: #666; stroke-width: 1; stroke-dasharray: 5,5; fill: none; }
+      .arrow { fill: #333; }
+      .us { fill: #dbeafe; stroke: #0369a1; }
+      .eu { fill: #dcfce7; stroke: #059669; }
+      .cn { fill: #fed7aa; stroke: #d97706; }
+      .apac { fill: #fce7f3; stroke: #db2777; }
+      .hub { fill: #fef3c7; stroke: #ca8a04; }
+      .info { fill: #f3e8ff; }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" class="arrow" />
+    </marker>
+    <marker id="arrowdash" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#666" />
+    </marker>
+  </defs>
+
+  <!-- 标题 -->
+  <text x="600" y="30" text-anchor="middle" class="title">案例 3: 互联网公司全球化 SD-WAN 网络</text>
+
+  <!-- 美国西海岸 -->
+  <g id="us-region">
+    <rect x="50" y="60" width="220" height="160" class="us" rx="5"/>
+    <rect x="55" y="65" width="210" height="25" fill="#0369a1" rx="3"/>
+    <text x="160" y="82" text-anchor="middle" class="header">🇺🇸 美国西海岸</text>
+    
+    <rect x="60" y="100" width="210" height="105" class="hub" rx="3"/>
+    <text x="165" y="120" text-anchor="middle" class="text" font-weight="bold">SD-WAN 总部Hub</text>
+    <text x="165" y="135" text-anchor="middle" class="small">San Jose 数据中心</text>
+    <text x="165" y="150" text-anchor="middle" class="small">• 全球控制中心</text>
+    <text x="165" y="162" text-anchor="middle" class="small">• 策略下发 + 故障协调</text>
+    <text x="165" y="174" text-anchor="middle" class="small">Tier1: 10Gbps | Tier2: 5Gbps</text>
+    <text x="165" y="186" text-anchor="middle" class="small">DCI专线: 10Gbps</text>
+    <text x="165" y="198" text-anchor="middle" class="small">📍 总部办公、工程团队</text>
+  </g>
+
+  <!-- 欧洲 -->
+  <g id="eu-region">
+    <rect x="330" y="60" width="220" height="160" class="eu" rx="5"/>
+    <rect x="335" y="65" width="210" height="25" fill="#059669" rx="3"/>
+    <text x="440" y="82" text-anchor="middle" class="header">🇩🇪 欧洲（德国）</text>
+    
+    <rect x="340" y="100" width="210" height="105" class="hub" rx="3"/>
+    <text x="445" y="120" text-anchor="middle" class="text" font-weight="bold">SD-WAN 欧洲Hub</text>
+    <text x="445" y="135" text-anchor="middle" class="small">Frankfurt 数据中心</text>
+    <text x="445" y="150" text-anchor="middle" class="small">• GDPR 合规执行</text>
+    <text x="445" y="162" text-anchor="middle" class="small">• 欧洲数据不出境</text>
+    <text x="445" y="174" text-anchor="middle" class="small">欧洲多ISP: 5Gbps总容量</text>
+    <text x="445" y="186" text-anchor="middle" class="small">美国跨境: 1Gbps</text>
+    <text x="445" y="198" text-anchor="middle" class="small">📍 欧洲销售、法务部门</text>
+  </g>
+
+  <!-- 中国 -->
+  <g id="cn-region">
+    <rect x="610" y="60" width="220" height="160" class="cn" rx="5"/>
+    <rect x="615" y="65" width="210" height="25" fill="#d97706" rx="3"/>
+    <text x="720" y="82" text-anchor="middle" class="header">🇨🇳 中国</text>
+    
+    <rect x="620" y="100" width="210" height="105" class="hub" rx="3"/>
+    <text x="725" y="120" text-anchor="middle" class="text" font-weight="bold">SD-WAN 中国Hub</text>
+    <text x="725" y="135" text-anchor="middle" class="small">上海+北京双中心</text>
+    <text x="725" y="150" text-anchor="middle" class="small">• 中国数据不出境</text>
+    <text x="725" y="162" text-anchor="middle" class="small">• 符合监管要求</text>
+    <text x="725" y="174" text-anchor="middle" class="small">国内三大运营商</text>
+    <text x="725" y="186" text-anchor="middle" class="small">香港中转: 受限</text>
+    <text x="725" y="198" text-anchor="middle" class="small">📍 本地销售、技术支持</text>
+  </g>
+
+  <!-- 亚太其他地区 -->
+  <g id="apac-region">
+    <rect x="890" y="60" width="220" height="160" class="apac" rx="5"/>
+    <rect x="895" y="65" width="210" height="25" fill="#db2777" rx="3"/>
+    <text x="1000" y="82" text-anchor="middle" class="header">🌏 亚太其他地区</text>
+    
+    <!-- 新加坡 -->
+    <rect x="905" y="100" width="200" height="35" fill="#fce7f3" stroke="#db2777" rx="2"/>
+    <text x="1005" y="115" text-anchor="middle" class="text" font-weight="bold">🇸🇬 新加坡</text>
+    <text x="1005" y="128" text-anchor="middle" class="small">SEA 区域中心 | 东南亚汇聚</text>
+    
+    <!-- 日本 -->
+    <rect x="905" y="140" width="200" height="35" fill="#fce7f3" stroke="#db2777" rx="2"/>
+    <text x="1005" y="155" text-anchor="middle" class="text" font-weight="bold">🇯🇵 日本</text>
+    <text x="1005" y="168" text-anchor="middle" class="small">东亚区域中心 | 日韩汇聚</text>
+  </g>
+
+  <!-- 互联互通关系 -->
+  <g id="connections">
+    <!-- US <-> EU: 高质量 -->
+    <line x1="270" y1="140" x2="330" y2="140" class="line" marker-end="url(#arrowhead)" stroke="#0369a1" stroke-width="3"/>
+    <text x="300" y="130" text-anchor="middle" class="small" fill="#0369a1">✅ 10Gbps 高质量</text>
+    <text x="300" y="145" text-anchor="middle" class="small" fill="#0369a1">延迟: 160ms</text>
+    
+    <!-- US -> CN: 受限 -->
+    <line x1="270" y1="160" x2="610" y2="160" class="dash" marker-end="url(#arrowdash)" stroke="#d97706" stroke-width="2"/>
+    <text x="440" y="150" text-anchor="middle" class="small" fill="#d97706">⚠️ 1Gbps 受限</text>
+    <text x="440" y="165" text-anchor="middle" class="small" fill="#d97706">延迟: 200ms</text>
+    
+    <!-- EU -.-> CN: 禁用 (法规隔离) -->
+    <line x1="550" y1="160" x2="610" y2="160" class="dash" marker-end="url(#arrowdash)" stroke="#ef4444" stroke-width="2"/>
+    <text x="580" y="150" text-anchor="middle" class="small" fill="#ef4444">❌ 法规隔离</text>
+    
+    <!-- US -> APAC -->
+    <line x1="270" y1="120" x2="890" y2="110" class="line" marker-end="url(#arrowhead)" stroke="#0369a1" stroke-width="2"/>
+    <text x="580" y="105" text-anchor="middle" class="small" fill="#0369a1">✓ 智能路由</text>
+    <text x="580" y="120" text-anchor="middle" class="small" fill="#0369a1">延迟: 120ms</text>
+    
+    <!-- EU -> SG -->
+    <line x1="550" y1="130" x2="905" y2="120" class="line" marker-end="url(#arrowhead)" stroke="#059669" stroke-width="2"/>
+    <text x="730" y="115" text-anchor="middle" class="small" fill="#059669">✓ 高质量</text>
+    <text x="730" y="130" text-anchor="middle" class="small" fill="#059669">延迟: 140ms</text>
+    
+    <!-- CN -> SG -->
+    <line x1="830" y1="140" x2="905" y2="125" class="line" marker-end="url(#arrowhead)" stroke="#d97706" stroke-width="2"/>
+    <text x="870" y="130" text-anchor="middle" class="small" fill="#d97706">✓ 区域互联</text>
+    <text x="870" y="145" text-anchor="middle" class="small" fill="#d97706">延迟: 50ms</text>
+    
+    <!-- APAC 内部 -->
+    <line x1="945" y1="135" x2="1005" y2="140" class="line" marker-end="url(#arrowhead)" stroke="#db2777" stroke-width="2"/>
+    <text x="975" y="125" text-anchor="middle" class="small" fill="#db2777">区域自治</text>
+    <text x="975" y="140" text-anchor="middle" class="small" fill="#db2777">延迟: 80ms</text>
+  </g>
+
+  <!-- 数据流向与合规管制 -->
+  <g id="data-flow">
+    <rect x="50" y="260" width="1060" height="120" class="info" rx="5"/>
+    <text x="580" y="280" text-anchor="middle" class="text" font-weight="bold">📊 数据流向与法规合规管制</text>
+    
+    <!-- 行1：正常流向 -->
+    <text x="60" y="305" class="text">✅ 允许的数据流向:</text>
+    <text x="80" y="323" class="small">• 美国 ↔ 欧洲: 完全互通（国际合作）</text>
+    <text x="80" y="336" class="small">• 美国 ↔ 亚太: 按需互通（区域优化）</text>
+    <text x="80" y="349" class="small">• 欧洲 ↔ 亚太: 通过新加坡中转（GDPR 保护）</text>
+    <text x="80" y="362" class="small">• 中国 ↔ 新加坡: 内地数据本地化（数据主权）</text>
+    
+    <!-- 行2：被禁止的流向 -->
+    <text x="60" y="290" class="text"/>
+    <text x="550" y="305" class="text">❌ 禁止的数据流向:</text>
+    <text x="570" y="323" class="small">• 欧洲数据 → 中国: GDPR 严禁</text>
+    <text x="570" y="336" class="small">• 中国数据 → 美国: 数据主权法规</text>
+    <text x="570" y="349" class="small">• 中国数据 → 欧洲: 双重限制（需特殊批准）</text>
+    <text x="570" y="362" class="small">• 用户敏感数据跨域: 审查机制强制隔离</text>
+  </g>
+
+  <!-- 性能优化案例 -->
+  <g id="performance">
+    <rect x="50" y="420" width="510" height="160" class="box" rx="5"/>
+    <rect x="55" y="425" width="500" height="25" fill="#1e40af" rx="3"/>
+    <text x="305" y="442" text-anchor="middle" class="header">⚡ 全球 CI/CD 加速示例</text>
+    
+    <!-- 场景 -->
+    <text x="60" y="470" class="text" font-weight="bold">场景: 中国深圳开发者提交代码</text>
+    
+    <!-- 迁移前 -->
+    <text x="60" y="490" class="small" fill="#ef4444">❌ 迁移前（传统）:</text>
+    <text x="80" y="505" class="small">深圳 → 跨越GFW → 美国服务器</text>
+    <text x="80" y="518" class="small">延迟: 800ms+ | 不稳定 | 经常超时</text>
+    <text x="80" y="531" class="small">CI/CD 周期: 45 分钟</text>
+    
+    <!-- 迁移后 -->
+    <text x="60" y="551" class="small" fill="#16a34a">✅ 迁移后（SD-WAN）:</text>
+    <text x="80" y="566" class="small">深圳 → 新加坡Hub → 美国（优化路由）</text>
+    <text x="80" y="579" class="small">延迟: 150ms | 稳定可靠 | 0% 丢包</text>
+    <text x="80" y="592" class="small">CI/CD 周期: 13 分钟 (提升 71%)</text>
+  </g>
+
+  <!-- 成本效益对比 -->
+  <g id="cost-benefit">
+    <rect x="600" y="420" width="510" height="160" class="box" rx="5"/>
+    <rect x="605" y="425" width="500" height="25" fill="#1e40af" rx="3"/>
+    <text x="855" y="442" text-anchor="middle" class="header">💰 成本与性能数据</text>
+    
+    <text x="610" y="465" class="small" font-weight="bold">关键指标对比:</text>
+    <text x="610" y="483" class="small">✓ 全球延迟 (P95): 800ms → 150ms (81% ↓)</text>
+    <text x="610" y="496" class="small">✓ 跨国带宽成本: 100% → 55% (45% ↓)</text>
+    <text x="610" y="509" class="small">✓ CI/CD 周期: 45min → 13min (71% ↓)</text>
+    <text x="610" y="522" class="small">✓ 开发效率提升: +50%</text>
+    <text x="610" y="535" class="small">✓ 全球可用性: 99.5% → 99.99% (4个9)</text>
+    <text x="610" y="548" class="small">✓ 故障恢复: 20min → <2min (90% ↓)</text>
+    
+    <text x="610" y="570" class="small" font-weight="bold" fill="#16a34a">年度ROI: 1 年回本</text>
+  </g>
+
+  <!-- 智能路由决策 -->
+  <g id="routing-decision">
+    <rect x="50" y="620" width="1060" height="130" class="info" rx="5"/>
+    <rect x="55" y="625" width="1050" height="25" fill="#6366f1" rx="3"/>
+    <text x="580" y="642" text-anchor="middle" class="header">🚀 智能路由与决策因素</text>
+    
+    <text x="60" y="670" class="text" font-weight="bold">决策维度:</text>
+    
+    <!-- 地理位置 -->
+    <text x="70" y="690" class="small" fill="#0369a1">📍 地理位置 & 法规:</text>
+    <text x="90" y="705" class="small">• 中国数据必须保留在中国 (数据主权法)</text>
+    <text x="90" y="718" class="small">• 欧洲数据必须在欧洲 (GDPR)</text>
+    <text x="90" y="731" class="small">• 自动执行数据隔离策略</text>
+    
+    <!-- 性能优化 -->
+    <text x="350" y="690" class="small" fill="#059669">⚡ 性能优化 & 成本:</text>
+    <text x="370" y="705" class="small">• 优先选择低延迟路径</text>
+    <text x="370" y="718" class="small">• 避免高成本的跨国链路</text>
+    <text x="370" y="731" class="small">• 智能缓存和本地处理</text>
+    
+    <!-- 业务需求 -->
+    <text x="680" y="690" class="small" fill="#d97706">💼 业务需求 & 优先级:</text>
+    <text x="700" y="705" class="small">• 关键业务: 最优延迟路由</text>
+    <text x="700" y="718" class="small">• 日常应用: 平衡成本和性能</text>
+    <text x="700" y="731" class="small">• 批量任务: 使用最便宜的链路</text>
+  </g>
+
+  <!-- 底部总结 -->
+  <g id="summary">
+    <text x="50" y="780" class="text" font-weight="bold">🎯 三个案例的关键对比：</text>
+    
+    <text x="60" y="800" class="small">案例1 (制造业): 成本优化 | 成本降低65% | ROI: 2年 | 难点: 灰度迁移</text>
+    <text x="60" y="815" class="small">案例2 (金融): 安全合规 | 检测时间减少98% | ROI: 1年 | 难点: 零信任复杂性</text>
+    <text x="60" y="830" class="small">案例3 (互联网): 全球化 | 延迟优化80% | ROI: 1年 | 难点: 跨国法规</text>
+  </g>
+</svg>

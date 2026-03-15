@@ -1,0 +1,186 @@
+<svg viewBox="0 0 1400 600" xmlns="http://www.w3.org/2000/svg" class="topology-diagram">
+  <defs>
+    <style>
+      .bg { fill: #f8fafc; }
+      .dark .bg { fill: #1e293b; }
+      
+      .title { font-size: 20px; font-weight: bold; fill: #0f172a; }
+      .dark .title { fill: #f1f5f9; }
+      
+      .label { font-size: 13px; font-weight: 500; fill: #334155; }
+      .dark .label { fill: #cbd5e1; }
+      
+      .device { fill: #0ea5e9; stroke: #0284c7; stroke-width: 2; rx: 6; }
+      .device-label { font-size: 14px; font-weight: 600; fill: #ffffff; }
+      
+      .link { stroke: #64748b; stroke-width: 2.5; fill: none; }
+      .link-mpls { stroke: #ef4444; stroke-dasharray: 5,5; }
+      .link-isp { stroke: #10b981; }
+      .link-4g { stroke: #f59e0b; stroke-dasharray: 3,3; }
+      
+      .link-label { font-size: 11px; fill: #475569; font-weight: 500; }
+      .dark .link-label { fill: #cbd5e1; }
+      
+      .legend-title { font-size: 13px; font-weight: 600; fill: #0f172a; }
+      .dark .legend-title { fill: #f1f5f9; }
+      
+      .legend-text { font-size: 11px; fill: #334155; }
+      .dark .legend-text { fill: #cbd5e1; }
+    </style>
+  </defs>
+  
+  <rect width="1400" height="600" class="bg" />
+  
+  <!-- 标题 -->
+  <text x="700" y="40" text-anchor="middle" class="title">案例 1: 制造业 SD-WAN 部署拓扑</text>
+  
+  <!-- 总部区域 -->
+  <g id="hq-zone">
+    <!-- 背景框 -->
+    <rect x="50" y="80" width="350" height="420" fill="none" stroke="#0284c7" stroke-width="2" stroke-dasharray="5,5" rx="8" />
+    <text x="70" y="105" class="label" style="fill: #0284c7;">总部（苏州）</text>
+    
+    <!-- Controller -->
+    <rect x="120" y="140" width="200" height="60" class="device" />
+    <text x="145" y="165" class="device-label">SD-WAN Controller</text>
+    <text x="145" y="185" class="device-label" style="font-size: 12px;">+ 分析引擎</text>
+    
+    <!-- 互联网出口 -->
+    <rect x="120" y="240" width="200" height="50" fill="#10b981" stroke="#059669" stroke-width="2" rx="6" />
+    <text x="145" y="272" class="device-label">互联网出口</text>
+    
+    <!-- ISP 链路 -->
+    <rect x="120" y="320" width="200" height="50" fill="#f59e0b" stroke="#d97706" stroke-width="2" rx="6" />
+    <text x="145" y="345" class="device-label">ISP 链路</text>
+    <text x="145" y="360" class="device-label" style="font-size: 12px;">多运营商选择</text>
+  </g>
+  
+  <!-- 分支工厂区域 -->
+  <g id="branches">
+    <!-- 大工厂 1 -->
+    <g>
+      <text x="550" y="85" class="label" style="fill: #0284c7;">分支工厂集群</text>
+      
+      <rect x="470" y="120" width="160" height="100" fill="#dbeafe" stroke="#0284c7" stroke-width="2" rx="6" />
+      <text x="485" y="145" class="label" style="fill: #0c4a6e; font-weight: 600;">大工厂 1</text>
+      <text x="485" y="165" class="label" style="fill: #0c4a6e; font-size: 12px;">SD-WAN 网关</text>
+      <text x="485" y="182" class="label" style="fill: #0c4a6e; font-size: 12px;">500 Mbps MPLS</text>
+      <text x="485" y="199" class="label" style="fill: #0c4a6e; font-size: 12px;">+ 宽带</text>
+    </g>
+    
+    <!-- 大工厂 2 -->
+    <g>
+      <rect x="750" y="120" width="160" height="100" fill="#dbeafe" stroke="#0284c7" stroke-width="2" rx="6" />
+      <text x="765" y="145" class="label" style="fill: #0c4a6e; font-weight: 600;">大工厂 2</text>
+      <text x="765" y="165" class="label" style="fill: #0c4a6e; font-size: 12px;">SD-WAN 网关</text>
+      <text x="765" y="182" class="label" style="fill: #0c4a6e; font-size: 12px;">500 Mbps MPLS</text>
+      <text x="765" y="199" class="label" style="fill: #0c4a6e; font-size: 12px;">+ 宽带</text>
+    </g>
+    
+    <!-- 大工厂 3 -->
+    <g>
+      <rect x="1030" y="120" width="160" height="100" fill="#dbeafe" stroke="#0284c7" stroke-width="2" rx="6" />
+      <text x="1045" y="145" class="label" style="fill: #0c4a6e; font-weight: 600;">大工厂 3</text>
+      <text x="1045" y="165" class="label" style="fill: #0c4a6e; font-size: 12px;">SD-WAN 网关</text>
+      <text x="1045" y="182" class="label" style="fill: #0c4a6e; font-size: 12px;">300 Mbps MPLS</text>
+      <text x="1045" y="199" class="label" style="fill: #0c4a6e; font-size: 12px;">+ 宽带</text>
+    </g>
+    
+    <!-- 小工厂 4-5 (群) -->
+    <g>
+      <rect x="470" y="280" width="160" height="100" fill="#ecfdf5" stroke="#10b981" stroke-width="2" rx="6" />
+      <text x="485" y="305" class="label" style="fill: #166534; font-weight: 600;">小工厂 4-45</text>
+      <text x="485" y="325" class="label" style="fill: #166534; font-size: 12px;">SD-WAN 微型网关</text>
+      <text x="485" y="342" class="label" style="fill: #166534; font-size: 12px;">宽带 + 4G</text>
+      <text x="485" y="359" class="label" style="fill: #166534; font-size: 12px;">（无 MPLS）</text>
+    </g>
+  </g>
+  
+  <!-- 连接线 -->
+  <g id="links">
+    <!-- Controller 到各工厂的控制连接 -->
+    <path d="M 320 170 L 470 170" class="link" stroke="#0284c7" stroke-width="2" />
+    <text x="385" y="160" class="link-label">OMP 控制</text>
+    
+    <path d="M 320 170 L 750 170" class="link" stroke="#0284c7" stroke-width="2" />
+    
+    <path d="M 320 170 L 1030 170" class="link" stroke="#0284c7" stroke-width="2" />
+    
+    <!-- MPLS 链路 -->
+    <path d="M 320 280 L 470 220" class="link link-mpls" />
+    <text x="370" y="250" class="link-label" style="fill: #ef4444;">MPLS VPN</text>
+    
+    <path d="M 320 280 L 750 220" class="link link-mpls" />
+    
+    <path d="M 320 280 L 1030 220" class="link link-mpls" />
+    
+    <!-- ISP 链路 -->
+    <path d="M 320 345 L 470 280" class="link link-isp" />
+    <text x="375" y="310" class="link-label" style="fill: #10b981;">ISP 链路</text>
+    
+    <path d="M 320 345 L 750 280" class="link link-isp" />
+    
+    <path d="M 320 345 L 1030 280" class="link link-isp" />
+    
+    <!-- 工厂间的网格连接 -->
+    <path d="M 630 150 L 750 150" class="link" stroke="#06b6d4" stroke-width="2" />
+    <text x="675" y="140" class="link-label" style="fill: #0891b2;">IPSec</text>
+    
+    <path d="M 910 150 L 1030 150" class="link" stroke="#06b6d4" stroke-width="2" />
+    <text x="955" y="140" class="link-label" style="fill: #0891b2;">IPSec</text>
+    
+    <path d="M 630 330 L 750 220" class="link" stroke="#06b6d4" stroke-width="2" />
+    
+    <!-- 4G 备份 -->
+    <path d="M 320 370 L 470 380" class="link link-4g" />
+    <text x="370" y="395" class="link-label" style="fill: #d97706;">4G 备份</text>
+  </g>
+  
+  <!-- 右侧图例和指标 -->
+  <g id="legend">
+    <rect x="1200" y="80" width="170" height="380" fill="none" stroke="#cbd5e1" stroke-width="1" stroke-dasharray="3,3" rx="6" />
+    <text x="1215" y="105" class="legend-title">链路类型</text>
+    
+    <!-- MPLS -->
+    <g>
+      <line x1="1215" y1="130" x2="1245" y2="130" class="link link-mpls" />
+      <text x="1255" y="135" class="legend-text">MPLS VPN</text>
+    </g>
+    
+    <!-- ISP -->
+    <g>
+      <line x1="1215" y1="155" x2="1245" y2="155" class="link link-isp" />
+      <text x="1255" y="160" class="legend-text">ISP 链路</text>
+    </g>
+    
+    <!-- IPSec -->
+    <g>
+      <line x1="1215" y1="180" x2="1245" y2="180" class="link" stroke="#06b6d4" stroke-width="2" />
+      <text x="1255" y="185" class="legend-text">IPSec 隧道</text>
+    </g>
+    
+    <!-- 4G -->
+    <g>
+      <line x1="1215" y1="205" x2="1245" y2="205" class="link link-4g" />
+      <text x="1255" y="210" class="legend-text">4G 备份</text>
+    </g>
+    
+    <!-- 控制平面 -->
+    <g>
+      <line x1="1215" y1="230" x2="1245" y2="230" class="link" stroke="#0284c7" stroke-width="2" />
+      <text x="1255" y="235" class="legend-text">OMP 控制</text>
+    </g>
+    
+    <!-- 成本指标 -->
+    <text x="1215" y="270" class="legend-title">成本节省</text>
+    <text x="1215" y="290" class="legend-text">MPLS: ¥960 万/年</text>
+    <text x="1215" y="310" class="legend-text" style="color: #10b981;">SD-WAN: ¥280 万/年</text>
+    <text x="1215" y="330" class="legend-text" style="font-weight: 600;">节省: 71%</text>
+    
+    <!-- 部署周期 -->
+    <text x="1215" y="360" class="legend-title">部署周期</text>
+    <text x="1215" y="380" class="legend-text">新工厂上线</text>
+    <text x="1215" y="398" class="legend-text" style="color: #ef4444;">传统: 3-4 周</text>
+    <text x="1215" y="416" class="legend-text" style="color: #10b981;">SD-WAN: 2-3 天</text>
+  </g>
+</svg>

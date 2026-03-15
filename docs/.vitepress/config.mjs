@@ -221,18 +221,52 @@ export default withMermaid(
       },
     },
 
-    // ─── Mermaid 配置 ───
+    // ─── Mermaid 配置 (优化视觉效果) ───
     mermaid: {
-      theme: 'neutral',
+      theme: 'base',
       themeVariables: {
-        primaryColor: '#d1fae5',
-        primaryTextColor: '#065f46',
-        primaryBorderColor: '#10b981',
-        lineColor: '#6ee7b7',
-        secondaryColor: '#ecfdf5',
-        tertiaryColor: '#f0fdf4',
-        fontFamily: 'Inter, -apple-system, sans-serif',
-        fontSize: '14px',
+        // 主色系 (绿蓝渐变)
+        primaryColor: '#0ea5e9',
+        primaryTextColor: '#ffffff',
+        primaryBorderColor: '#0284c7',
+        lineColor: '#475569',
+        
+        // 辅助色
+        secondaryColor: '#06b6d4',
+        secondaryTextColor: '#ffffff',
+        secondaryBorderColor: '#0891b2',
+        
+        // 第三色
+        tertiaryColor: '#10b981',
+        tertiaryTextColor: '#ffffff',
+        tertiaryBorderColor: '#059669',
+        
+        // 文字与外观
+        fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+        fontSize: '16px',
+        fontSizeLarge: '18px',
+        
+        // 边框和线条
+        borderRadius: '8px',
+        lineStrokeWidth: '2px',
+        
+        // 特殊强调
+        accentColor: '#f59e0b',
+        dangerColor: '#ef4444',
+        warningColor: '#f59e0b',
+        successColor: '#10b981',
+      },
+      // 高级配置
+      securityLevel: 'loose',
+      startOnLoad: true,
+      gantt: {
+        numberSectionStyles: 3,
+        fontSize: 14,
+      },
+      flowchart: {
+        htmlLabels: true,
+        useMaxWidth: true,
+        padding: 20,
       }
     },
     mermaidPlugin: {
