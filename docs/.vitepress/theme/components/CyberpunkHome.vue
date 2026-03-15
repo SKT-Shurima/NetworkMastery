@@ -1,9 +1,9 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue'
-import { useData, useRouter } from 'vitepress'
+import { useData, useRouter, withBase } from 'vitepress'
 import { learningPaths, getProgress, getTotalHours, getTotalArticles, getNextRecommendation } from '../learningPath.js'
 
-const { frontmatter } = useData()
+const { frontmatter, site } = useData()
 const router = useRouter()
 
 // 学习路径映射（首页 features → 学习路径）
@@ -106,7 +106,7 @@ onMounted(() => {
         <a
           v-for="action in frontmatter.hero?.actions"
           :key="action.text"
-          :href="action.link"
+          :href="withBase(action.link)"
           :class="['cyber-btn', action.theme === 'brand' ? 'cyber-btn-primary' : 'cyber-btn-secondary']"
         >
           <span class="btn-border"></span>
@@ -137,7 +137,7 @@ onMounted(() => {
           <span class="rec-icon">▶</span>
           <span class="rec-label">NEXT MISSION</span>
         </div>
-        <a :href="nextArticle.path" class="rec-card">
+        <a :href="withBase(nextArticle.path)" class="rec-card">
           <div class="rec-path">
             <span class="rec-path-icon">{{ nextArticle.pathIcon }}</span>
             <span class="rec-path-title">{{ nextArticle.pathTitle }}</span>
@@ -198,7 +198,7 @@ onMounted(() => {
           <h3 class="card-title">{{ feature.title }}</h3>
           <p class="card-details">{{ feature.details }}</p>
 
-          <a v-if="feature.link" :href="feature.link" class="card-link">
+          <a v-if="feature.link" :href="withBase(feature.link)" class="card-link">
             <span>{{ feature.linkText || 'ACCESS' }}</span>
             <span class="link-arrow">→</span>
           </a>
