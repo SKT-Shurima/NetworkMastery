@@ -80,30 +80,16 @@
 
 #### 架构设计
 
-```mermaid
-graph TB
-    subgraph "总部（苏州）"
-        HQ["SD-WAN Controller<br/>控制器 + 分析引擎"]
-    end
-    
-    subgraph "分支工厂集群"
-        F1["大工厂1<br/>SD-WAN 边界网关<br/>MPLS+宽带+4G"]
-        F2["大工厂2<br/>SD-WAN 边界网关"]
-        F3["小工厂3<br/>SD-WAN 微型网关<br/>宽带+4G（无MPLS）"]
-    end
-    
-    subgraph "互联网出口"
-        ISP["智能路由选择<br/>公网、运营商"]
-    end
-    
-    HQ <-->|控制命令| F1
-    HQ <-->|控制命令| F2
-    HQ <-->|控制命令| F3
-    F1 <-->|IPSec隧道| F2
-    F2 <-->|IPSec隧道| F3
-    F1 <-->|智能选路| ISP
-    F2 <-->|智能选路| ISP
-```
+![案例 1: 制造业 SD-WAN 部署拓扑](./diagrams/svg/case1-topology.svg)
+
+*图表说明*: 上图展示了 SD-WAN 改造后的完整拓扑结构：
+- **总部**（苏州）部署 Controller 和 Orchestrator，集中管理全部分支
+- **大工厂** 1-3 配备专业级 SD-WAN 网关，支持 MPLS + 宽带 + 4G 多链路
+- **小工厂** 群采用轻量级网关，仅用宽带 + 4G（无需昂贵专线）
+- **链路类型** 包括 MPLS 传统链路、ISP 商务链路、4G 应急备份
+- **IPSec 网格** 建立分支之间的直连隧道，避免流量回源
+
+详细的架构文档和可编辑版本见：[`diagrams/enhanced-mermaid/case1-architecture.md`](./diagrams/enhanced-mermaid/case1-architecture.md)
 
 #### 具体部署
 
@@ -252,36 +238,16 @@ graph TB
 
 #### 架构
 
-```mermaid
-graph TB
-    subgraph "分支"
-        User["员工<br/>(在分支或远程)"]
-        Branch["SD-WAN<br/>边界网关"]
-    end
-    
-    subgraph "信任与决策层"
-        AC["Access Control<br/>(身份认证)"]
-        CA["Compliance Agent<br/>(风险评估)"]
-    end
-    
-    subgraph "执行与监控"
-        FW["Firewall/ZT<br/>(微分段)"]
-        DLP["DLP & Audit<br/>(数据防护 + 审计)"]
-    end
-    
-    subgraph "应用与数据"
-        Apps["核心应用<br/>(ERP、核心业务)"]
-        Cloud["云应用<br/>(备份、OA)"]
-    end
-    
-    User -->|身份凭证| AC
-    AC -->|发放临时令牌| Branch
-    CA -->|评估风险| AC
-    Branch -->|加密隧道| Apps
-    Branch -->|互联网隧道| Cloud
-    Apps -->|记录日志| DLP
-    Cloud -->|记录日志| DLP
-```
+![案例 2: 金融零信任安全框架](./diagrams/svg/case2-zerotrust.svg)
+
+*图表说明*: 上图展示了 SD-WAN 与零信任安全的五层架构：
+- **用户层** - 远程员工和分支行柜员
+- **认证层** - 身份验证 + 风险评估 + 设备检查
+- **决策层** - 基于身份和设备状态的访问决策
+- **执行层** - 微分段隔离 + 数据防护 (DLP)
+- **应用层** - 核心金融系统 + 云端 OA 服务
+
+详细的架构文档和可编辑版本见：[`diagrams/enhanced-mermaid/case2-security.md`](./diagrams/enhanced-mermaid/case2-security.md)
 
 #### 三大改进
 
@@ -423,6 +389,12 @@ graph TB
     EU <-->|欧盟内网络| APAC
     CN <-->|合规数据流| EU
 ```
+
+已升级为高质量 SVG 图表：
+
+![案例 3: 互联网公司全球化网络拓扑](./diagrams/svg/case3-global.svg)
+
+详细的架构文档和可编辑版本见：[`diagrams/enhanced-mermaid/case3-global.md`](./diagrams/enhanced-mermaid/case3-global.md)
 
 #### 具体效果
 
