@@ -1,4 +1,4 @@
-import Theme from 'vitepress/theme'
+import DefaultTheme from 'vitepress/theme'
 import './custom.css'
 import RoughDiagram from './components/RoughDiagram.vue'
 import WideTable from './components/WideTable.vue'
