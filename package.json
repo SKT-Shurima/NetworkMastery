@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "mermaid": "^11.13.0",
-    "vitepress-plugin-mermaid": "^2.0.17"
+    "vitepress-plugin-mermaid": "^2.0.17",
+    "roughjs": "^4.6.6"
   }
 }

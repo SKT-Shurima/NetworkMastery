@@ -419,8 +419,10 @@
 
 
 /* ═══════════════════════════════════
-   11. 表格 (参考 dux 圆角表格)
+   11. 表格系统 (强化版全宽表格)
    ═══════════════════════════════════ */
+   
+/* 标准表格 */
 .vp-doc table {
   border-collapse: separate;
   border-spacing: 0;
@@ -460,6 +462,88 @@
 
 .vp-doc table tbody tr:hover {
   background: var(--vp-c-brand-soft);
+}
+
+/* 全宽表格系统增强 */
+.wide-table-container {
+  margin: 2rem calc(-1 * var(--vp-doc-content-padding));
+  width: calc(100% + 2 * var(--vp-doc-content-padding));
+  max-width: none;
+  overflow: visible;
+}
+
+@media (min-width: 960px) {
+  .wide-table-container {
+    margin-left: calc(-1 * (100vw - var(--vp-content-width)) / 2);
+    margin-right: calc(-1 * (100vw - var(--vp-content-width)) / 2);
+    width: 100vw;
+    max-width: 100vw;
+  }
+}
+
+@media (max-width: 768px) {
+  .wide-table-container {
+    margin-left: -1rem;
+    margin-right: -1rem;
+    width: calc(100% + 2rem);
+  }
+}
+
+/* 增强表格视觉效果 */
+.wide-table-container .table-wrapper {
+  background: linear-gradient(135deg, var(--vp-c-bg) 0%, var(--vp-c-bg-soft) 100%);
+  border: 2px solid var(--vp-c-divider);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.08),
+    0 2px 8px rgba(0, 0, 0, 0.04);
+  transition: all 0.3s ease;
+}
+
+.dark .wide-table-container .table-wrapper {
+  background: linear-gradient(135deg, var(--vp-c-bg-alt) 0%, var(--vp-c-bg-soft) 100%);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.3),
+    0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.wide-table-container:hover .table-wrapper {
+  border-color: var(--nm-500);
+  box-shadow: 
+    0 12px 48px rgba(16, 185, 129, 0.15),
+    0 4px 16px rgba(16, 185, 129, 0.1);
+}
+
+/* 表格标题增强 */
+.wide-table-container .table-title {
+  background: linear-gradient(135deg, var(--nm-500), var(--nm-600));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* 表头增强渐变 */
+.wide-table-container .wide-table thead th {
+  background: linear-gradient(135deg, var(--nm-500), var(--nm-600));
+  color: white;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+.wide-table-container .wide-table thead th::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.6s ease;
+}
+
+.wide-table-container:hover .wide-table thead th::before {
+  left: 100%;
 }
 
 
