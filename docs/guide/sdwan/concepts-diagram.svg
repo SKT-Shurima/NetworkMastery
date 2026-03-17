@@ -1,0 +1,140 @@
+<svg viewBox="0 0 1200 700" xmlns="http://www.w3.org/2000/svg" class="concepts-diagram">
+  <defs>
+    <style>
+      .bg { fill: #f8fafc; }
+      .dark .bg { fill: #1e293b; }
+      
+      .title { font-size: 24px; font-weight: bold; fill: #0f172a; }
+      .dark .title { fill: #f1f5f9; }
+      
+      .subtitle { font-size: 16px; font-weight: 600; fill: #334155; }
+      .dark .subtitle { fill: #cbd5e1; }
+      
+      .box { fill: #e0f2fe; stroke: #0284c7; stroke-width: 2; rx: 8; }
+      .box-alt { fill: #dbeafe; stroke: #0284c7; stroke-width: 2; rx: 8; }
+      .dark .box { fill: #082f49; stroke: #0ea5e9; }
+      .dark .box-alt { fill: #0c4a6e; stroke: #0ea5e9; }
+      
+      .box-title { font-size: 15px; font-weight: 600; fill: #0c4a6e; }
+      .dark .box-title { fill: #7dd3fc; }
+      
+      .box-text { font-size: 13px; fill: #164e63; }
+      .dark .box-text { fill: #cffafe; }
+      
+      .arrow { stroke: #475569; stroke-width: 2.5; fill: none; marker-end: url(#arrowhead); }
+      .dark .arrow { stroke: #cbd5e1; marker-end: url(#arrowhead-dark); }
+      
+      .arrow-label { font-size: 12px; fill: #475569; font-weight: 500; }
+      .dark .arrow-label { fill: #cbd5e1; }
+      
+      .highlight-box { fill: none; stroke: #f59e0b; stroke-width: 3; stroke-dasharray: 5,5; rx: 12; }
+      .highlight-label { font-size: 12px; fill: #d97706; font-weight: 600; }
+      .dark .highlight-label { fill: #fbbf24; }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#475569" />
+    </marker>
+    <marker id="arrowhead-dark" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#cbd5e1" />
+    </marker>
+  </defs>
+  
+  <!-- 背景 -->
+  <rect width="1200" height="700" class="bg" />
+  
+  <!-- 标题 -->
+  <text x="600" y="50" text-anchor="middle" class="title">SD-WAN 核心概念演进</text>
+  
+  <!-- 左列：传统网络问题 -->
+  <g id="traditional">
+    <text x="50" y="100" class="subtitle">❌ 传统网络（MPLS/专线）</text>
+    
+    <!-- 问题 1 -->
+    <rect x="40" y="130" width="240" height="120" class="box" />
+    <text x="60" y="160" class="box-title">成本高</text>
+    <text x="60" y="185" class="box-text">• MPLS 固定费用高</text>
+    <text x="60" y="205" class="box-text">• 带宽划分死板</text>
+    <text x="60" y="225" class="box-text">• 业务灵活性差</text>
+    
+    <!-- 问题 2 -->
+    <rect x="40" y="290" width="240" height="120" class="box" />
+    <text x="60" y="320" class="box-title">性能低</text>
+    <text x="60" y="345" class="box-text">• Hair Pinning 回源</text>
+    <text x="60" y="365" class="box-text">• 延迟高、体验差</text>
+    <text x="60" y="385" class="box-text">• 无应用感知</text>
+    
+    <!-- 问题 3 -->
+    <rect x="40" y="450" width="240" height="120" class="box" />
+    <text x="60" y="480" class="box-title">扩展难</text>
+    <text x="60" y="505" class="box-text">• 部署周期 3-4 周</text>
+    <text x="60" y="525" class="box-text">• 新分支审批麻烦</text>
+    <text x="60" y="545" class="box-text">• 难以敏捷扩展</text>
+  </g>
+  
+  <!-- 中央：演进过程 -->
+  <g id="evolution">
+    <!-- 箭头指向 -->
+    <path d="M 330 320 L 420 320" class="arrow" />
+    <text x="370" y="310" text-anchor="middle" class="arrow-label">升级</text>
+    
+    <!-- 过渡层 -->
+    <rect x="430" y="280" width="140" height="80" fill="#fef3c7" stroke="#d97706" stroke-width="2" rx="6" />
+    <text x="450" y="310" class="subtitle" style="fill: #b45309;">🔄 混合方案</text>
+    <text x="450" y="335" class="box-text" style="fill: #92400e;">MPLS + 互联网</text>
+    
+    <!-- 箭头继续 -->
+    <path d="M 610 320 L 700 320" class="arrow" />
+    <text x="650" y="310" text-anchor="middle" class="arrow-label">优化</text>
+  </g>
+  
+  <!-- 右列：SD-WAN 优势 -->
+  <g id="sdwan">
+    <text x="730" y="100" class="subtitle">✅ SD-WAN（Software-Defined WAN）</text>
+    
+    <!-- 优势 1 -->
+    <rect x="720" y="130" width="240" height="120" class="box-alt" />
+    <text x="740" y="160" class="box-title">成本优化</text>
+    <text x="740" y="185" class="box-text">• 宽带替代专线</text>
+    <text x="740" y="205" class="box-text">• 成本降低 50-70%</text>
+    <text x="740" y="225" class="box-text">• 动态分配资源</text>
+    
+    <!-- 优势 2 -->
+    <rect x="720" y="290" width="240" height="120" class="box-alt" />
+    <text x="740" y="320" class="box-title">性能提升</text>
+    <text x="740" y="345" class="box-text">• 应用感知路由</text>
+    <text x="740" y="365" class="box-text">• 流量优化</text>
+    <text x="740" y="385" class="box-text">• 毫秒级故障转移</text>
+    
+    <!-- 优势 3 -->
+    <rect x="720" y="450" width="240" height="120" class="box-alt" />
+    <text x="740" y="480" class="box-title">敏捷扩展</text>
+    <text x="740" y="505" class="box-text">• 零接触部署 (ZTP)</text>
+    <text x="740" y="525" class="box-text">• 5 分钟快速上线</text>
+    <text x="740" y="545" class="box-text">• 自动化管理</text>
+  </g>
+  
+  <!-- 底部：技术对比 -->
+  <g id="comparison">
+    <text x="600" y="640" text-anchor="middle" class="subtitle">🎯 核心差异</text>
+    
+    <!-- 传统 -->
+    <g>
+      <rect x="80" y="660" width="150" height="30" fill="#fee2e2" stroke="#dc2626" stroke-width="2" rx="4" />
+      <text x="90" y="681" class="box-text" style="fill: #7f1d1d; font-weight: 600;">传统网络：分布式决策</text>
+    </g>
+    
+    <!-- SD-WAN -->
+    <g>
+      <rect x="500" y="660" width="200" height="30" fill="#dbeafe" stroke="#0284c7" stroke-width="2" rx="4" />
+      <text x="510" y="681" class="box-text" style="fill: #0c4a6e; font-weight: 600;">SD-WAN：集中式管理 + 分布式转发</text>
+    </g>
+  </g>
+  
+  <!-- 右下角：关键指标 -->
+  <g id="metrics">
+    <rect x="1000" y="620" width="160" height="70" fill="#f0fdf4" stroke="#10b981" stroke-width="2" rx="6" />
+    <text x="1015" y="645" class="subtitle" style="fill: #166534;">📊 投资回报</text>
+    <text x="1015" y="665" class="box-text" style="fill: #166534;">• 成本 ↓ 50-70%</text>
+    <text x="1015" y="680" class="box-text" style="fill: #166534;">• 性能 ↑ 2-3 倍</text>
+  </g>
+</svg>

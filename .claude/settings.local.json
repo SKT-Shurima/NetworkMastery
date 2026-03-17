@@ -1,7 +1,12 @@
 {
   "permissions": {
     "allow": [
-      "Bash(git add -A)"
+      "Bash(git add -A)",
+      "Bash(git commit -m \"🔄 本地更改暂存 - 准备同步远程更新\")",
+      "Bash(git fetch origin main)",
+      "Bash(git merge origin/main --strategy-option=ours)",
+      "Bash(git add docs/.vitepress/theme/custom.css)",
+      "Bash(git add .claude/settings.local.json)"
     ],
     "deny": [],
     "ask": []

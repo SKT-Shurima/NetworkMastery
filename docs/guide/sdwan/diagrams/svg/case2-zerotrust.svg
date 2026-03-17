@@ -1,0 +1,248 @@
+<svg viewBox="0 0 1200 900" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      .box { fill: #f0f4f8; stroke: #333; stroke-width: 2; }
+      .header { fill: white; color: white; font-size: 14px; font-weight: bold; }
+      .title { fill: #1e3a8a; font-size: 18px; font-weight: bold; }
+      .text { fill: #333; font-size: 12px; }
+      .small { fill: #666; font-size: 10px; }
+      .line { stroke: #333; stroke-width: 2; fill: none; }
+      .dash { stroke: #666; stroke-width: 1; stroke-dasharray: 5,5; fill: none; }
+      .arrow { fill: #333; }
+      .success { fill: #dcfce7; stroke: #22c55e; }
+      .warning { fill: #fef3c7; stroke: #f59e0b; }
+      .danger { fill: #fee2e2; stroke: #ef4444; }
+      .auth { fill: #ede9fe; }
+      .gateway { fill: #fef3c7; }
+      .system { fill: #d1fae5; }
+      .section-header { fill: #1e40af; }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" class="arrow" />
+    </marker>
+  </defs>
+
+  <!-- 标题 -->
+  <text x="600" y="30" text-anchor="middle" class="title">案例 2: 金融公司零信任安全框架</text>
+
+  <!-- 第一层：用户与设备 -->
+  <g id="users">
+    <text x="50" y="60" class="text" font-weight="bold">👤 用户与设备层</text>
+    
+    <!-- 远程员工 -->
+    <rect x="30" y="80" width="140" height="80" class="danger" rx="5"/>
+    <text x="100" y="100" text-anchor="middle" class="text">🏠 远程员工</text>
+    <text x="100" y="118" text-anchor="middle" class="small">家庭网络</text>
+    <text x="100" y="132" text-anchor="middle" class="small">不可信环境</text>
+    <text x="100" y="146" text-anchor="middle" class="small">⚠️ 中等信任</text>
+    
+    <!-- 分支行员工 -->
+    <rect x="200" y="80" width="140" height="80" class="warning" rx="5"/>
+    <text x="270" y="100" text-anchor="middle" class="text">🏢 分支行员工</text>
+    <text x="270" y="118" text-anchor="middle" class="small">办公网络</text>
+    <text x="270" y="132" text-anchor="middle" class="small">部分可信</text>
+    <text x="270" y="146" text-anchor="middle" class="small">✓ 高信任</text>
+    
+    <!-- 移动设备 -->
+    <rect x="370" y="80" width="140" height="80" class="danger" rx="5"/>
+    <text x="440" y="100" text-anchor="middle" class="text">📱 移动设备</text>
+    <text x="440" y="118" text-anchor="middle" class="small">CEO/高管</text>
+    <text x="440" y="132" text-anchor="middle" class="small">极限信任</text>
+    <text x="440" y="146" text-anchor="middle" class="small">⚠️ 受限访问</text>
+  </g>
+
+  <!-- 第二层：身份与信任评估 -->
+  <g id="auth-layer">
+    <text x="50" y="210" class="text" font-weight="bold">🔐 身份与信任评估层</text>
+    
+    <!-- 身份认证 -->
+    <rect x="30" y="230" width="140" height="100" class="auth" rx="5"/>
+    <rect x="35" y="235" width="130" height="20" fill="#6366f1" rx="3"/>
+    <text x="100" y="250" text-anchor="middle" class="header">身份认证服务</text>
+    <text x="100" y="270" text-anchor="middle" class="small">• 用户名密码</text>
+    <text x="100" y="282" text-anchor="middle" class="small">• MFA 多因素</text>
+    <text x="100" y="294" text-anchor="middle" class="small">• 生物识别</text>
+    <text x="100" y="306" text-anchor="middle" class="small">• Windows Hello</text>
+    <text x="100" y="318" text-anchor="middle" class="small">状态: ✓ OK</text>
+    
+    <!-- 设备信任评估 -->
+    <rect x="200" y="230" width="140" height="100" class="auth" rx="5"/>
+    <rect x="205" y="235" width="130" height="20" fill="#6366f1" rx="3"/>
+    <text x="270" y="250" text-anchor="middle" class="header">设备信任评估</text>
+    <text x="270" y="270" text-anchor="middle" class="small">• MDM 合规性</text>
+    <text x="270" y="282" text-anchor="middle" class="small">• 防病毒最新</text>
+    <text x="270" y="294" text-anchor="middle" class="small">• 补丁完整性</text>
+    <text x="270" y="306" text-anchor="middle" class="small">• 硬件加密</text>
+    <text x="270" y="318" text-anchor="middle" class="small">状态: 85 分（中等）</text>
+    
+    <!-- 风险评分 -->
+    <rect x="370" y="230" width="140" height="100" class="auth" rx="5"/>
+    <rect x="375" y="235" width="130" height="20" fill="#6366f1" rx="3"/>
+    <text x="440" y="250" text-anchor="middle" class="header">风险评分引擎</text>
+    <text x="440" y="270" text-anchor="middle" class="small">• 地点识别</text>
+    <text x="440" y="282" text-anchor="middle" class="small">• 异常检测</text>
+    <text x="440" y="294" text-anchor="middle" class="small">• 时间模式</text>
+    <text x="440" y="306" text-anchor="middle" class="small">• 综合评分</text>
+    <text x="440" y="318" text-anchor="middle" class="small">状态: 高风险</text>
+  </g>
+
+  <!-- 连接用户和认证 -->
+  <line x1="100" y1="160" x2="100" y2="230" class="line" marker-end="url(#arrowhead)"/>
+  <line x1="270" y1="160" x2="270" y2="230" class="line" marker-end="url(#arrowhead)"/>
+  <line x1="440" y1="160" x2="440" y2="230" class="line" marker-end="url(#arrowhead)"/>
+
+  <!-- 第三层：SD-WAN 网关 -->
+  <g id="gateway-layer">
+    <rect x="30" y="380" width="480" height="80" class="gateway" rx="5"/>
+    <rect x="35" y="385" width="470" height="20" fill="#ea580c" rx="3"/>
+    <text x="270" y="400" text-anchor="middle" class="header">🌐 SD-WAN 安全网关</text>
+    <text x="100" y="430" text-anchor="middle" class="small">流量加密</text>
+    <text x="180" y="430" text-anchor="middle" class="small">零信任检查</text>
+    <text x="270" y="430" text-anchor="middle" class="small">微分段实施</text>
+    <text x="370" y="430" text-anchor="middle" class="small">DLP 触发</text>
+    <text x="450" y="430" text-anchor="middle" class="small">审计日志</text>
+  </g>
+
+  <!-- 连接认证和网关 -->
+  <line x1="100" y1="330" x2="150" y2="380" class="dash" marker-end="url(#arrowhead)"/>
+  <line x1="270" y1="330" x2="270" y2="380" class="dash" marker-end="url(#arrowhead)"/>
+  <line x1="440" y1="330" x2="390" y2="380" class="dash" marker-end="url(#arrowhead)"/>
+
+  <!-- 第四层：访问决策 -->
+  <g id="policies">
+    <text x="50" y="510" class="text" font-weight="bold">⚙️ 访问决策与执行</text>
+    
+    <!-- 策略1：财务员工 -->
+    <rect x="30" y="530" width="140" height="120" class="success" rx="5"/>
+    <text x="100" y="550" text-anchor="middle" class="text" font-weight="bold">📌 策略 1</text>
+    <text x="100" y="568" text-anchor="middle" class="small">财务员工</text>
+    <text x="100" y="582" text-anchor="middle" class="small">✓ 身份: OK</text>
+    <text x="100" y="596" text-anchor="middle" class="small">✓ 设备: 可信</text>
+    <text x="100" y="610" text-anchor="middle" class="small">✓ 地点: 分支</text>
+    <text x="100" y="624" text-anchor="middle" class="small">→ 发放令牌</text>
+    <text x="100" y="638" text-anchor="middle" class="small">有效期: 4h</text>
+    
+    <!-- 策略2：远程IT -->
+    <rect x="200" y="530" width="140" height="120" class="warning" rx="5"/>
+    <text x="270" y="550" text-anchor="middle" class="text" font-weight="bold">📌 策略 2</text>
+    <text x="270" y="568" text-anchor="middle" class="small">远程 IT 员工</text>
+    <text x="270" y="582" text-anchor="middle" class="small">✓ 身份: OK</text>
+    <text x="270" y="596" text-anchor="middle" class="small">⚠️ 设备: 中等</text>
+    <text x="270" y="610" text-anchor="middle" class="small">⚠️ 地点: 家庭</text>
+    <text x="270" y="624" text-anchor="middle" class="small">→ 限制令牌</text>
+    <text x="270" y="638" text-anchor="middle" class="small">有效期: 2h</text>
+    
+    <!-- 策略3：高管移动 -->
+    <rect x="370" y="530" width="140" height="120" class="danger" rx="5"/>
+    <text x="440" y="550" text-anchor="middle" class="text" font-weight="bold">📌 策略 3</text>
+    <text x="440" y="568" text-anchor="middle" class="small">高管移动设备</text>
+    <text x="440" y="582" text-anchor="middle" class="small">✓ 身份: OK</text>
+    <text x="440" y="596" text-anchor="middle" class="small">⚠️ 设备: 无管理</text>
+    <text x="440" y="610" text-anchor="middle" class="small">✓ 地点: GPS验证</text>
+    <text x="440" y="624" text-anchor="middle" class="small">→ 只读权限</text>
+    <text x="440" y="638" text-anchor="middle" class="small">有效期: 1h</text>
+  </g>
+
+  <!-- 连接网关和策略 -->
+  <line x1="100" y1="460" x2="100" y2="530" class="line" marker-end="url(#arrowhead)"/>
+  <line x1="270" y1="460" x2="270" y2="530" class="line" marker-end="url(#arrowhead)"/>
+  <line x1="440" y1="460" x2="440" y2="530" class="line" marker-end="url(#arrowhead)"/>
+
+  <!-- 第五层：核心应用系统 -->
+  <g id="systems">
+    <text x="50" y="700" class="text" font-weight="bold">💼 核心应用系统</text>
+    
+    <!-- 金融交易系统 -->
+    <rect x="30" y="720" width="140" height="100" class="system" rx="5"/>
+    <text x="100" y="740" text-anchor="middle" class="text" font-weight="bold">金融交易系统</text>
+    <text x="100" y="758" text-anchor="middle" class="small">隔离网段</text>
+    <text x="100" y="772" text-anchor="middle" class="small">VLAN: FS-001</text>
+    <text x="100" y="786" text-anchor="middle" class="small">访问控制: 严格</text>
+    <text x="100" y="800" text-anchor="middle" class="small">审计: 完整</text>
+    
+    <!-- ERP系统 -->
+    <rect x="200" y="720" width="140" height="100" class="system" rx="5"/>
+    <text x="270" y="740" text-anchor="middle" class="text" font-weight="bold">ERP 系统</text>
+    <text x="270" y="758" text-anchor="middle" class="small">隔离网段</text>
+    <text x="270" y="772" text-anchor="middle" class="small">VLAN: ERP-001</text>
+    <text x="270" y="786" text-anchor="middle" class="small">访问控制: 中等</text>
+    <text x="270" y="800" text-anchor="middle" class="small">审计: 完整</text>
+    
+    <!-- 其他应用 -->
+    <rect x="370" y="720" width="140" height="100" class="system" rx="5"/>
+    <text x="440" y="740" text-anchor="middle" class="text" font-weight="bold">其他应用</text>
+    <text x="440" y="758" text-anchor="middle" class="small">多个网段</text>
+    <text x="440" y="772" text-anchor="middle" class="small">基于角色</text>
+    <text x="440" y="786" text-anchor="middle" class="small">访问控制: 灵活</text>
+    <text x="440" y="800" text-anchor="middle" class="small">审计: 完整</text>
+  </g>
+
+  <!-- 连接策略和系统 -->
+  <line x1="100" y1="650" x2="100" y2="720" class="line" marker-end="url(#arrowhead)"/>
+  <line x1="270" y1="650" x2="270" y2="720" class="line" marker-end="url(#arrowhead)"/>
+  <line x1="440" y1="650" x2="440" y2="720" class="line" marker-end="url(#arrowhead)"/>
+
+  <!-- 右侧：监控与审计 -->
+  <g id="monitoring">
+    <rect x="650" y="60" width="300" height="820" class="box" rx="5"/>
+    <rect x="655" y="65" width="290" height="30" fill="#4f46e5" rx="3"/>
+    <text x="800" y="85" text-anchor="middle" class="header">📊 监控 & 审计</text>
+    
+    <!-- 审计日志 -->
+    <rect x="665" y="110" width="280" height="140" class="success" rx="3"/>
+    <text x="805" y="130" text-anchor="middle" class="text" font-weight="bold">✅ 完整审计日志</text>
+    <text x="675" y="150" class="small">时间戳: 2025-01-15 10:32</text>
+    <text x="675" y="163" class="small">用户: 李四 (财务部)</text>
+    <text x="675" y="176" class="small">设备: MacBook Pro</text>
+    <text x="675" y="189" class="small">地点: 分支行 (GPS验证)</text>
+    <text x="675" y="202" class="small">操作: 查询客户账户</text>
+    <text x="675" y="215" class="small">结果: 成功 | 数据: 未下载</text>
+    <text x="675" y="228" class="small">IP: 192.168.1.100</text>
+    <text x="675" y="241" class="small">令牌: 有效 | 剩余时间: 2h</text>
+    
+    <!-- 异常告警 -->
+    <rect x="665" y="270" width="280" height="120" class="danger" rx="3"/>
+    <text x="805" y="290" text-anchor="middle" class="text" font-weight="bold">⚠️ 异常告警规则</text>
+    <text x="675" y="310" class="small">• 失败登录 ≥ 5 次 → 立即锁定</text>
+    <text x="675" y="323" class="small">• 异常地点访问 → 二次认证</text>
+    <text x="675" y="336" class="small">• 高危操作 → 需审批</text>
+    <text x="675" y="349" class="small">• 数据大量下载 → 触发 DLP</text>
+    <text x="675" y="362" class="small">• 访问时间外 → 强制重认证</text>
+    <text x="675" y="375" class="small">• 频繁跳转地区 → 地理不可能</text>
+    
+    <!-- 合规报告 -->
+    <rect x="665" y="410" width="280" height="140" class="warning" rx="3"/>
+    <text x="805" y="430" text-anchor="middle" class="text" font-weight="bold">📋 合规报告生成</text>
+    <text x="675" y="450" class="small">✓ 央行审查报告</text>
+    <text x="675" y="463" class="small">  - 风险等级评估</text>
+    <text x="675" y="476" class="small">  - 操作审计追踪</text>
+    <text x="675" y="489" class="small">  - 异常事件分析</text>
+    <text x="675" y="502" class="small">✓ 内审合规审查</text>
+    <text x="675" y="515" class="small">  - 权限访问矩阵</text>
+    <text x="675" y="528" class="small">  - 数据流向追踪</text>
+    <text x="675" y="541" class="small">✓ 客户数据保护</text>
+    
+    <!-- 实时监控仪表板 -->
+    <rect x="665" y="570" width="280" height="240" class="success" rx="3"/>
+    <text x="805" y="590" text-anchor="middle" class="text" font-weight="bold">📈 实时仪表板</text>
+    <text x="675" y="615" class="text" font-weight="bold">成本效益数据:</text>
+    <text x="675" y="635" class="small">检测时间: 从 4-8h → 2-5分钟</text>
+    <text x="675" y="648" class="small">权限回收: 从 1-2天 → 实时</text>
+    <text x="675" y="661" class="small">数据泄露: 从 年均2-3起 → 0</text>
+    <text x="675" y="674" class="small">审计覆盖: 从 70% → 100%</text>
+    <text x="675" y="687" class="small">入职配置: 从 1-2天 → 5分钟</text>
+    <text x="675" y="700" class="small">权限变更: 从 2h → 自动化</text>
+    <text x="675" y="720" class="text" font-weight="bold">当前状态:</text>
+    <text x="675" y="740" class="small">🟢 连接: 正常 (所有网关)</text>
+    <text x="675" y="753" class="small">🟢 安全: 无告警</text>
+    <text x="675" y="766" class="small">🟡 合规: 98% 完成</text>
+    <text x="675" y="779" class="small">📊 吞吐: 450 Mbps (50% 容量)</text>
+  </g>
+
+  <!-- 图例 -->
+  <g id="legend" transform="translate(50, 850)">
+    <text x="0" y="0" class="text" font-weight="bold">🎯 关键指标</text>
+    <text x="0" y="20" class="small">✓ 绿色: 信任/通过 | ⚠️ 黄色: 警告/受限 | ❌ 红色: 不信任/被拒</text>
+    <text x="320" y="20" class="small">核心特性: 身份验证 → 设备评估 → 风险评分 → 自动决策 → 完整审计</text>
+  </g>
+</svg>

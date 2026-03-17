@@ -1,0 +1,149 @@
+<svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      .box { fill: #f0f4f8; stroke: #333; stroke-width: 2; }
+      .header { fill: #1e3a8a; color: white; font-size: 14px; font-weight: bold; }
+      .title { fill: #1e3a8a; font-size: 18px; font-weight: bold; }
+      .text { fill: #333; font-size: 12px; }
+      .small { fill: #666; font-size: 10px; }
+      .line { stroke: #333; stroke-width: 2; fill: none; }
+      .dash { stroke: #666; stroke-width: 1; stroke-dasharray: 5,5; fill: none; }
+      .arrow { fill: #333; }
+      .highlight { fill: #e0e7ff; }
+      .gateway { fill: #dbeafe; }
+      .center { fill: #fef3c7; }
+      .factory { fill: #e0f2fe; }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" class="arrow" />
+    </marker>
+  </defs>
+
+  <!-- 标题 -->
+  <text x="600" y="30" text-anchor="middle" class="title">案例 1: 制造业集团 SD-WAN 架构</text>
+
+  <!-- 总部（苏州） -->
+  <g id="headquarters">
+    <rect x="500" y="60" width="200" height="100" class="center" rx="5"/>
+    <text x="600" y="80" text-anchor="middle" class="header">🏢 总部（苏州）</text>
+    <text x="600" y="100" text-anchor="middle" class="text">SD-WAN Controller</text>
+    <text x="600" y="115" text-anchor="middle" class="small">控制器 + 分析引擎</text>
+    <text x="600" y="130" text-anchor="middle" class="small">策略下发 | 流量分析</text>
+    <text x="600" y="145" text-anchor="middle" class="small">故障检测 | 成本优化</text>
+  </g>
+
+  <!-- 大工厂1 -->
+  <g id="factory1">
+    <rect x="100" y="250" width="180" height="140" class="factory" rx="5"/>
+    <text x="190" y="270" text-anchor="middle" class="header">🏭 大工厂1 (华东)</text>
+    
+    <!-- 网关 -->
+    <rect x="110" y="285" width="160" height="80" class="gateway" stroke="#0369a1" stroke-width="2" rx="3"/>
+    <text x="190" y="305" text-anchor="middle" class="text">SD-WAN 网关</text>
+    <text x="190" y="320" text-anchor="middle" class="small">规格: 中端设备</text>
+    <text x="190" y="333" text-anchor="middle" class="small">MPLS 600 Mbps</text>
+    <text x="190" y="346" text-anchor="middle" class="small">宽带 200 Mbps | 4G 备份</text>
+    
+    <!-- ERP 应用 -->
+    <text x="190" y="375" text-anchor="middle" class="small">📊 ERP 应用</text>
+  </g>
+
+  <!-- 大工厂2 -->
+  <g id="factory2">
+    <rect x="900" y="250" width="180" height="140" class="factory" rx="5"/>
+    <text x="990" y="270" text-anchor="middle" class="header">🏭 大工厂2 (华北)</text>
+    
+    <!-- 网关 -->
+    <rect x="910" y="285" width="160" height="80" class="gateway" stroke="#0369a1" stroke-width="2" rx="3"/>
+    <text x="990" y="305" text-anchor="middle" class="text">SD-WAN 网关</text>
+    <text x="990" y="320" text-anchor="middle" class="small">规格: 中端设备</text>
+    <text x="990" y="333" text-anchor="middle" class="small">MPLS 600 Mbps</text>
+    <text x="990" y="346" text-anchor="middle" class="small">宽带 150 Mbps | 4G 备份</text>
+    
+    <!-- ERP 应用 -->
+    <text x="990" y="375" text-anchor="middle" class="small">📊 生产制造系统</text>
+  </g>
+
+  <!-- 小工厂3 -->
+  <g id="factory3">
+    <rect x="500" y="450" width="180" height="140" class="factory" rx="5"/>
+    <text x="590" y="470" text-anchor="middle" class="header">🏭 小工厂3 (西南)</text>
+    
+    <!-- 网关 -->
+    <rect x="510" y="485" width="160" height="80" class="gateway" stroke="#0369a1" stroke-width="2" rx="3"/>
+    <text x="590" y="505" text-anchor="middle" class="text">SD-WAN 微型网关</text>
+    <text x="590" y="520" text-anchor="middle" class="small">规格: 低功耗</text>
+    <text x="590" y="533" text-anchor="middle" class="small">宽带 50 Mbps</text>
+    <text x="590" y="546" text-anchor="middle" class="small">4G 10 Mbps (无MPLS)</text>
+    
+    <!-- ERP 应用 -->
+    <text x="590" y="575" text-anchor="middle" class="small">📊 库存查询系统</text>
+  </g>
+
+  <!-- 互联网出口 -->
+  <g id="internet">
+    <circle cx="600" cy="700" r="40" class="highlight" stroke="#666" stroke-width="2"/>
+    <text x="600" y="700" text-anchor="middle" class="header">☁️ 互联网</text>
+    <text x="600" y="715" text-anchor="middle" class="small">智能出口</text>
+  </g>
+
+  <!-- 连接线：总部 -> 各工厂 -->
+  <!-- 总部 -> 工厂1 -->
+  <line x1="520" y1="160" x2="250" y2="250" class="line" marker-end="url(#arrowhead)"/>
+  <text x="350" y="195" class="small" fill="#0369a1">🔄 政策下发</text>
+
+  <!-- 总部 -> 工厂2 -->
+  <line x1="680" y1="160" x2="950" y2="250" class="line" marker-end="url(#arrowhead)"/>
+  <text x="800" y="195" class="small" fill="#0369a1">🔄 政策下发</text>
+
+  <!-- 总部 -> 工厂3 -->
+  <line x1="600" y1="160" x2="590" y2="450" class="line" marker-end="url(#arrowhead)"/>
+  <text x="620" y="300" class="small" fill="#0369a1">🔄 政策下发</text>
+
+  <!-- 工厂间隧道 -->
+  <!-- 工厂1 <-> 工厂2 -->
+  <line x1="280" y1="320" x2="910" y2="320" class="dash" marker-end="url(#arrowhead)"/>
+  <text x="595" y="310" text-anchor="middle" class="small" fill="#059669">🔐 IPSec 隧道</text>
+
+  <!-- 工厂1 <-> 工厂3 -->
+  <line x1="240" y1="390" x2="520" y2="520" class="dash" marker-end="url(#arrowhead)"/>
+  <text x="350" y="460" class="small" fill="#059669">🔐 IPSec</text>
+
+  <!-- 工厂2 <-> 工厂3 -->
+  <line x1="960" y1="390" x2="660" y2="520" class="dash" marker-end="url(#arrowhead)"/>
+  <text x="850" y="460" class="small" fill="#059669">🔐 IPSec</text>
+
+  <!-- 各工厂到互联网的连接 -->
+  <!-- 工厂1 -> 互联网 -->
+  <line x1="190" y1="390" x2="560" y2="660" class="line" marker-end="url(#arrowhead)"/>
+  <text x="350" y="520" class="small" fill="#dc2626">🚀 智能路由</text>
+
+  <!-- 工厂2 -> 互联网 -->
+  <line x1="990" y1="390" x2="640" y2="660" class="line" marker-end="url(#arrowhead)"/>
+  <text x="850" y="520" class="small" fill="#dc2626">🚀 智能路由</text>
+
+  <!-- 工厂3 -> 互联网 -->
+  <line x1="590" y1="590" x2="600" y2="660" class="line" marker-end="url(#arrowhead)"/>
+  <text x="610" y="620" class="small" fill="#dc2626">🚀 智能路由</text>
+
+  <!-- 图例 -->
+  <g id="legend" transform="translate(50, 650)">
+    <text x="0" y="0" class="text" font-weight="bold">图例</text>
+    <line x1="0" y1="15" x2="30" y2="15" class="line" marker-end="url(#arrowhead)"/>
+    <text x="40" y="20" class="small">实线: 单向连接/信息流</text>
+    
+    <line x1="0" y1="35" x2="30" y2="35" class="dash" marker-end="url(#arrowhead)"/>
+    <text x="40" y="40" class="small">虚线: IPSec 加密隧道</text>
+  </g>
+
+  <!-- 性能指标框 -->
+  <g id="metrics" transform="translate(50, 50)">
+    <rect x="0" y="0" width="180" height="100" class="box" rx="5"/>
+    <text x="90" y="20" text-anchor="middle" class="header">📊 成本效益</text>
+    <text x="5" y="40" class="small">✓ 月费降低: 800K → 280K</text>
+    <text x="5" y="53" class="small">✓ 成本节省: 65%</text>
+    <text x="5" y="66" class="small">✓ 部署周期: 3周 → 3天</text>
+    <text x="5" y="79" class="small">✓ ERP 延迟: 200ms → 80ms</text>
+    <text x="5" y="92" class="small">✓ 年度节省: 6.2 百万</text>
+  </g>
+</svg>

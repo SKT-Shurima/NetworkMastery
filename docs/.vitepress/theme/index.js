@@ -4,7 +4,7 @@ import RoughDiagram from './components/RoughDiagram.vue'
 import WideTable from './components/WideTable.vue'
 
 export default {
-  extends: Theme,
+  extends: DefaultTheme,
   enhanceApp({ app }) {
     // 注册全局组件
     app.component('RoughDiagram', RoughDiagram)

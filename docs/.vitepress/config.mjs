@@ -7,11 +7,13 @@ export default withMermaid(
     titleTemplate: ':title - NetworkMastery',
     description: '从 OSI 七层到 SD-WAN 智能路由的网络知识深度解析',
     lang: 'zh-CN',
+    base: '/NetworkMastery/',
     ignoreDeadLinks: true,
     lastUpdated: true,
-    cleanUrls: false,
+    cleanUrls: true,
 
     head: [
+      ['meta', { name: 'viewport', content: 'width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes' }],
       ['link', { rel: 'icon', type: 'image/svg+xml', href: '/logo.svg' }],
       ['meta', { name: 'theme-color', content: '#10b981' }],
       ['meta', { name: 'og:type', content: 'website' }],
@@ -76,6 +78,8 @@ export default withMermaid(
             items: [
               { text: 'OSI 七层模型', link: '/guide/basics/osi' },
               { text: 'TCP/IP 协议栈', link: '/guide/basics/tcpip' },
+              { text: 'HTTP 协议详解', link: '/guide/basics/http' },
+              { text: 'NAT 网络地址转换', link: '/guide/basics/nat' },
               { text: 'IP 寻址与路由', link: '/guide/basics/routing' },
             ]
           },
@@ -106,6 +110,7 @@ export default withMermaid(
               { text: 'IPSec 协议详解', link: '/guide/security/ipsec' },
               { text: 'GRE 和网络隧道', link: '/guide/security/gre' },
               { text: 'MPLS 多协议标签交换', link: '/guide/advanced/mpls' },
+              { text: 'VXLAN 虚拟网络', link: '/guide/advanced/vxlan' },
             ]
           },
           {
@@ -140,6 +145,7 @@ export default withMermaid(
             items: [
               { text: '网络监控与可观测性', link: '/guide/ops/monitoring' },
               { text: '故障排查方法论', link: '/guide/ops/troubleshooting' },
+              { text: '网络诊断与抓包分析', link: '/guide/ops/packet-analysis' },
             ]
           },
         ],
@@ -215,18 +221,52 @@ export default withMermaid(
       },
     },
 
-    // ─── Mermaid 配置 ───
+    // ─── Mermaid 配置 (优化视觉效果) ───
     mermaid: {
-      theme: 'neutral',
+      theme: 'base',
       themeVariables: {
-        primaryColor: '#d1fae5',
-        primaryTextColor: '#065f46',
-        primaryBorderColor: '#10b981',
-        lineColor: '#6ee7b7',
-        secondaryColor: '#ecfdf5',
-        tertiaryColor: '#f0fdf4',
-        fontFamily: 'Inter, -apple-system, sans-serif',
-        fontSize: '14px',
+        // 主色系 (绿蓝渐变)
+        primaryColor: '#0ea5e9',
+        primaryTextColor: '#ffffff',
+        primaryBorderColor: '#0284c7',
+        lineColor: '#475569',
+        
+        // 辅助色
+        secondaryColor: '#06b6d4',
+        secondaryTextColor: '#ffffff',
+        secondaryBorderColor: '#0891b2',
+        
+        // 第三色
+        tertiaryColor: '#10b981',
+        tertiaryTextColor: '#ffffff',
+        tertiaryBorderColor: '#059669',
+        
+        // 文字与外观
+        fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+        fontSize: '16px',
+        fontSizeLarge: '18px',
+        
+        // 边框和线条
+        borderRadius: '8px',
+        lineStrokeWidth: '2px',
+        
+        // 特殊强调
+        accentColor: '#f59e0b',
+        dangerColor: '#ef4444',
+        warningColor: '#f59e0b',
+        successColor: '#10b981',
+      },
+      // 高级配置
+      securityLevel: 'loose',
+      startOnLoad: true,
+      gantt: {
+        numberSectionStyles: 3,
+        fontSize: 14,
+      },
+      flowchart: {
+        htmlLabels: true,
+        useMaxWidth: true,
+        padding: 20,
       }
     },
     mermaidPlugin: {

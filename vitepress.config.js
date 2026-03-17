@@ -1,5 +1,9 @@
 import { defineConfig } from 'vitepress'
 import { withMermaid } from 'vitepress-plugin-mermaid'
+import markdownItMark from 'markdown-it-mark'
+import markdownItFootnote from 'markdown-it-footnote'
+import markdownItAnchor from 'markdown-it-anchor'
+import markdownItMathjax3 from 'markdown-it-mathjax3'
 
 export default withMermaid(
   defineConfig({
@@ -54,6 +58,15 @@ export default withMermaid(
             { text: '智能路由', link: '/guide/sdwan/routing' },
             { text: '安全设计', link: '/guide/sdwan/security' },
             { text: '实战案例', link: '/guide/sdwan/cases' },
+          ]
+        },
+        {
+          text: '🌐 高级主题',
+          items: [
+            { text: 'BGP 深度分析', link: '/guide/advanced/bgp' },
+            { text: 'WireGuard VPN', link: '/guide/vpn/wireguard' },
+            { text: '容器网络', link: '/guide/cloud/container-networking' },
+            { text: '故障排查实战', link: '/guide/ops/troubleshooting-advanced' },
           ]
         },
         {
@@ -140,6 +153,16 @@ export default withMermaid(
             items: [
               { text: '网络监控与可观测性', link: '/guide/ops/monitoring' },
               { text: '故障排查方法论', link: '/guide/ops/troubleshooting' },
+              { text: '故障排查实战', link: '/guide/ops/troubleshooting-advanced' },
+            ]
+          },
+          {
+            text: '🚀 高级主题',
+            collapsed: true,
+            items: [
+              { text: 'BGP 深度解析', link: '/guide/advanced/bgp' },
+              { text: 'WireGuard VPN 详解', link: '/guide/vpn/wireguard' },
+              { text: '容器网络详解', link: '/guide/cloud/container-networking' },
             ]
           },
         ],
@@ -207,12 +230,32 @@ export default withMermaid(
       darkModeSwitchTitle: '切换到暗色模式',
     },
 
-    // ─── Markdown 配置 ───
+    // ─── Markdown 配置 - 集成高质量插件 ───
     markdown: {
       lineNumbers: true,
       image: {
         lazyLoading: true
       },
+      config: (md) => {
+        // 支持标记高亮 (==text==)
+        md.use(markdownItMark)
+        
+        // 支持脚注
+        md.use(markdownItFootnote)
+        
+        // 支持自动标题锚点
+        md.use(markdownItAnchor, {
+          permalink: markdownItAnchor.permalink.linkInsideHeader({
+            symbol: '🔗',
+            placement: 'after'
+          })
+        })
+        
+        // 支持数学公式 (LaTeX)
+        md.use(markdownItMathjax3)
+        
+        return md
+      }
     },
 
     // ─── Mermaid 配置 ───
