@@ -43,7 +43,7 @@ diagrams/
 ```
 
 **📊 详细资源**: 
-- [增强版 Mermaid 图表 + 说明](./diagrams/enhanced-mermaid/case1-architecture.md)
+- [增强版 Mermaid 图表 + 说明](./enhanced-mermaid/case1-architecture)
 - [高质量 SVG 拓扑图](./diagrams/svg/case1-topology.svg)
 - [可编辑 Excalidraw 版本](./diagrams/excalidraw/case1-architecture.json)
 ```
@@ -108,7 +108,7 @@ graph TB
 ```
 
 > 💡 **想要更详细的图表吗？** 
-> - [增强版 Mermaid](./diagrams/enhanced-mermaid/case1-architecture.md) - 包含详细说明
+> - [增强版 Mermaid](./enhanced-mermaid/case1-architecture) - 包含详细说明
 > - [高清 SVG 图](./diagrams/svg/case1-topology.svg) - 用于演讲和打印
 > - [可编辑版本](./diagrams/excalidraw/case1-architecture.json) - 在 Excalidraw 中自定义
 ```
@@ -152,7 +152,7 @@ graph TB
 
 **案例 1**：
 ```markdown
-详细的图表和说明可查看 [这里](./diagrams/enhanced-mermaid/case1-architecture.md)。
+详细的图表和说明可查看 [这里](./enhanced-mermaid/case1-architecture)。
 
 对应的高质量 SVG 图：[制造业拓扑图](./diagrams/svg/case1-topology.svg)
 ```

@@ -1,3 +1,8 @@
+---
+title: QoS 与流量工程
+description: 介绍服务质量模型、DiffServ 与流量工程在网络中的应用。
+---
+
 # QoS 与流量工程
 
 ## 什么是 QoS？

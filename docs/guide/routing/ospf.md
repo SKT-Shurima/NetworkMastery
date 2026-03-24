@@ -1,3 +1,13 @@
+---
+title: OSPF 开放最短路径优先：企业网络的路由主力
+description: 企业网 IGP 链路状态路由、区域划分、LSA 与 Dijkstra 最短路径实践。
+---
+
+---
+title: OSPF 开放最短路径优先：企业网络的路由主力
+description: OSPF 链路状态原理、区域与 LSA，企业 IGP 设计与常见排障要点。
+---
+
 # OSPF 开放最短路径优先：企业网络的路由主力
 
 ## 导言

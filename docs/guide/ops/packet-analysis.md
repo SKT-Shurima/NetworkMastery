@@ -1,3 +1,13 @@
+---
+title: 网络诊断工具完全指南：从 tcpdump 到 Wireshark
+description: tcpdump 命令、Wireshark 过滤器与抓包诊断真实故障的完整指南。
+---
+
+---
+title: 网络诊断工具完全指南：从 tcpdump 到 Wireshark
+description: tcpdump 与 Wireshark 抓包命令、过滤器与真实场景下的包分析与网络性能诊断指南。
+---
+
 # 网络诊断工具完全指南：从 tcpdump 到 Wireshark
 
 ## 导言：网络工程师的武器库
@@ -631,6 +641,6 @@ DNS 慢：
 
 ## 下一步
 
-- [TCP/IP 深度解析](../../basics/tcpip.md)
-- [HTTP 协议分析](../../basics/http.md)
-- [网络安全基础](../../security/ipsec.md)
+- [TCP/IP 深度解析](/guide/basics/tcpip)
+- [HTTP 协议分析](/guide/basics/http)
+- [网络安全基础](/guide/security/ipsec)

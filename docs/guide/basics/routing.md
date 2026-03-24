@@ -1,3 +1,8 @@
+---
+title: 路由：互联网的交通指挥系统
+description: 从路由表与转发决策入手，对比静态与动态路由，并介绍互联网中数据包如何被逐级转发到目的地。
+---
+
 # 路由：互联网的交通指挥系统
 
 ## 导言：路由的本质
@@ -409,6 +414,6 @@ RPKI 解决方案：
 
 ## 推荐阅读
 
-- [BGP 深度解析](../advanced/bgp.md)
+- [BGP 深入解析](../routing/bgp.md)
 - [SD-WAN 概念](../sdwan/concepts.md)
 - [网络抓包分析](../ops/packet-analysis.md)

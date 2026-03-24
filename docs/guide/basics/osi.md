@@ -1,3 +1,11 @@
+---
+title: OSI 七层模型：网络通信的分层哲学
+description: 介绍 OSI 七层模型的分层思想、各层职责及与真实网络实现的关系，帮助理解网络通信的整体架构。
+---
+
+> 📋 **前置知识**：无，这是学习网络的起点
+> ⏱️ **阅读时间**：约 15 分钟
+
 # OSI 七层模型：网络通信的分层哲学
 
 ## 导言：从混沌到秩序
@@ -550,3 +558,29 @@ OSI 七层              TCP/IP 四层
 - [TCP/IP 协议栈深度解析](tcpip.md)
 - [网络诊断和抓包分析](../ops/packet-analysis.md)
 - 经典书籍：*TCP/IP Illustrated* Volume 1
+
+## 与其他技术的关系
+
+```mermaid
+graph LR
+    OSI["OSI 七层模型<br/>(本文)"] --> TCPIP["TCP/IP 协议栈"]
+    OSI --> HTTP["HTTP 协议"]
+    TCPIP --> Routing["IP 寻址与路由"]
+    TCPIP --> DNS["DNS 域名解析"]
+    Routing --> OSPF["OSPF 路由协议"]
+    Routing --> Enterprise["企业网络架构"]
+
+    style OSI fill:#0ea5e9,color:#fff
+```
+
+*OSI 模型是理解所有网络技术的基石，掌握分层思想后可以逐步深入各层的具体协议和实现。*
+
+## 总结与下一步
+
+| 维度 | 要点 |
+|------|------|
+| 核心价值 | 提供网络通信的统一思维框架，让复杂系统可理解、可修复 |
+| 适用场景 | 网络设计、故障排查、协议分析、技术沟通 |
+| 局限性 | 理论模型，实际实现（TCP/IP）合并了部分层次 |
+
+> 📖 **下一步学习**：[TCP/IP 协议栈](/guide/basics/tcpip) — 了解真实网络中最广泛使用的协议族

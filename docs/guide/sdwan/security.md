@@ -1,3 +1,11 @@
+---
+title: SD-WAN 安全设计：零信任架构在实践中
+description: 剖析 SD-WAN 安全模型与零信任落地，对比传统边界安全与多层防护实践。
+---
+
+> 📋 **前置知识**：[SD-WAN 智能路由](/guide/sdwan/routing)、[IPSec 协议详解](/guide/security/ipsec)
+> ⏱️ **阅读时间**：约 12 分钟
+
 # SD-WAN 安全设计：零信任架构在实践中
 
 ## 导言
@@ -405,3 +413,13 @@ EDR：终端威胁检测（必须在终端）
 - 下一章：[SD-WAN 实战案例](/guide/sdwan/cases)
 - 相关：[网络安全架构](/guide/attacks/security-arch)
 - 返回目录：[首页](/)
+
+## 总结与下一步
+
+| 维度 | 要点 |
+|------|------|
+| 核心价值 | 在 Underlay 网络上构建端到端加密、零信任的安全体系 |
+| 关键技术 | IPSec 隧道加密、微分段、集中安全策略、SASE 融合 |
+| 设计原则 | 默认不信任、最小权限、持续验证、东西向防护 |
+
+> 📖 **下一步学习**：[SD-WAN 实战案例](/guide/sdwan/cases) — 看真实企业如何落地 SD-WAN

@@ -1,3 +1,13 @@
+---
+title: 网络事件应急响应：快速止血
+description: 网络故障应急响应四阶段框架与快速诊断恢复的运维流程。
+---
+
+---
+title: 网络事件应急响应：快速止血
+description: 网络故障从检测、应对、缓解到解决的全流程应急响应框架与运维实践要点。
+---
+
 # 网络事件应急响应：快速止血
 
 ## 导言
@@ -260,7 +270,7 @@ Root Cause：
 
 ## 推荐阅读
 
-- [网络故障排查实战](/guide/ops/troubleshooting-advanced)
+- [故障排查方法论](/guide/ops/troubleshooting)
 - [网络监控与可观测性](/guide/ops/monitoring)
 - [网络安全架构](/guide/attacks/security-arch)
 - 返回目录：[首页](/)

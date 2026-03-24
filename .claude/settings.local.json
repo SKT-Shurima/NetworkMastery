@@ -6,7 +6,14 @@
       "Bash(git fetch origin main)",
       "Bash(git merge origin/main --strategy-option=ours)",
       "Bash(git add docs/.vitepress/theme/custom.css)",
-      "Bash(git add .claude/settings.local.json)"
+      "Bash(git add .claude/settings.local.json)",
+      "Bash(git commit -m \"✅ 合并远程更新完成 - 保留本地优先级配置\n\n🔄 合并内容:\n- 远程新增 40+ 篇高质量文档\n- 新增 Cyberpunk 主题系统\n- 新增交互式学习组件\n- 集成图表查看器 (DiagramViewer, ExcalidrawViewer)\n- 保留本地 custom.css 样式配置\n\n🎯 冲突解决:\n- 保持本地 docs/.vitepress/theme/custom.css\n- 保留本地 Claude 设置配置\n\n🚀 项目现已同步至最新版本\")",
+      "Bash(rm -rf docs/.vitepress/cache)",
+      "Bash(npm install)",
+      "Bash(npm run dev)",
+      "Bash(npm run build)",
+      "Bash(git add docs/.vitepress/theme/index.js)",
+      "Bash(git commit -m \"🔧 修复构建错误 - DefaultTheme 导入问题\n\n✅ 修复内容:\n- 修正 docs/.vitepress/theme/index.js 中的 DefaultTheme 导入\n- 构建测试成功通过\n- 开发服务器正常启动\n\n🎯 项目状态: 远程同步完成，功能正常\")"
     ],
     "deny": [],
     "ask": []

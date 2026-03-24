@@ -1,3 +1,13 @@
+---
+title: 混合云网络：本地和云的无缝融合
+description: 混合云架构模式、跨云互联挑战与本地数据中心与公有云协同组网。
+---
+
+---
+title: 混合云网络：本地和云的无缝融合
+description: 混合云常见架构、互联方式与延迟、安全、运维一致性等挑战的应对思路。
+---
+
 # 混合云网络：本地和云的无缝融合
 
 ## 导言
@@ -244,6 +254,6 @@ AWS Direct Connect、Azure ExpressRoute 等
 ## 推荐阅读
 
 - [SD-WAN 概念与价值](/guide/sdwan/concepts)
-- [云网融合](/guide/enterprise/cloud-integration)
+- [云网融合](/guide/enterprise/cloud)
 - [网络监控与可观测性](/guide/ops/monitoring)
 - 返回目录：[首页](/)

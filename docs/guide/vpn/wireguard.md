@@ -1,3 +1,13 @@
+---
+title: WireGuard VPN 详解：现代加密传输的典范
+description: WireGuard 极简加密 VPN 原理、配置与相较 OpenVPN、IPSec 的优势。
+---
+
+---
+title: WireGuard VPN 详解：现代加密传输的典范
+description: WireGuard 简洁加密隧道原理、配置要点，以及与 OpenVPN、IPSec 的对比与适用场景。
+---
+
 # WireGuard VPN 详解：现代加密传输的典范
 
 ## 导言

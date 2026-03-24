@@ -1,3 +1,8 @@
+---
+title: IPSec：网络层的隐形盾牌
+description: 介绍 IPSec 在网络层的加密与隧道原理、IKE/ESP/AH 及企业 VPN 中的应用。
+---
+
 # IPSec：网络层的隐形盾牌
 
 ## 导言：为什么 IPSec 还活着？

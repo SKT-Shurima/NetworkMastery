@@ -1,3 +1,11 @@
+---
+title: HTTP 协议详解：从 1.0 到 3.0 的演进史
+description: 梳理 HTTP 从 1.0 到 3.0 的演进脉络，解析各版本差异、性能瓶颈（如队头阻塞）及 HTTP/2、HTTP/3 的优化思路。
+---
+
+> 📋 **前置知识**：[TCP/IP 协议栈](/guide/basics/tcpip)
+> ⏱️ **阅读时间**：约 12 分钟
+
 # HTTP 协议详解：从 1.0 到 3.0 的演进史
 
 ## 导言：HTTP 如何统治了 Web
@@ -1293,4 +1301,14 @@ webpack 配置：
 
 - [TCP/IP 协议栈深度解析](./tcpip.md)
 - [网络抓包与分析](../ops/packet-analysis.md)
-- [CDN 与缓存策略](../advanced/cdn.md)
+- [网络性能优化](/guide/qos/performance)
+
+## 总结与下一步
+
+| 维度 | 要点 |
+|------|------|
+| 核心价值 | Web 通信的基石，从 HTTP/1.0 到 HTTP/3 持续优化性能 |
+| 关键演进 | 持久连接 → 多路复用 → QUIC 协议 |
+| 安全要点 | HTTPS = HTTP + TLS，已成为现代 Web 的标配 |
+
+> 📖 **下一步学习**：[DHCP 动态主机配置](/guide/basics/dhcp) — 了解设备如何自动获取网络配置

@@ -1,3 +1,11 @@
+---
+title: SD-WAN 实战案例：真实企业场景深度分析
+description: 通过制造业等真实企业场景，展示 SD-WAN 如何解决成本、扩展与业务问题。
+---
+
+> 📋 **前置知识**：[SD-WAN 概念与价值](/guide/sdwan/concepts)、[SD-WAN 架构设计](/guide/sdwan/architecture)
+> ⏱️ **阅读时间**：约 20 分钟
+
 # SD-WAN 实战案例：真实企业场景深度分析
 
 ## 导言
@@ -445,3 +453,13 @@ graph TB
 - 上一章：[SD-WAN 安全设计](/guide/sdwan/security)
 - 相关：[网络监控与可观测性](/guide/ops/monitoring)
 - 返回目录：[首页](/)
+
+## 总结与下一步
+
+| 维度 | 要点 |
+|------|------|
+| 核心价值 | 真实案例验证 SD-WAN 的降本增效、敏捷部署与安全合规 |
+| 典型场景 | 零售连锁、制造业、金融合规、跨国企业 |
+| 关键教训 | 渐进迁移而非一步到位、Underlay 质量是底线、安全不能后补 |
+
+> 📖 **下一步学习**：[容器网络](/guide/cloud/container-networking) — 探索云原生时代的网络架构

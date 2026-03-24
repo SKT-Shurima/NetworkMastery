@@ -1,3 +1,8 @@
+---
+title: VLAN 进阶：复杂网络的分段隔离
+description: 在基础 VLAN 之上，讲解数据/语音/管理等 VLAN 分类、Access 与 Trunk 模式及复杂场景下的分段与隔离设计要点。
+---
+
 # VLAN 进阶：复杂网络的分段隔离
 
 ## 导言

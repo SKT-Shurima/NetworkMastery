@@ -1,3 +1,13 @@
+---
+title: 企业网络设计最佳实践
+description: 基于真实案例的企业网络架构设计原则与经验：分层隔离、高可用、安全、成本与可维护性的平衡。
+---
+
+---
+title: 企业网络设计最佳实践
+description: 基于真实案例总结企业网络在分层隔离、冗余高可用、成本与安全之间的设计原则与可维护性经验。
+---
+
 # 企业网络设计最佳实践
 
 ## 导言
@@ -341,6 +351,6 @@
 
 - [SD-WAN 概念与价值](/guide/sdwan/concepts)
 - [网络监控与可观测性](/guide/ops/monitoring)
-- [BGP 深度解析](/guide/advanced/bgp)
+- [BGP 深入解析](/guide/routing/bgp)
 - [网络安全架构](/guide/attacks/security-arch)
 - 返回目录：[首页](/)

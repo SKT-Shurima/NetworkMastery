@@ -1,3 +1,11 @@
+---
+title: TCP/IP 协议栈：互联网的骨架与灵魂
+description: 系统讲解 TCP/IP 四层模型、与 OSI 的对比，以及 TCP、UDP、IP 等核心协议的设计动机与工程实践要点。
+---
+
+> 📋 **前置知识**：[OSI 七层模型](/guide/basics/osi)
+> ⏱️ **阅读时间**：约 18 分钟
+
 # TCP/IP 协议栈：互联网的骨架与灵魂
 
 ## 导言：为什么互联网没有崩溃？
@@ -1676,6 +1684,32 @@ def recv_msg(sock):
 
 ## 下一步
 
-- 深入学习：[高级网络主题 → BGP 和 MPLS](../advanced/bgp.md)
+- 深入学习：[BGP 深入解析](../routing/bgp.md) 与 [MPLS 和流量工程](../advanced/mpls.md)
 - 故障诊断：[运维工具 → 网络抓包分析](../ops/packet-analysis.md)
 - 安全加固：[网络安全 → IPSec](../security/ipsec.md)
+
+## 与其他技术的关系
+
+```mermaid
+graph LR
+    OSI["OSI 七层模型"] --> TCPIP["TCP/IP 协议栈<br/>(本文)"]
+    TCPIP --> HTTP["HTTP 协议"]
+    TCPIP --> DNS["DNS 域名解析"]
+    TCPIP --> DHCP["DHCP 配置"]
+    TCPIP --> Routing["IP 寻址与路由"]
+    TCPIP --> IPSec["IPSec 安全"]
+    
+    style TCPIP fill:#0ea5e9,color:#fff
+```
+
+*TCP/IP 是互联网的实际协议标准，掌握它之后可以深入各层具体协议（HTTP、DNS）和安全机制（IPSec）。*
+
+## 总结与下一步
+
+| 维度 | 要点 |
+|------|------|
+| 核心价值 | 互联网的实际协议标准，TCP 保证可靠传输，IP 负责寻址路由 |
+| 与 OSI 关系 | TCP/IP 四层模型是 OSI 七层的实用化简版 |
+| 关键协议 | TCP/UDP（传输层）、IP/ICMP（网络层）、ARP（链路层） |
+
+> 📖 **下一步学习**：[HTTP 协议详解](/guide/basics/http) — 了解应用层最广泛使用的协议

@@ -1,3 +1,13 @@
+---
+title: 网络切片：5G 时代的灵活网络
+description: 5G 网络切片概念、eMBB、URLLC 与 mMTC 等虚拟逻辑网络应用场景。
+---
+
+---
+title: 网络切片：5G 时代的灵活网络
+description: 5G 网络切片概念，eMBB、URLLC、mMTC 等逻辑切片与典型业务场景。
+---
+
 # 网络切片：5G 时代的灵活网络
 
 ## 导言

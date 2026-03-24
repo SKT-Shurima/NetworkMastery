@@ -1,3 +1,13 @@
+---
+title: MPLS：标签交换与流量工程
+description: 多协议标签交换原理、标签转发与 ISP 环境下的 VPN 与流量工程应用。
+---
+
+---
+title: MPLS：标签交换与流量工程
+description: MPLS 标签转发、LSP、与 IP 路由的区别，以及 VPN 与流量工程应用场景。
+---
+
 # MPLS：标签交换与流量工程
 
 ## 导言：为什么要给数据包贴标签？

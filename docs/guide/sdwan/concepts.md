@@ -1,3 +1,11 @@
+---
+title: SD-WAN 概念与价值
+description: 介绍 SD-WAN 诞生的背景、核心价值与工作原理，帮助理解为何需要 SD-WAN。
+---
+
+> 📋 **前置知识**：[广域网 (WAN)](/guide/enterprise/wan)、[SDN 基础理论](/guide/sdn/fundamentals)
+> ⏱️ **阅读时间**：约 18 分钟
+
 # SD-WAN 概念与价值
 
 > **学习目标**: 理解 SD-WAN 诞生的背景、核心价值和工作原理，能够向非技术人员解释为什么需要 SD-WAN。
@@ -633,3 +641,31 @@ SD-WAN 零接触部署：
     💡 记住：SD-WAN 不是技术炫技，而是用软件解决企业网络的真实痛点
   </p>
 </div>
+
+## 与其他技术的关系
+
+```mermaid
+graph TD
+    WAN["广域网 WAN"] -->|痛点驱动| Concepts["SD-WAN 概念与价值<br/>(本文)"]
+    SDN["SDN 理论"] -->|理念基础| Concepts
+    MPLS["MPLS VPN"] -->|对比替代| Concepts
+    Concepts --> Arch["SD-WAN 架构设计"]
+    Concepts --> Routing["智能路由"]
+    Concepts --> Security["安全设计"]
+    Concepts --> Cases["实战案例"]
+    IPSec["IPSec 隧道"] -->|底层支撑| Concepts
+    
+    style Concepts fill:#0ea5e9,color:#fff
+```
+
+*SD-WAN 是 SDN 理念在广域网场景的落地实践，它综合了隧道技术（IPSec/GRE）、智能路由和集中管理，解决传统 MPLS VPN 的成本与灵活性问题。*
+
+## 总结与下一步
+
+| 维度 | 要点 |
+|------|------|
+| 核心价值 | 降低 WAN 成本 40-60%、提升应用体验、实现零接触部署 |
+| 适用场景 | 多分支企业、混合云接入、跨国组网、零售/制造连锁 |
+| 局限性 | 依赖 Underlay 质量、厂商锁定风险、安全合规需额外设计 |
+
+> 📖 **下一步学习**：[SD-WAN 架构与控制面](/guide/sdwan/architecture) — 深入 SD-WAN 的三平面架构设计

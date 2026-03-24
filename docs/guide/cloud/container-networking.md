@@ -1,3 +1,13 @@
+---
+title: 容器网络深入：Docker、Kubernetes 网络模型
+description: 从 Docker 桥接与 Host 模式到 Kubernetes 集群网络编排的深入讲解。
+---
+
+---
+title: 容器网络深入：Docker、Kubernetes 网络模型
+description: Docker 网络模式、Kubernetes Pod 网络与 CNI，以及容器跨主机通信与 Service 原理。
+---
+
 # 容器网络深入：Docker、Kubernetes 网络模型
 
 ## 导言

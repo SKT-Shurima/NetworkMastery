@@ -63,10 +63,10 @@ export default withMermaid(
         {
           text: '🌐 高级主题',
           items: [
-            { text: 'BGP 深度分析', link: '/guide/advanced/bgp' },
+            { text: 'BGP 深入解析', link: '/guide/routing/bgp' },
             { text: 'WireGuard VPN', link: '/guide/vpn/wireguard' },
             { text: '容器网络', link: '/guide/cloud/container-networking' },
-            { text: '故障排查实战', link: '/guide/ops/troubleshooting-advanced' },
+            { text: '故障排查方法论', link: '/guide/ops/troubleshooting' },
           ]
         },
         {
@@ -153,14 +153,13 @@ export default withMermaid(
             items: [
               { text: '网络监控与可观测性', link: '/guide/ops/monitoring' },
               { text: '故障排查方法论', link: '/guide/ops/troubleshooting' },
-              { text: '故障排查实战', link: '/guide/ops/troubleshooting-advanced' },
             ]
           },
           {
             text: '🚀 高级主题',
             collapsed: true,
             items: [
-              { text: 'BGP 深度解析', link: '/guide/advanced/bgp' },
+              { text: 'BGP 深入解析', link: '/guide/routing/bgp' },
               { text: 'WireGuard VPN 详解', link: '/guide/vpn/wireguard' },
               { text: '容器网络详解', link: '/guide/cloud/container-networking' },
             ]

@@ -1,3 +1,13 @@
+---
+title: VXLAN：云数据中心的虚拟网络革命
+description: 云数据中心 VXLAN overlay、突破 VLAN 限制与跨域虚拟网络技术解析。
+---
+
+---
+title: VXLAN：云数据中心的虚拟网络革命
+description: VXLAN Overlay、VTEP 与多租户隔离，解决 VLAN 规模与跨域虚拟网络的数据中心方案。
+---
+
 # VXLAN：云数据中心的虚拟网络革命
 
 ## 导言：为什么云数据中心需要 VXLAN？

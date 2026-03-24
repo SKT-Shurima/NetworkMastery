@@ -14,40 +14,40 @@ hero:
 
 features:
   - icon: 🌐
-    title: 网络基础
-    details: 从 OSI 七层模型、TCP/IP 协议栈到 IP 寻址与路由，用通俗的语言拆解网络世界的底层逻辑，帮你建立完整的理论框架。
+    title: "第一篇：网络基石"
+    details: 从 OSI 七层模型、TCP/IP 协议栈到 DHCP、DNS、NAT 核心服务，再到交换与路由基础，用通俗语言拆解网络世界的底层逻辑。
     link: /guide/basics/osi
-    linkText: 开始阅读
+    linkText: 从零开始
 
-  - icon: 🔐
-    title: 安全与隧道
-    details: 深入 IPSec 加密原理、GRE 虚拟链路和 MPLS 标签转发，揭示运营商级网络技术的工作机制和真实应用场景。
-    link: /guide/security/ipsec
-    linkText: 深入了解
-
-  - icon: 🏗️
-    title: 网络架构
-    details: 星形、网状、Spoke-Hub、Full Mesh 五大组网模式的深度对比，以及骨干网和分支网络的分层设计方法论。
-    link: /guide/architecture/topology
-    linkText: 探索架构
-
-  - icon: 🛡️
-    title: 安全防御
-    details: DDoS 三大攻击类型与多层防御体系、网络安全架构的纵深防御设计、加密认证与零信任的完整实践指南。
-    link: /guide/attacks/ddos
-    linkText: 查看方案
+  - icon: 🏢
+    title: "第二篇：企业网络"
+    details: 企业网络架构设计、防火墙与零信任安全体系、QoS 流量工程与性能优化，构建面向业务的企业级网络能力。
+    link: /guide/enterprise/traditional
+    linkText: 走进企业
 
   - icon: ⚡
-    title: SD-WAN 核心
+    title: "第三篇：网络演进"
+    details: 从 IPSec/MPLS/VXLAN 隧道技术到 SDN 软件定义网络，再到 SD-WAN 智能路由的完整演进路径，理解网络的过去与未来。
+    link: /guide/security/ipsec
+    linkText: 技术演进
+
+  - icon: 🔧
+    title: "第四篇：实战进阶"
+    details: 云网融合与容器网络、网络监控与故障排查、BGP 深入与网络切片等前沿技术，从理论走向实战。
+    link: /guide/cloud/container-networking
+    linkText: 实战出发
+
+  - icon: 📡
+    title: "SDN 软件定义网络"
+    details: 控制面与数据面分离、OpenFlow 协议、SDN 控制器架构，理解网络从硬件驱动到软件驱动的范式转换。
+    link: /guide/sdn/fundamentals
+    linkText: 探索 SDN
+
+  - icon: 🚀
+    title: "SD-WAN 深度剖析"
     details: 从概念价值、架构设计、控制面原理、智能路由到安全策略，五篇深度文章带你完整掌握 SD-WAN 的方方面面。
     link: /guide/sdwan/concepts
     linkText: 深入 SD-WAN
-
-  - icon: 🎯
-    title: QoS 与优化
-    details: QoS 流量工程的 DSCP 标记体系、网络冗余的可用性计算、WAN 加速与 TCP 优化，让网络真正为业务服务。
-    link: /guide/qos/qos
-    linkText: 了解优化
 ---
 
 <CyberpunkHome />

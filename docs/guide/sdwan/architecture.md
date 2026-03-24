@@ -1,3 +1,11 @@
+---
+title: SD-WAN 架构与控制面
+description: 讲解 SD-WAN 三平面分离、Controller、Orchestrator、vEdge 职责与企业级部署思路。
+---
+
+> 📋 **前置知识**：[SD-WAN 概念与价值](/guide/sdwan/concepts)、[SDN 控制器架构](/guide/sdn/controllers)
+> ⏱️ **阅读时间**：约 15 分钟
+
 # SD-WAN 架构与控制面
 
 > **学习目标**: 理解 SD-WAN 的三平面分离架构，掌握 Controller、Orchestrator、vEdge 的职责，能够设计企业级 SD-WAN 部署方案。
@@ -578,3 +586,13 @@ vEdge (总部/云网关)
     💡 三平面分离是 SD-WAN 的核心设计哲学：决策者、执行者、管理者各司其职
   </p>
 </div>
+
+## 总结与下一步
+
+| 维度 | 要点 |
+|------|------|
+| 核心价值 | 三平面分离架构实现网络可编程化与集中管理 |
+| 关键组件 | Controller（控制面）、Orchestrator（管理面）、CPE（数据面） |
+| 设计要点 | Controller 高可用、CPE 零接触部署、API 驱动自动化 |
+
+> 📖 **下一步学习**：[智能路由与流量优化](/guide/sdwan/routing) — 了解 SD-WAN 如何实现应用感知的动态路径选择
