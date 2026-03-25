@@ -1027,4 +1027,4 @@ ansible-playbook playbooks/compliance_audit.yml --list-tasks
 
 ---
 
-*下一篇：[网络配置版本控制：GitOps 实践](/guide/automation/gitops-network)*
+*下一篇：[网络 CI/CD：配置即代码流水线](/guide/automation/network-cicd)*
