@@ -1,0 +1,62 @@
+domain:
+  id: basics
+  name_zh: 网络基石
+  name_en: Network Fundamentals
+  color: cyan
+  default: false
+  order: 1
+
+concepts:
+  - id: osi
+    name_zh: OSI 七层模型
+    name_en: OSI Seven-Layer Model
+    short: 把网络通信抽象成 7 层，每层只管自己那一摊事，互不干涉。
+    long: |
+      想象寄一封国际信件：你写信（应用层）→ 装信封（表示层）→ 贴邮票（会话层）→
+      交给邮局（传输层）→ 邮局分拣到不同城市（网络层）→ 邮车装运（数据链路层）→
+      飞机/卡车送达（物理层）。每个环节出问题，只查那一层即可。
+    level: L1
+    aliases: [七层模型, OSI 模型]
+    neighbors: [tcpip]
+    canonical:
+      file: /guide/basics/osi.md
+    is_hub: true
+
+  - id: tcpip
+    name_zh: TCP/IP 协议栈
+    name_en: TCP/IP Protocol Stack
+    short: 真实互联网用的 4 层模型，比 OSI 更实用。
+    level: L1
+    aliases: [TCP/IP, IP 协议栈]
+    neighbors: [osi, ip-routing]
+    canonical:
+      file: /guide/basics/tcpip.md
+
+  - id: ip-routing
+    name_zh: IP 寻址与路由
+    name_en: IP Addressing & Routing
+    short: 每个网络设备一个地址，路由表决定数据包下一跳走哪。
+    level: L1
+    neighbors: [tcpip, wan]
+    canonical:
+      file: /guide/basics/routing.md
+
+  - id: wan
+    name_zh: 广域网 WAN
+    name_en: Wide Area Network
+    short: 跨地域连接多个分支的网络。SD-WAN 就是它的智能化升级。
+    level: L2
+    aliases: [广域网, Wide Area Network]
+    neighbors: [ip-routing, sdn, sdwan-core]
+    canonical:
+      file: /guide/enterprise/wan.md
+
+  - id: sdn
+    name_zh: SDN 软件定义网络
+    name_en: Software-Defined Networking
+    short: 把网络的控制面与数据面分离，用软件集中调度，是 SD-WAN 的理论基础。
+    level: L2
+    aliases: [软件定义网络, OpenFlow]
+    neighbors: [wan, sdwan-core]
+    canonical:
+      file: /guide/sdn/fundamentals.md
