@@ -3,14 +3,23 @@
   "version": "1.0.0",
   "description": "Deep dive into network architecture and SD-WAN technology",
   "scripts": {
+    "prebuild": "node scripts/build-graph.mjs",
+    "predev": "node scripts/build-graph.mjs",
+    "build:graph": "node scripts/build-graph.mjs",
     "dev": "vitepress dev docs --host",
     "build": "vitepress build docs",
-    "preview": "vitepress preview docs --host"
+    "preview": "vitepress preview docs --host",
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "devDependencies": {
+    "@vue/test-utils": "^2.4.10",
     "excalidraw": "^0.6.4",
+    "happy-dom": "^14.12.3",
+    "js-yaml": "^4.1.1",
     "vis-network": "^10.0.2",
     "vitepress": "^1.0.0",
+    "vitest": "^1.6.1",
     "vue": "^3.3.0"
   },
   "dependencies": {
@@ -20,7 +29,7 @@
     "markdown-it-mathjax3": "^4.3.2",
     "medium-zoom": "^1.1.0",
     "mermaid": "^11.13.0",
-    "vitepress-plugin-mermaid": "^2.0.17",
-    "roughjs": "^4.6.6"
+    "roughjs": "^4.6.6",
+    "vitepress-plugin-mermaid": "^2.0.17"
   }
 }
