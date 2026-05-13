@@ -2,3 +2,4 @@ node_modules/
 .vitepress/cache
 docs/.vitepress/dist/
 .claude/
+.superpowers/
