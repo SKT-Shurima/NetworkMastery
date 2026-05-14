@@ -1,6 +1,6 @@
 # 三个 SD-WAN 案例对比总结
 
-## 📊 企业规模与背景
+## <Icon name="bar-chart-3" color="cyan" /> 企业规模与背景
 
 | 维度 | 案例 1: 制造业 | 案例 2: 金融 | 案例 3: 互联网 |
 |------|--------------|-----------|------------|
@@ -11,18 +11,18 @@
 
 ---
 
-## 🎯 核心诉求与解决方案
+## <Icon name="target" color="magenta" /> 核心诉求与解决方案
 
 | 诉求维度 | 制造业 | 金融 | 互联网 |
 |---------|-------|------|--------|
-| **首要目标** | 💰 成本优化 | 🔐 安全增强 | ⚡ 性能提升 |
-| **次要目标** | 📈 敏捷扩展 | 📋 合规管制 | 🌍 全球化 |
+| **首要目标** | <Icon name="circle-dollar-sign" color="green" /> 成本优化 | <Icon name="lock-keyhole" color="green" /> 安全增强 | <Icon name="zap" color="cyan" /> 性能提升 |
+| **次要目标** | <Icon name="trending-up" color="green" /> 敏捷扩展 | <Icon name="clipboard-list" color="cyan" /> 合规管制 | <Icon name="earth" color="cyan" /> 全球化 |
 | **痛点根源** | MPLS 过贵 | 权限管理复杂 | 跨国网络复杂 |
 | **关键指标** | 费用/周期 | 检测时间/覆盖率 | 延迟/成本 |
 
 ---
 
-## 💡 SD-WAN 的价值实现
+## <Icon name="lightbulb" color="cyan" /> SD-WAN 的价值实现
 
 ### 案例 1：制造业 - 成本驱动型
 
@@ -94,7 +94,7 @@ SD-WAN 解决方案：
 
 ---
 
-## 📈 关键指标对比
+## <Icon name="trending-up" color="green" /> 关键指标对比
 
 ### 成本指标
 
@@ -125,7 +125,7 @@ SD-WAN 解决方案：
 
 ---
 
-## 🏗️ 实施难度对比
+## <Icon name="layers" color="purple" /> 实施难度对比
 
 ### 制造业（难度：⭐⭐⭐）
 
@@ -136,10 +136,10 @@ SD-WAN 解决方案：
 - IT 人员有限
 
 **关键成功因素**：
-✅ 分阶段迁移（大工厂→中等工厂→小工厂）  
-✅ 并行运行（MPLS 和 SD-WAN 共存）  
-✅ 员工培训（操作人员理解新系统）  
-✅ 厂商支持（24/7 故障处理）
+<Icon name="check-circle-2" color="green" /> 分阶段迁移（大工厂→中等工厂→小工厂）  
+<Icon name="check-circle-2" color="green" /> 并行运行（MPLS 和 SD-WAN 共存）  
+<Icon name="check-circle-2" color="green" /> 员工培训（操作人员理解新系统）  
+<Icon name="check-circle-2" color="green" /> 厂商支持（24/7 故障处理）
 
 ---
 
@@ -152,10 +152,10 @@ SD-WAN 解决方案：
 - 审计要求全面 (每笔操作都要记录)
 
 **关键成功因素**：
-✅ 管理层支持 (CEO + 合规官)  
-✅ 分部试点 (小范围验证)  
-✅ MFA 用户友好度 (Windows Hello + 生物识别)  
-✅ 完整的审计链 (从认证→授权→执行→日志)
+<Icon name="check-circle-2" color="green" /> 管理层支持 (CEO + 合规官)  
+<Icon name="check-circle-2" color="green" /> 分部试点 (小范围验证)  
+<Icon name="check-circle-2" color="green" /> MFA 用户友好度 (Windows Hello + 生物识别)  
+<Icon name="check-circle-2" color="green" /> 完整的审计链 (从认证→授权→执行→日志)
 
 ---
 
@@ -168,14 +168,14 @@ SD-WAN 解决方案：
 - 开发团队的快速反应
 
 **关键成功因素**：
-✅ 区域 Hub 的选择 (地理位置最优)  
-✅ ISP 多元化 (避免单点故障)  
-✅ 完善的监控 (实时可视化)  
-✅ 自动化运维 (减少人工干预)
+<Icon name="check-circle-2" color="green" /> 区域 Hub 的选择 (地理位置最优)  
+<Icon name="check-circle-2" color="green" /> ISP 多元化 (避免单点故障)  
+<Icon name="check-circle-2" color="green" /> 完善的监控 (实时可视化)  
+<Icon name="check-circle-2" color="green" /> 自动化运维 (减少人工干预)
 
 ---
 
-## 🔄 迁移策略对比
+## <Icon name="refresh-cw" color="cyan" /> 迁移策略对比
 
 ### 制造业：渐进式迁移
 
@@ -233,15 +233,15 @@ SD-WAN 解决方案：
 
 ---
 
-## 🎓 经验教训
+## <Icon name="graduation-cap" color="magenta" /> 经验教训
 
 ### 制造业的坑
 
-❌ **踩过的坑**：
+<Icon name="x-circle" color="danger" /> **踩过的坑**：
 1. 一开始忽视了 VPN 加密的 CPU 开销 → 小网关 CPU 跑满
 2. 4G 备份在雨天丢包率高 → 增加宽带容量或加强 QoS
 
-✅ **解决方案**：
+<Icon name="check-circle-2" color="green" /> **解决方案**：
 - 选择硬件加速的网关
 - 重视 4G 链路的质量评估
 - 建立故障降级机制
@@ -250,11 +250,11 @@ SD-WAN 解决方案：
 
 ### 金融的坑
 
-❌ **踩过的坑**：
+<Icon name="x-circle" color="danger" /> **踩过的坑**：
 1. 一开始对 MFA 的用户体验考虑不足 → 员工强烈反对
 2. 某些遗留系统不支持零信任模式 → 无法快速迁移
 
-✅ **解决方案**：
+<Icon name="check-circle-2" color="green" /> **解决方案**：
 - 引入友好的认证方式（Windows Hello、生物识别）
 - 为兼容性差的系统建立专门的"兼容性区域"
 - 逐步现代化改造遗留系统
@@ -263,36 +263,36 @@ SD-WAN 解决方案：
 
 ### 互联网的坑
 
-❌ **踩过的坑**：
+<Icon name="x-circle" color="danger" /> **踩过的坑**：
 1. 初期 ISP 选择不当 → 某些地区经常掉线
 2. 中国和美国之间的互联受限 → CI/CD 流程被卡住
 
-✅ **解决方案**：
+<Icon name="check-circle-2" color="green" /> **解决方案**：
 - 多地区冗余部署（同一地区至少 2 个 ISP）
 - 建立中国-新加坡的转接中心（避免直连限制）
 - 完善的故障自愈机制（自动漂移到备用线路）
 
 ---
 
-## 📋 选型建议矩阵
+## <Icon name="clipboard-list" color="cyan" /> 选型建议矩阵
 
 ```
 根据企业类型选择合适的 SD-WAN 策略：
 
                 成本优先  |  性能优先  |  安全优先
-├─ 传统制造      ✅         ⭕         ⭕
-├─ 金融服务      ⭕         ⭕         ✅
-├─ 科技互联网    ⭕         ✅         ⭕
-├─ 零售电商      ✅         ✅         ⭕
-└─ 政府机关      ⭕         ⭕         ✅
+├─ 传统制造      [v]         ⭕         ⭕
+├─ 金融服务      ⭕         ⭕         [v]
+├─ 科技互联网    ⭕         [v]         ⭕
+├─ 零售电商      [v]         [v]         ⭕
+└─ 政府机关      ⭕         ⭕         [v]
 
-✅ = 最佳选择
+[v] = 最佳选择
 ⭕ = 可考虑
 ```
 
 ---
 
-## 🚀 推荐阅读顺序
+## <Icon name="rocket" color="magenta" /> 推荐阅读顺序
 
 **如果你是...**
 

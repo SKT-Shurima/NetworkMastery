@@ -1,8 +1,8 @@
-# 🎨 Cyberpunk Theme Demo
+# <Icon name="palette" color="magenta" /> Cyberpunk Theme Demo
 
 这是 NetworkMastery 赛博朋克风格主题的完整展示页面。
 
-## 🌐 网络拓扑示例
+## <Icon name="globe" color="cyan" /> 网络拓扑示例
 
 <NetworkTopology
   title="SD-WAN 三层架构拓扑"
@@ -29,14 +29,14 @@
   ]"
 />
 
-## ✏️ Excalidraw 逻辑图
+## <Icon name="pencil" color="cyan" /> Excalidraw 逻辑图
 
 <ExcalidrawDiagram
   title="IPSec 隧道建立流程"
   height="400px"
 />
 
-## 💾 代码示例
+## <Icon name="save" color="cyan" /> 代码示例
 
 ```python
 # SD-WAN 路由策略示例
@@ -47,7 +47,7 @@ class SDWANRouter:
     
     def add_tunnel(self, tunnel):
         self.tunnels.append(tunnel)
-        print(f"✅ Tunnel {tunnel} added to {self.name}")
+        print(f"[v] Tunnel {tunnel} added to {self.name}")
     
     def select_best_path(self, destination):
         # 应用感知路由
@@ -59,7 +59,7 @@ router.add_tunnel({"name": "MPLS", "latency": 10})
 router.add_tunnel({"name": "Internet", "latency": 5})
 ```
 
-## 📊 表格示例
+## <Icon name="bar-chart-3" color="cyan" /> 表格示例
 
 | 技术方案 | 带宽 | 延迟 | 成本 | 适用场景 |
 |---------|------|------|------|---------|
@@ -67,9 +67,9 @@ router.add_tunnel({"name": "Internet", "latency": 5})
 | SD-WAN  | 中高 | 低   | 中   | 混合场景 |
 | Internet VPN | 中 | 中高 | 低 | 分支互联 |
 
-## 🎯 引用块
+## <Icon name="target" color="magenta" /> 引用块
 
-> **💡 提示**
+> **<Icon name="lightbulb" color="cyan" /> 提示**
 > 
 > SD-WAN 的核心价值在于「应用感知 + 智能路由」，不仅仅是多链路聚合。
 
@@ -85,7 +85,7 @@ router.add_tunnel({"name": "Internet", "latency": 5})
 不要在生产环境直接切换，建议先在测试环境充分验证。
 :::
 
-## 🔗 链接
+## <Icon name="link" color="cyan" /> 链接
 
 - [OSI 七层模型](/guide/basics/osi)
 - [SD-WAN 概念](/guide/sdwan/concepts)

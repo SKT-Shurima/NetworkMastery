@@ -2,30 +2,30 @@
 
 本文档说明如何将生成的高质量图表资源集成到 `docs/guide/sdwan/cases.md` 中。
 
-## 📋 资源清单
+## <Icon name="clipboard-list" color="cyan" /> 资源清单
 
 已生成的文件：
 
 ```
 diagrams/
-├── README.md                          ✅ 资源库总览
-├── COMPARISON.md                      ✅ 三个案例对比表
-├── INTEGRATION.md                     ✅ 本文件（集成指南）
+├── README.md                          [v] 资源库总览
+├── COMPARISON.md                      [v] 三个案例对比表
+├── INTEGRATION.md                     [v] 本文件（集成指南）
 ├── enhanced-mermaid/
-│   ├── case1-architecture.md         ✅ 案例1 - 增强Mermaid图表
-│   ├── case2-security.md             ✅ 案例2 - 零信任框架详解
-│   └── case3-global.md               ✅ 案例3 - 全球网络拓扑
+│   ├── case1-architecture.md         [v] 案例1 - 增强Mermaid图表
+│   ├── case2-security.md             [v] 案例2 - 零信任框架详解
+│   └── case3-global.md               [v] 案例3 - 全球网络拓扑
 ├── svg/
-│   ├── case1-topology.svg            ✅ 制造业拓扑图
-│   ├── case2-zerotrust.svg           ✅ 零信任安全框架
-│   └── case3-global.svg              ✅ 全球网络拓扑
+│   ├── case1-topology.svg            [v] 制造业拓扑图
+│   ├── case2-zerotrust.svg           [v] 零信任安全框架
+│   └── case3-global.svg              [v] 全球网络拓扑
 └── excalidraw/
-    ├── case1-architecture.json        ✅ 制造业架构（可编辑）
-    ├── case2-zerotrust.json          ✅ 零信任框架（可编辑）
-    └── case3-global.json             ✅ 全球网络（可编辑）
+    ├── case1-architecture.json        [v] 制造业架构（可编辑）
+    ├── case2-zerotrust.json          [v] 零信任框架（可编辑）
+    └── case3-global.json             [v] 全球网络（可编辑）
 ```
 
-## 🔄 集成方式
+## <Icon name="refresh-cw" color="cyan" /> 集成方式
 
 ### 选项 1: 最小化改动（推荐）
 
@@ -42,7 +42,7 @@ diagrams/
 [原有的 Mermaid 代码]
 ```
 
-**📊 详细资源**: 
+**[chart] 详细资源**: 
 - [增强版 Mermaid 图表 + 说明](./enhanced-mermaid/case1-architecture)
 - [高质量 SVG 拓扑图](./diagrams/svg/case1-topology.svg)
 - [可编辑 Excalidraw 版本](./diagrams/excalidraw/case1-architecture.json)
@@ -70,7 +70,7 @@ diagrams/
 4. 在 Mermaid 代码块后添加：
 
 ```markdown
-📍 **架构说明**：
+<Icon name="map-pin" color="magenta" /> **架构说明**：
 - **总部**：集中控制和策略下发
 - **大工厂**：MPLS + 宽带 + 4G 多链路
 - **小工厂**：仅需宽带 + 4G（成本最优）
@@ -103,11 +103,11 @@ diagrams/
 
 ```mermaid
 graph TB
-    HQ["🏢 总部（苏州）<br/>SD-WAN Controller"]
+    HQ["[corp] 总部（苏州）<br/>SD-WAN Controller"]
     [简化的 Mermaid 代码]
 ```
 
-> 💡 **想要更详细的图表吗？** 
+> <Icon name="lightbulb" color="cyan" /> **想要更详细的图表吗？** 
 > - [增强版 Mermaid](./enhanced-mermaid/case1-architecture) - 包含详细说明
 > - [高清 SVG 图](./diagrams/svg/case1-topology.svg) - 用于演讲和打印
 > - [可编辑版本](./diagrams/excalidraw/case1-architecture.json) - 在 Excalidraw 中自定义
@@ -126,7 +126,7 @@ graph TB
 
 ---
 
-## 🎯 具体集成步骤
+## [target] 具体集成步骤
 
 ### 步骤 1: 准备文档
 
@@ -135,7 +135,7 @@ graph TB
 ```markdown
 ---
 
-## 📚 详细资源库
+## <Icon name="library" color="cyan" /> 详细资源库
 
 本文档的所有图表已生成高质量版本，包括：
 
@@ -143,7 +143,7 @@ graph TB
 - **SVG 拓扑图**：矢量图形，无限缩放无损，适合演讲和打印
 - **Excalidraw 版本**：可编辑的交互式图表，支持团队协作
 
-👉 [查看完整资源库](./diagrams/README.md)
+<Icon name="arrow-right" color="cyan" /> [查看完整资源库](./diagrams/README.md)
 ```
 
 ### 步骤 2: 更新各个案例
@@ -178,7 +178,7 @@ graph TB
 ```markdown
 ---
 
-## 🔄 三个案例快速对比
+## <Icon name="refresh-cw" color="cyan" /> 三个案例快速对比
 
 需要快速比较三个案例？查看 [详细对比表](./diagrams/COMPARISON.md)
 
@@ -188,18 +188,18 @@ graph TB
 | 金融 | 安全增强 + 合规 | 30% | 1 年 |
 | 互联网 | 全球化 + 高性能 | 45% | 1 年 |
 
-[👉 查看完整对比分析](./diagrams/COMPARISON.md)
+[<Icon name="arrow-right" color="cyan" /> 查看完整对比分析](./diagrams/COMPARISON.md)
 ```
 
 ---
 
-## 📱 对不同平台的优化
+## [phone] 对不同平台的优化
 
 ### GitHub/GitLab
 
-✅ Mermaid 图表会自动渲染  
-✅ SVG 图片会显示  
-⚠️ Excalidraw JSON 需要外链打开
+[v] Mermaid 图表会自动渲染  
+[v] SVG 图片会显示  
+[!] Excalidraw JSON 需要外链打开
 
 **优化建议**：在 GitHub 中使用 Mermaid + SVG 组合
 
@@ -254,7 +254,7 @@ export default {
 
 ---
 
-## 🔧 维护指南
+## [fix] 维护指南
 
 ### 更新流程
 
@@ -293,7 +293,7 @@ git diff HEAD~1 docs/guide/sdwan/diagrams/enhanced-mermaid/case1-architecture.md
 
 ---
 
-## ✅ 集成检查清单
+## [v] 集成检查清单
 
 - [ ] 所有 `diagrams/` 文件已添加到 Git
 - [ ] `cases.md` 已添加指向资源库的链接
@@ -305,7 +305,7 @@ git diff HEAD~1 docs/guide/sdwan/diagrams/enhanced-mermaid/case1-architecture.md
 
 ---
 
-## 🚀 快速启动
+## [run] 快速启动
 
 ### 对于急着集成的人：
 
@@ -314,7 +314,7 @@ git diff HEAD~1 docs/guide/sdwan/diagrams/enhanced-mermaid/case1-architecture.md
 ```markdown
 ---
 
-## 📊 高质量图表资源
+## <Icon name="bar-chart-3" color="cyan" /> 高质量图表资源
 
 本文档的所有架构图已生成高质量版本：
 
@@ -324,7 +324,7 @@ git diff HEAD~1 docs/guide/sdwan/diagrams/enhanced-mermaid/case1-architecture.md
 | **SVG** | 演讲、打印、网页 | [`diagrams/svg/`](./diagrams/svg/) |
 | **Excalidraw** | 团队协作编辑 | [`diagrams/excalidraw/`](./diagrams/excalidraw/) |
 
-👉 [进入资源库](./diagrams/README.md)
+<Icon name="arrow-right" color="cyan" /> [进入资源库](./diagrams/README.md)
 
 [三个案例对比分析](./diagrams/COMPARISON.md)
 ```
@@ -333,7 +333,7 @@ git diff HEAD~1 docs/guide/sdwan/diagrams/enhanced-mermaid/case1-architecture.md
 
 ---
 
-## 📞 常见问题
+## [tel] 常见问题
 
 **Q: SVG 太大了怎么办？**  
 A: 可以在网页中加 CSS：

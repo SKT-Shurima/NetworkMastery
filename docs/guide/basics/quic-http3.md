@@ -3,8 +3,8 @@ title: QUIC与HTTP/3：传输层的下一次革命
 description: 深入理解QUIC协议的设计动机、连接建立（0-RTT握手）、多路复用无头阻塞、连接迁移与HTTP/3的分层架构，以及企业部署HTTP/3的性能收益与注意事项
 ---
 
-> 📋 **前置知识**：[HTTP协议演进](/guide/basics/http)、[TCP/IP协议栈](/guide/basics/tcpip)、[TLS 1.3](/guide/basics/tls)
-> ⏱️ **阅读时间**：约18分钟
+> <Icon name="clipboard-list" color="cyan" /> **前置知识**：[HTTP协议演进](/guide/basics/http)、[TCP/IP协议栈](/guide/basics/tcpip)、[TLS 1.3](/guide/basics/tls)
+> ⏱ **阅读时间**：约18分钟
 
 # QUIC与HTTP/3：传输层的下一次革命
 
@@ -115,24 +115,24 @@ graph TB
     subgraph TCP["TCP + HTTP/2 —— 有序字节流，丢包阻塞全部流"]
         direction LR
         T_PKT1["数据包1\n流A帧"]
-        T_PKT2["❌ 数据包2\n流B帧（丢失）"]
+        T_PKT2["[x] 数据包2\n流B帧（丢失）"]
         T_PKT3["数据包3\n流C帧（等待）"]
         T_PKT4["数据包4\n流A帧（等待）"]
         T_PKT1 --> T_PKT2 --> T_PKT3 --> T_PKT4
-        T_BLOCK["🔴 所有流阻塞\n等待数据包2重传"]
+        T_BLOCK["(red) 所有流阻塞\n等待数据包2重传"]
         T_PKT4 --> T_BLOCK
     end
 
     subgraph QUIC_LAYER["QUIC —— 独立流，丢包仅影响相关流"]
         direction LR
         Q_PKT1["QUIC包1\n流A帧"]
-        Q_PKT2["❌ QUIC包2\n流B帧（丢失）"]
-        Q_PKT3["QUIC包3\n流C帧 ✅ 正常交付"]
-        Q_PKT4["QUIC包4\n流A帧 ✅ 正常交付"]
+        Q_PKT2["[x] QUIC包2\n流B帧（丢失）"]
+        Q_PKT3["QUIC包3\n流C帧 [v] 正常交付"]
+        Q_PKT4["QUIC包4\n流A帧 [v] 正常交付"]
 
-        Q_PKT1 --> Q_STREAM_A["流A ✅ 继续"]
-        Q_PKT2 --> Q_STREAM_B["流B 🔴 等待重传"]
-        Q_PKT3 --> Q_STREAM_C["流C ✅ 继续"]
+        Q_PKT1 --> Q_STREAM_A["流A [v] 继续"]
+        Q_PKT2 --> Q_STREAM_B["流B (red) 等待重传"]
+        Q_PKT3 --> Q_STREAM_C["流C [v] 继续"]
         Q_PKT4 --> Q_STREAM_A
     end
 ```

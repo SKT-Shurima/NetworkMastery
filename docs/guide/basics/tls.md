@@ -3,8 +3,8 @@ title: TLS 1.3详解：现代网络加密的基石
 description: 深入理解传输层安全（TLS）1.3的握手机制、密码套件简化、0-RTT恢复、前向保密（PFS）与证书验证流程，掌握企业TLS部署的安全配置最佳实践
 ---
 
-> 📋 **前置知识**：[PKI与数字证书](/guide/security/pki)、[HTTP协议](/guide/basics/http)、[网络加密基础](/guide/attacks/encryption)
-> ⏱️ **阅读时间**：约20分钟
+> <Icon name="clipboard-list" color="cyan" /> **前置知识**：[PKI与数字证书](/guide/security/pki)、[HTTP协议](/guide/basics/http)、[网络加密基础](/guide/attacks/encryption)
+> ⏱ **阅读时间**：约20分钟
 
 # TLS 1.3详解：现代网络加密的基石
 
@@ -131,7 +131,7 @@ sequenceDiagram
     Note over S: 服务器立即计算握手密钥
     S->>C: ServerHello<br/>+ key_share（服务器ECDHE公钥）
 
-    Note over S: 以下消息均已加密 🔒
+    Note over S: 以下消息均已加密 [lock]
     S->>C: EncryptedExtensions（加密扩展）
     S->>C: Certificate（证书，已加密传输）
     S->>C: CertificateVerify（证书签名验证）
@@ -535,15 +535,15 @@ spec:
 
 | 阶段 | 任务 | 优先级 |
 |------|------|--------|
-| **立即执行** | 禁用TLS 1.0/1.1，仅保留1.2+1.3 | 🔴 高 |
-| **立即执行** | 移除所有无PFS的密码套件（RSA密钥交换） | 🔴 高 |
-| **近期规划** | 启用OCSP Stapling | 🟡 中 |
-| **近期规划** | 部署HSTS（从短max-age开始） | 🟡 中 |
-| **近期规划** | 用SSL Labs对公网服务评级，目标A+ | 🟡 中 |
-| **中期规划** | 评估并启用TLS 1.3（独占模式） | 🟢 低 |
-| **中期规划** | 微服务场景引入mTLS（Istio/SPIRE） | 🟢 低 |
-| **持续运营** | 证书有效期监控（避免证书过期） | 🔴 高 |
-| **持续运营** | TLS代理/负载均衡器固件更新 | 🟡 中 |
+| **立即执行** | 禁用TLS 1.0/1.1，仅保留1.2+1.3 | <Icon name="circle" color="danger" filled /> 高 |
+| **立即执行** | 移除所有无PFS的密码套件（RSA密钥交换） | <Icon name="circle" color="danger" filled /> 高 |
+| **近期规划** | 启用OCSP Stapling | <Icon name="circle" color="warn" filled /> 中 |
+| **近期规划** | 部署HSTS（从短max-age开始） | <Icon name="circle" color="warn" filled /> 中 |
+| **近期规划** | 用SSL Labs对公网服务评级，目标A+ | <Icon name="circle" color="warn" filled /> 中 |
+| **中期规划** | 评估并启用TLS 1.3（独占模式） | <Icon name="circle" color="green" filled /> 低 |
+| **中期规划** | 微服务场景引入mTLS（Istio/SPIRE） | <Icon name="circle" color="green" filled /> 低 |
+| **持续运营** | 证书有效期监控（避免证书过期） | <Icon name="circle" color="danger" filled /> 高 |
+| **持续运营** | TLS代理/负载均衡器固件更新 | <Icon name="circle" color="warn" filled /> 中 |
 
 TLS 1.3代表了密码协议设计的最高水准：在不牺牲安全性的前提下，通过精心的协议工程大幅提升性能；通过强制约束消除了配置失误的空间。对于企业安全团队而言，迁移至TLS 1.3不仅是技术升级，更是系统性降低攻击面的战略选择。
 

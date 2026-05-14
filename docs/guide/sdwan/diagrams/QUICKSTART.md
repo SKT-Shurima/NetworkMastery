@@ -1,12 +1,12 @@
-# 🚀 快速开始指南
+# <Icon name="rocket" color="magenta" /> 快速开始指南
 
 不想看那么多文档？这个 5 分钟快速指南帮你快速上手。
 
 ---
 
-## 你是谁？👤
+## 你是谁？<Icon name="user" color="cyan" />
 
-### 📖 我是文档阅读者
+### <Icon name="book-open" color="cyan" /> 我是文档阅读者
 **你想**: 看看 SD-WAN 在三个企业中的实际应用
 
 **做这个**:
@@ -17,7 +17,7 @@
 
 ---
 
-### 🖼️ 我是演讲者/博主
+### <Icon name="image" color="cyan" /> 我是演讲者/博主
 **你想**: 获得高质量的图表用于演讲或文章
 
 **做这个**:
@@ -30,7 +30,7 @@
 
 ---
 
-### ✏️ 我需要编辑这些图
+### <Icon name="pencil" color="cyan" /> 我需要编辑这些图
 **你想**: 修改图表内容以适应自己的场景
 
 **做这个**:
@@ -44,7 +44,7 @@
 
 ---
 
-### 🔄 我需要集成到文档中
+### <Icon name="refresh-cw" color="cyan" /> 我需要集成到文档中
 **你想**: 在原 `cases.md` 中使用这些资源
 
 **做这个**:
@@ -55,7 +55,7 @@
 
 ---
 
-### 📊 我想快速了解三个案例的异同
+### <Icon name="bar-chart-3" color="cyan" /> 我想快速了解三个案例的异同
 **你想**: 一张表格对比三个案例
 
 **做这个**:
@@ -65,7 +65,7 @@
 
 ---
 
-## 🎯 核心资源地图
+## <Icon name="target" color="magenta" /> 核心资源地图
 
 ```
 我想...                          打开这个文件
@@ -97,7 +97,7 @@
 
 ---
 
-## ⚡ 最常见的 3 个使用场景
+## <Icon name="zap" color="cyan" /> 最常见的 3 个使用场景
 
 ### 场景 1: "我要在 GitHub 上看文档"
 ```
@@ -126,27 +126,27 @@
 
 ---
 
-## 📁 文件夹结构一览
+## <Icon name="folder" color="cyan" /> 文件夹结构一览
 
 ```
 diagrams/
-├── 📄 README.md          ← 完整的功能说明（30 行）
-├── 📄 COMPARISON.md      ← 三案例对比表（10 分钟阅读）
-├── 📄 INTEGRATION.md     ← 集成步骤指南（15 分钟）
-├── 📄 MANIFEST.md        ← 项目统计信息（参考）
-├── 📄 QUICKSTART.md      ← 这个文件！（5 分钟）
+├── [file] README.md          ← 完整的功能说明（30 行）
+├── [file] COMPARISON.md      ← 三案例对比表（10 分钟阅读）
+├── [file] INTEGRATION.md     ← 集成步骤指南（15 分钟）
+├── [file] MANIFEST.md        ← 项目统计信息（参考）
+├── [file] QUICKSTART.md      ← 这个文件！（5 分钟）
 │
-├── 📁 enhanced-mermaid/  ← Mermaid 图表
+├── [dir] enhanced-mermaid/  ← Mermaid 图表
 │   ├── case1-architecture.md
 │   ├── case2-security.md
 │   └── case3-global.md
 │
-├── 📁 svg/               ← 高质量 SVG 图
+├── [dir] svg/               ← 高质量 SVG 图
 │   ├── case1-topology.svg
 │   ├── case2-zerotrust.svg
 │   └── case3-global.svg
 │
-└── 📁 excalidraw/        ← 可编辑 JSON
+└── [dir] excalidraw/        ← 可编辑 JSON
     ├── case1-architecture.json
     ├── case2-zerotrust.json
     └── case3-global.json
@@ -154,15 +154,15 @@ diagrams/
 
 ---
 
-## 🎓 如果你不知道...
+## <Icon name="graduation-cap" color="magenta" /> 如果你不知道...
 
 ### "我应该用哪个格式？"
 
 | 我想... | 用这个 |
 |--------|------|
-| 在 GitHub 上看 | 💬 **Mermaid** (enhanced-mermaid/) |
-| 做演讲或打印 | 🖼️ **SVG** (svg/) |
-| 团队一起编辑 | ✏️ **Excalidraw** (excalidraw/) |
+| 在 GitHub 上看 | <Icon name="message-circle" color="cyan" /> **Mermaid** (enhanced-mermaid/) |
+| 做演讲或打印 | <Icon name="image" color="cyan" /> **SVG** (svg/) |
+| 团队一起编辑 | <Icon name="pencil" color="cyan" /> **Excalidraw** (excalidraw/) |
 
 ### "SVG 是什么？"
 一种矢量图格式。优点：无论放多大都不会模糊，文件小，可以放在网页上。
@@ -175,7 +175,7 @@ diagrams/
 
 ---
 
-## ⏱️ 时间估算
+## ⏱ 时间估算
 
 | 任务 | 时间 |
 |------|------|
@@ -188,27 +188,27 @@ diagrams/
 
 ---
 
-## 💡 快速提示
+## <Icon name="lightbulb" color="cyan" /> 快速提示
 
-✨ **Pro Tip 1**: GitHub 直接打开 Mermaid
+<Icon name="sparkles" color="magenta" /> **Pro Tip 1**: GitHub 直接打开 Mermaid
 - 不需要任何工具，自动渲染
 - 适合快速查看
 
-✨ **Pro Tip 2**: SVG 右键"在浏览器中打开"
+<Icon name="sparkles" color="magenta" /> **Pro Tip 2**: SVG 右键"在浏览器中打开"
 - 在浏览器中可以缩放、拖拽
 - 完全不失质量
 
-✨ **Pro Tip 3**: Excalidraw 支持实时协作
+<Icon name="sparkles" color="magenta" /> **Pro Tip 3**: Excalidraw 支持实时协作
 - 邀请他人访问共享链接
 - 可以一起编辑和注释
 
-✨ **Pro Tip 4**: 所有文件都在 Git 中
+<Icon name="sparkles" color="magenta" /> **Pro Tip 4**: 所有文件都在 Git 中
 - 可以看到历史记录
 - 可以 diff 看到变化
 
 ---
 
-## 🆘 遇到问题？
+## <Icon name="life-buoy" color="danger" /> 遇到问题？
 
 | 问题 | 解决方案 |
 |------|--------|
@@ -219,7 +219,7 @@ diagrams/
 
 ---
 
-## 🚀 接下来...
+## <Icon name="rocket" color="magenta" /> 接下来...
 
 选一个你感兴趣的：
 
@@ -239,6 +239,6 @@ diagrams/
 
 ---
 
-**祝你使用愉快！** 🎉
+**祝你使用愉快！** <Icon name="party-popper" color="magenta" />
 
 *最后更新: 2025-01-15*

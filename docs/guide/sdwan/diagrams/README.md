@@ -2,7 +2,7 @@
 
 本目录包含 NetworkMastery 中三个 SD-WAN 实战案例的高质量可视化资源，包括增强的 Mermaid 图表、SVG 拓扑图和 Excalidraw 兼容格式。
 
-## 📁 目录结构
+## <Icon name="folder" color="cyan" /> 目录结构
 
 ```
 diagrams/
@@ -20,7 +20,7 @@ diagrams/
     └── (case2 和 case3 即将推出)
 ```
 
-## 🎯 各案例概览
+## <Icon name="target" color="magenta" /> 各案例概览
 
 ### 案例 1：制造业集团的成本优化与敏捷扩展
 
@@ -100,7 +100,7 @@ diagrams/
 
 ---
 
-## 🔄 使用指南
+## <Icon name="refresh-cw" color="cyan" /> 使用指南
 
 ### 1. 在 Markdown 中嵌入 Mermaid 图表
 
@@ -137,7 +137,7 @@ SVG 文件可以直接嵌入 HTML：
 
 ---
 
-## 📊 图表特性对比
+## <Icon name="bar-chart-3" color="cyan" /> 图表特性对比
 
 | 特性 | Mermaid | SVG | Excalidraw JSON |
 |------|---------|-----|-----------------|
@@ -150,7 +150,7 @@ SVG 文件可以直接嵌入 HTML：
 
 ---
 
-## 🎨 设计说明
+## <Icon name="palette" color="magenta" /> 设计说明
 
 ### 配色方案
 
@@ -169,7 +169,7 @@ SVG 文件可以直接嵌入 HTML：
 
 ---
 
-## 🔧 维护与更新
+## <Icon name="wrench" color="cyan" /> 维护与更新
 
 ### 如何更新图表
 
@@ -192,7 +192,7 @@ export function Architecture() {
 
 ---
 
-## 📝 相关文档
+## <Icon name="pencil-line" color="cyan" /> 相关文档
 
 - [案例 1：制造业集团详解](../cases.md#案例-1制造业集团的成本优化与敏捷扩展)
 - [案例 2：金融公司详解](../cases.md#案例-2金融公司的零信任安全升级)
@@ -200,7 +200,7 @@ export function Architecture() {
 
 ---
 
-## ✨ 最佳实践
+## <Icon name="sparkles" color="magenta" /> 最佳实践
 
 ### 文档中使用
 
@@ -225,12 +225,12 @@ export function Architecture() {
 
 ---
 
-## 🚀 快速开始
+## <Icon name="rocket" color="magenta" /> 快速开始
 
 1. 选择合适的文件格式：
-   - 📄 需要在 Markdown 中？→ `enhanced-mermaid/`
-   - 🖼️ 需要高质量展示？→ `svg/`
-   - ✏️ 需要编辑修改？→ `excalidraw/`
+   - <Icon name="file-text" color="cyan" /> 需要在 Markdown 中？→ `enhanced-mermaid/`
+   - <Icon name="image" color="cyan" /> 需要高质量展示？→ `svg/`
+   - <Icon name="pencil" color="cyan" /> 需要编辑修改？→ `excalidraw/`
 
 2. 复制相应的文件链接或内容
 

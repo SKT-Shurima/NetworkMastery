@@ -3,8 +3,8 @@ title: 邮件协议体系：SMTP、IMAP与反垃圾邮件机制
 description: 系统理解电子邮件传输的完整协议栈——SMTP中继路由、IMAP/POP3邮件访问、SPF发件人验证、DKIM数字签名与DMARC策略的企业邮件安全防护体系
 ---
 
-> 📋 **前置知识**：[DNS协议](/guide/basics/dns)、[TLS加密](/guide/basics/tls)
-> ⏱️ **阅读时间**：约18分钟
+> <Icon name="clipboard-list" color="cyan" /> **前置知识**：[DNS协议](/guide/basics/dns)、[TLS加密](/guide/basics/tls)
+> ⏱ **阅读时间**：约18分钟
 
 # 邮件协议体系：SMTP、IMAP与反垃圾邮件机制
 
@@ -46,7 +46,7 @@ journey
 ```mermaid
 flowchart LR
     subgraph 发件方域 example.com
-        A[👤 Alice\nMUA] -->|SMTP 587\nSTARTTLS| B[MSA\nsmtp.example.com]
+        A[[user] Alice\nMUA] -->|SMTP 587\nSTARTTLS| B[MSA\nsmtp.example.com]
         B -->|SMTP 25| C[MTA\n出站网关]
     end
 
@@ -57,7 +57,7 @@ flowchart LR
     subgraph 收件方域 corp.com
         E[MTA\n入站网关] -->|本地投递| F[MDA\nDovecot LDA]
         F --> G[(邮箱\n/var/mail/bob)]
-        G -->|IMAP 993| H[👤 Bob\nMUA]
+        G -->|IMAP 993| H[[user] Bob\nMUA]
     end
 
     C -->|查询 corp.com MX| D
@@ -178,14 +178,14 @@ flowchart TD
 
     C --> D{连接 mail1.corp.com:25}
 
-    D -->|连接成功| E[✅ 通过 mail1 投递]
+    D -->|连接成功| E[[v] 通过 mail1 投递]
     D -->|连接失败/超时| F{连接 mail2.corp.com:25}
 
-    F -->|连接成功| G[✅ 通过 mail2 投递]
+    F -->|连接成功| G[[v] 通过 mail2 投递]
     F -->|连接失败| H{连接 backup.corp.com:25}
 
-    H -->|连接成功| I[✅ 通过 backup 投递]
-    H -->|全部失败| J[❌ 邮件进入重试队列\n返回 4xx 临时错误\n最长重试 4-5 天]
+    H -->|连接成功| I[[v] 通过 backup 投递]
+    H -->|全部失败| J[[x] 邮件进入重试队列\n返回 4xx 临时错误\n最长重试 4-5 天]
 
     style E fill:#22c55e,color:#fff
     style G fill:#22c55e,color:#fff
@@ -371,13 +371,13 @@ sequenceDiagram
 
     Note over R: DMARC 对齐检查：<br/>From 头部域名必须与<br/>SPF/DKIM 通过的域对齐
 
-    alt SPF ✅ + DKIM ✅ + DMARC 对齐 ✅
+    alt SPF [v] + DKIM [v] + DMARC 对齐 [v]
         R-->>S: 250 Message accepted
         Note over R: 邮件正常投递至收件箱
-    else SPF ❌ 或 DKIM ❌，DMARC 策略 = quarantine
+    else SPF [x] 或 DKIM [x]，DMARC 策略 = quarantine
         R-->>S: 250 Message accepted (quarantined)
         Note over R: 邮件投递至垃圾箱
-    else SPF ❌ 且 DKIM ❌，DMARC 策略 = reject
+    else SPF [x] 且 DKIM [x]，DMARC 策略 = reject
         R-->>S: 550 5.7.1 DMARC policy violation
         Note over R: 邮件被拒绝
     end

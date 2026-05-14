@@ -127,6 +127,43 @@ function buildIconTag(emoji) {
   return `<Icon ${attrs.join(' ')} />`
 }
 
+// ASCII fallbacks for emojis appearing inside code blocks (where <Icon /> can't
+// render). Falls back to '' (strip) for emojis we have no good text symbol for.
+const codeText = {
+  '✓':'[v]','✅':'[v]','✗':'[x]','❌':'[x]',
+  '★':'*','☆':'o','⚠':'[!]','🚨':'[!!]',
+  '🔒':'[lock]','🔐':'[lock]','🔓':'[unlock]','🔑':'[key]',
+  '🛡':'[shield]','💀':'[skull]',
+  '💡':'[tip]','📋':'[list]','📊':'[chart]','📈':'[up]','📉':'[down]',
+  '🔄':'[sync]','🎨':'[art]','📖':'[doc]','📚':'[docs]','🎓':'[edu]',
+  '🧠':'[ai]','🤔':'[?]',
+  '📄':'[file]','📝':'[note]','✏':'[edit]','📁':'[dir]','🗄':'[arc]','🗺':'[map]',
+  '📦':'[pkg]','💾':'[save]','🔍':'[search]','🔗':'[link]','📌':'[pin]','📍':'[loc]',
+  '📐':'[ruler]','📜':'[scroll]','👉':'->',
+  '🌐':'[net]','🌍':'[earth]','🌏':'[earth]','🌊':'[wave]',
+  '🏢':'[corp]','🏪':'[shop]','🏠':'[home]','🏭':'[factory]','🏛':'[gov]','🏗':'[arch]',
+  '⚡':'[fast]','🔧':'[fix]','🛠':'[tools]','⚙':'[cfg]',
+  '📡':'[radio]','🚀':'[run]','🎯':'[target]',
+  '📱':'[phone]','💻':'[pc]','🖨':'[printer]','🖼':'[img]','📸':'[cam]',
+  '🎥':'[video]','🎤':'[mic]','🎛':'[knobs]','📟':'[radio]','📞':'[tel]','📢':'[mega]',
+  '💬':'[chat]','☁':'[cloud]','🔥':'[hot]','✨':'[*]','🎉':'[!]','🐌':'[slow]',
+  '💰':'[$]','💵':'[$]','💼':'[work]','⚖':'[law]',
+  '👤':'[user]','👥':'[users]','👨':'[user]','👁':'[eye]',
+  '⛶':'[max]','✕':'[x]',
+  '🔴':'(red)','🟢':'(grn)','🟡':'(ylw)','🟠':'(org)',
+  '🟦':'[blue]','🟥':'[red]','🟩':'[grn]','🟨':'[ylw]','🟧':'[org]','🟪':'[ppl]',
+  '🔷':'[cyan]','🔶':'[org]','🔵':'[blue]',
+  '✋':'[stop]','🆘':'[SOS]','🙈':'[hide]','🤦':'[!]',
+  '🚪':'[door]',
+}
+
+function buildCodeText(emoji) {
+  if (codeText[emoji] !== undefined) return codeText[emoji]
+  // Fallback: regional indicators / unmapped — strip
+  if (emojiMap[emoji]?.icon === '__remove__') return ''
+  return null
+}
+
 function processFile(file) {
   const content = readFileSync(file, 'utf-8')
   const regions = splitRegions(content)
@@ -135,12 +172,20 @@ function processFile(file) {
 
   const out = regions
     .map((r) => {
-      if (r.protected) return r.text
       return r.text.replace(EMOJI_PATTERN, (match, base) => {
         // Orphan FE0F variation selector — silently strip
         if (base === undefined) {
           replacedCount++
           return ''
+        }
+        if (r.protected) {
+          const repl = buildCodeText(base)
+          if (repl === null) {
+            unknown.set(base, (unknown.get(base) || 0) + 1)
+            return match
+          }
+          replacedCount++
+          return repl
         }
         const tag = buildIconTag(base)
         if (tag === null) {
