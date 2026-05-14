@@ -471,13 +471,99 @@ export default withMermaid(
     },
 
     // ─── Mermaid 配置 · Cyberpunk Theme ───
-    // 与 ConceptMap / KnowledgeGraph 视觉统一：
-    //   青 #00d4ff = 主节点 / 主线
-    //   洋红 #ec4899 = 强调节点
-    //   绿 #10b981 = 辅助 / 成功
-    //   深空蓝 #050818 / #0b1230 = 背景
+    // 与 ConceptMap / KnowledgeGraph 视觉统一
+    //
+    // 关键策略：
+    // 1) htmlLabels: false  → 强制走 SVG <text>，避免 foreignObject 里的内联 style 干扰
+    // 2) themeCSS 内联到 SVG 内部 → 优先级最高，绕开所有外部覆盖问题
     mermaid: {
       theme: 'base',
+      themeCSS: `
+        /* === Force node fills + text === */
+        g.node rect, g.node circle, g.node ellipse, g.node polygon, g.node path,
+        .nodes g rect, .nodes g circle, .nodes g ellipse, .nodes g polygon {
+          fill: #233156 !important;
+          stroke: #00d4ff !important;
+          stroke-width: 1.8px !important;
+        }
+        g.node:hover rect, g.node:hover circle, g.node:hover ellipse, g.node:hover polygon {
+          fill: #2f4373 !important;
+        }
+        /* Text inside nodes — fill is what matters for SVG text */
+        g.node text, g.node tspan, g.node .nodeLabel,
+        text.nodeLabel, .nodeLabel, .label text, .label tspan {
+          fill: #ffffff !important;
+          color: #ffffff !important;
+          stroke: none !important;
+          font-weight: 700 !important;
+          font-size: 14px !important;
+          font-family: 'JetBrains Mono', 'PingFang SC', sans-serif !important;
+        }
+        /* Edge / arrow / line */
+        path.flowchart-link, .edgePath .path, path.edge {
+          stroke: #5cdcff !important;
+          stroke-width: 2 !important;
+          fill: none !important;
+        }
+        defs marker path, marker path {
+          fill: #5cdcff !important;
+          stroke: #5cdcff !important;
+        }
+        /* Edge labels (the small text on arrows) */
+        .edgeLabel, .edgeLabel rect, g.edgeLabel rect {
+          background-color: transparent !important;
+          fill: #050818 !important;
+          stroke: rgba(0,212,255,0.4) !important;
+        }
+        .edgeLabel text, .edgeLabel tspan, g.edgeLabel text {
+          fill: #5cdcff !important;
+          font-weight: 600 !important;
+          font-size: 12px !important;
+        }
+        /* Cluster (subgraph) */
+        .cluster rect, .cluster polygon {
+          fill: rgba(0,212,255,0.05) !important;
+          stroke: rgba(0,212,255,0.4) !important;
+          stroke-dasharray: 4 4 !important;
+        }
+        .cluster text, .cluster-label text, .cluster .nodeLabel {
+          fill: #5cdcff !important;
+          font-size: 12px !important;
+          font-weight: 700 !important;
+          letter-spacing: 1.5px !important;
+          text-transform: uppercase !important;
+        }
+        /* Sequence diagram */
+        .actor { fill: #233156 !important; stroke: #00d4ff !important; }
+        text.actor, text.actor tspan { fill: #ffffff !important; font-weight: 700 !important; }
+        line.actor-line, .actor-line { stroke: rgba(0,212,255,0.4) !important; stroke-dasharray: 3 5 !important; }
+        .messageLine0, .messageLine1, line.messageLine0, line.messageLine1 {
+          stroke: #5cdcff !important; stroke-width: 1.8 !important;
+        }
+        text.messageText, .messageText { fill: #cfe8ff !important; font-weight: 500 !important; }
+        rect.activation0, rect.activation1, rect.activation2 {
+          fill: rgba(236,72,153,0.25) !important; stroke: #ec4899 !important;
+        }
+        rect.note, .note rect { fill: rgba(236,72,153,0.18) !important; stroke: #ec4899 !important; }
+        text.noteText, .noteText { fill: #ffe4f0 !important; font-style: italic !important; }
+        rect.labelBox { fill: rgba(236,72,153,0.22) !important; stroke: #ec4899 !important; }
+        text.labelText, .labelText { fill: #ff6bb6 !important; font-weight: 700 !important; }
+        .loopLine { stroke: rgba(236,72,153,0.5) !important; stroke-dasharray: 3 4 !important; }
+        /* Class / State */
+        .classGroup rect, .stateGroup rect { fill: #233156 !important; stroke: #00d4ff !important; }
+        .classTitle, .classLabel, .stateLabel,
+        g.stateGroup text, g.classGroup text { fill: #ffffff !important; font-weight: 600 !important; }
+        /* Pie */
+        text.pieTitleText { fill: #ffffff !important; font-size: 17px !important; font-weight: 700 !important; }
+        text.slice { fill: #ffffff !important; font-weight: 600 !important; }
+        .legend text { fill: #cfe8ff !important; }
+        /* Gantt */
+        rect.task { fill: #2f4373 !important; stroke: #00d4ff !important; }
+        rect.task.done { fill: #0a2218 !important; stroke: #10b981 !important; }
+        rect.task.crit { fill: rgba(236,72,153,0.35) !important; stroke: #ec4899 !important; }
+        .taskText, .taskTextOutsideRight, .taskTextOutsideLeft { fill: #ffffff !important; font-weight: 600 !important; }
+        .grid .tick line { stroke: rgba(0,212,255,0.15) !important; }
+      `,
       themeVariables: {
         // 全局背景与字体
         background: '#0b1230',
@@ -570,7 +656,7 @@ export default withMermaid(
         fontSize: 14,
       },
       flowchart: {
-        htmlLabels: true,
+        htmlLabels: false,
         useMaxWidth: true,
         padding: 20,
         curve: 'basis',
