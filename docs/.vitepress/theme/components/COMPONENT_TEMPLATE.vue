@@ -2,12 +2,12 @@
   组件模板 - 确保所有标签正确闭合
   
   使用前检查清单：
-  ✅ <script setup> 有对应的 </script>
-  ✅ <template> 有对应的 </template>
-  ✅ <style scoped> 有对应的 </style>
-  ✅ 所有 HTML 标签正确闭合
-  ✅ props 类型定义完整
-  ✅ ref/computed 正确导入
+  [x] <script setup> 有对应的 </script>
+  [x] <template> 有对应的 </template>
+  [x] <style scoped> 有对应的 </style>
+  [x] 所有 HTML 标签正确闭合
+  [x] props 类型定义完整
+  [x] ref/computed 正确导入
 -->
 
 <script setup>

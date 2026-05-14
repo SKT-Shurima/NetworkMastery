@@ -79,7 +79,7 @@ function onBlur() {
 <template>
   <div class="search-bar">
     <div class="input-wrap">
-      <span class="icon">🔍</span>
+      <span class="icon"><Icon name="search" color="cyan" /></span>
       <input
         v-model="query"
         :placeholder="loading ? '加载中…' : '模糊搜索 (例如: 三次握手 / DPI / sd wan)'"
@@ -87,7 +87,7 @@ function onBlur() {
         @focus="focused = true"
         @blur="onBlur"
       />
-      <button v-if="query" class="clear" @click="clear">✕</button>
+      <button v-if="query" class="clear" @click="clear"><Icon name="x" color="cyan" /></button>
     </div>
     <Transition name="results">
       <div v-if="focused && results.length" class="results">

@@ -23,40 +23,40 @@ const showAnswer = ref(false)
 <template>
   <div class="thinking-question">
     <div class="tq-header">
-      <span class="tq-icon">🤔</span>
+      <span class="tq-icon"><Icon name="help-circle" color="purple" glow /></span>
       <span class="tq-label">思考题</span>
     </div>
-    
+
     <div class="tq-question">
       {{ question }}
     </div>
-    
+
     <div v-if="hint" class="tq-actions">
-      <button 
-        @click="showHint = !showHint" 
+      <button
+        @click="showHint = !showHint"
         class="tq-btn tq-btn-hint"
       >
-        <span class="btn-icon">💡</span>
+        <span class="btn-icon"><Icon name="lightbulb" color="cyan" /></span>
         {{ showHint ? '隐藏提示' : '查看提示' }}
       </button>
-      
-      <button 
+
+      <button
         v-if="answer"
-        @click="showAnswer = !showAnswer" 
+        @click="showAnswer = !showAnswer"
         class="tq-btn tq-btn-answer"
       >
-        <span class="btn-icon">✓</span>
+        <span class="btn-icon"><Icon name="check" color="green" /></span>
         {{ showAnswer ? '隐藏答案' : '查看答案' }}
       </button>
     </div>
-    
+
     <div v-if="showHint && hint" class="tq-hint">
-      <div class="hint-label">💡 提示</div>
+      <div class="hint-label"><Icon name="lightbulb" color="cyan" /> 提示</div>
       <div class="hint-content">{{ hint }}</div>
     </div>
-    
+
     <div v-if="showAnswer && answer" class="tq-answer">
-      <div class="answer-label">✓ 参考答案</div>
+      <div class="answer-label"><Icon name="check" color="green" /> 参考答案</div>
       <div class="answer-content">{{ answer }}</div>
     </div>
   </div>

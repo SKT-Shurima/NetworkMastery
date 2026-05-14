@@ -134,12 +134,14 @@ onMounted(() => {
       <!-- 下一步推荐 -->
       <div v-if="nextArticle" class="next-recommendation">
         <div class="rec-header">
-          <span class="rec-icon">▶</span>
+          <span class="rec-icon"><Icon name="chevron-right" color="cyan" glow /></span>
           <span class="rec-label">NEXT MISSION</span>
         </div>
         <a :href="withBase(nextArticle.path)" class="rec-card">
           <div class="rec-path">
-            <span class="rec-path-icon">{{ nextArticle.pathIcon }}</span>
+            <span class="rec-path-icon">
+              <Icon :name="nextArticle.pathIcon" :color="nextArticle.pathIconColor || 'cyan'" :size="20" />
+            </span>
             <span class="rec-path-title">{{ nextArticle.pathTitle }}</span>
           </div>
           <h4 class="rec-title">{{ nextArticle.title }}</h4>
@@ -194,7 +196,9 @@ onMounted(() => {
             ></div>
           </div>
 
-          <div class="card-icon">{{ feature.icon }}</div>
+          <div class="card-icon">
+            <Icon :name="feature.icon" :color="feature.iconColor || 'cyan'" :size="56" glow stroke="1.5" />
+          </div>
           <h3 class="card-title">{{ feature.title }}</h3>
           <p class="card-details">{{ feature.details }}</p>
 

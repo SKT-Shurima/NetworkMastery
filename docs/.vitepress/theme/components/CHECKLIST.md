@@ -1,6 +1,6 @@
 # Vue 组件开发检查清单
 
-## ⚠️ 必须检查项（避免编译错误）
+## 必须检查项（避免编译错误）
 
 ### 1. 标签闭合检查
 - [ ] `<script setup>` 有对应的 `</script>`
@@ -22,7 +22,7 @@
 
 ---
 
-## ✅ 推荐检查项（提升代码质量）
+## 推荐检查项（提升代码质量）
 
 ### 4. 性能优化
 - [ ] 大数据列表使用 v-for key
@@ -41,7 +41,7 @@
 
 ---
 
-## 🔍 常见错误及修复
+## 常见错误及修复
 
 ### 错误 1: Element is missing end tag
 
@@ -91,7 +91,7 @@ const props = defineProps({
 
 ---
 
-## 🛠️ 开发流程
+## 开发流程
 
 1. **复制模板** - 从 `COMPONENT_TEMPLATE.vue` 开始
 2. **编写代码** - 按需修改
@@ -102,7 +102,7 @@ const props = defineProps({
 
 ---
 
-## 📝 提交前自查
+## 提交前自查
 
 ```bash
 # 1. 检查语法错误
@@ -120,7 +120,7 @@ git commit -m "feat: add new component"
 
 ---
 
-## 🚨 紧急修复步骤
+## 紧急修复步骤
 
 如果出现编译错误：
 
@@ -132,7 +132,7 @@ git commit -m "feat: add new component"
 
 ---
 
-## 📚 参考资源
+## 参考资源
 
 - [Vue 3 文档](https://vuejs.org/)
 - [VitePress 文档](https://vitepress.dev/)

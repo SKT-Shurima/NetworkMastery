@@ -3,7 +3,8 @@ export const learningPaths = {
   basics: {
     id: 'basics',
     title: '网络基础',
-    icon: '🌐',
+    icon: 'globe',
+    iconColor: 'cyan',
     level: 'beginner',
     estimatedHours: 8,
     articles: [
@@ -31,7 +32,8 @@ export const learningPaths = {
   security: {
     id: 'security',
     title: '安全与隧道',
-    icon: '🔐',
+    icon: 'lock-keyhole',
+    iconColor: 'green',
     level: 'intermediate',
     estimatedHours: 10,
     articles: [
@@ -59,7 +61,8 @@ export const learningPaths = {
   architecture: {
     id: 'architecture',
     title: '网络架构',
-    icon: '🏗️',
+    icon: 'layers',
+    iconColor: 'purple',
     level: 'intermediate',
     estimatedHours: 6,
     articles: [
@@ -81,7 +84,8 @@ export const learningPaths = {
   defense: {
     id: 'defense',
     title: '安全防御',
-    icon: '🛡️',
+    icon: 'shield',
+    iconColor: 'green',
     level: 'advanced',
     estimatedHours: 12,
     articles: [
@@ -109,7 +113,8 @@ export const learningPaths = {
   sdwan: {
     id: 'sdwan',
     title: 'SD-WAN 核心',
-    icon: '⚡',
+    icon: 'zap',
+    iconColor: 'cyan',
     level: 'advanced',
     estimatedHours: 15,
     articles: [
@@ -149,7 +154,8 @@ export const learningPaths = {
   qos: {
     id: 'qos',
     title: 'QoS 与优化',
-    icon: '🎯',
+    icon: 'target',
+    iconColor: 'magenta',
     level: 'advanced',
     estimatedHours: 9,
     articles: [
@@ -247,7 +253,8 @@ export function getNextRecommendation() {
         return {
           ...article,
           pathTitle: path.title,
-          pathIcon: path.icon
+          pathIcon: path.icon,
+          pathIconColor: path.iconColor
         }
       }
     }

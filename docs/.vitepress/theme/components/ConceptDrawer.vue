@@ -31,7 +31,7 @@ function goToCanonical() {
         <span class="level-pill">{{ concept.level }}</span>
         <h3>{{ concept.name_zh }}</h3>
         <small v-if="concept.name_en">{{ concept.name_en }}</small>
-        <button class="close" aria-label="关闭" @click="emit('close')">✕</button>
+        <button class="close" aria-label="关闭" @click="emit('close')"><Icon name="x" color="cyan" /></button>
       </header>
 
       <section class="short">{{ concept.short }}</section>
@@ -59,7 +59,10 @@ function goToCanonical() {
       </section>
 
       <footer>
-        <button class="expand-btn" @click="emit('toggle-expand')">{{ expanded ? '⛶ 收起' : '⛶ 展开全屏' }}</button>
+        <button class="expand-btn" @click="emit('toggle-expand')">
+          <Icon :name="expanded ? 'minimize-2' : 'maximize-2'" color="cyan" />
+          {{ expanded ? '收起' : '展开全屏' }}
+        </button>
         <button v-if="concept.canonical?.file" class="deep-btn" @click="goToCanonical">深入阅读 →</button>
       </footer>
     </aside>

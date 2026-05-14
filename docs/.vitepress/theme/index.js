@@ -5,6 +5,7 @@ import WideTable from './components/WideTable.vue'
 import CyberpunkHome from './components/CyberpunkHome.vue'
 import KnowledgeGraph from './components/KnowledgeGraph.vue'
 import ConceptMap from './components/ConceptMap.vue'
+import Icon from './components/Icon.vue'
 
 export default {
   extends: DefaultTheme,
@@ -14,5 +15,6 @@ export default {
     app.component('CyberpunkHome', CyberpunkHome)
     app.component('KnowledgeGraph', KnowledgeGraph)
     app.component('ConceptMap', ConceptMap)
+    app.component('Icon', Icon)
   }
 }
