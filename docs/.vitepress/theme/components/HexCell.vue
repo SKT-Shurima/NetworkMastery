@@ -1,5 +1,5 @@
 <script setup>
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 
 const props = defineProps({
   cx: { type: Number, required: true },
@@ -13,6 +13,10 @@ const props = defineProps({
 })
 
 const emit = defineEmits(['select'])
+
+// 涟漪动画：每次点击 push 一个唯一 id，CSS 动画结束后自清
+const ripples = ref([])
+let rippleId = 0
 
 const SQRT3 = Math.sqrt(3)
 
@@ -43,6 +47,11 @@ const labelClass = computed(() => ({
 }))
 
 function onClick() {
+  const id = ++rippleId
+  ripples.value.push(id)
+  setTimeout(() => {
+    ripples.value = ripples.value.filter(r => r !== id)
+  }, 700)
   emit('select', props.conceptId)
 }
 </script>
@@ -53,6 +62,14 @@ function onClick() {
       :points="points"
       :class="polygonClass"
       @click="onClick"
+    />
+    <circle
+      v-for="r in ripples"
+      :key="r"
+      class="hex-ripple"
+      :cx="cx"
+      :cy="cy"
+      pointer-events="none"
     />
     <text
       :x="cx"
@@ -106,4 +123,16 @@ function onClick() {
 }
 .hex-label.bright { fill: #fff; font-weight: 600; }
 .hex-label.core   { fill: #fff; font-weight: 700; font-size: 11.5px; letter-spacing: 0.3px; }
+
+.hex-ripple {
+  fill: none;
+  stroke: #00d4ff;
+  stroke-width: 2;
+  opacity: 0.8;
+  animation: ripple-out 600ms cubic-bezier(.2, .8, .3, 1) forwards;
+}
+@keyframes ripple-out {
+  0%   { r: 4;  opacity: 0.8; stroke-width: 2; }
+  100% { r: 36; opacity: 0;   stroke-width: 0.4; }
+}
 </style>
