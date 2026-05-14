@@ -3,8 +3,8 @@ title: NETCONF/YANG/RESTCONF：网络配置协议详解
 description: 深入理解NETCONF协议栈、YANG数据建模语言与RESTCONF接口，掌握现代网络设备自动化配置的标准方法
 ---
 
-> 📋 **前置知识**：[OSI网络模型](/guide/basics/osi)、[网络运维基础](/guide/ops/monitoring)
-> ⏱️ **阅读时间**：约18分钟
+> <Icon name="clipboard-list" color="cyan" /> **前置知识**：[OSI网络模型](/guide/basics/osi)、[网络运维基础](/guide/ops/monitoring)
+> ⏱ **阅读时间**：约18分钟
 
 # NETCONF/YANG/RESTCONF：网络配置协议详解
 
@@ -37,7 +37,7 @@ description: 深入理解NETCONF协议栈、YANG数据建模语言与RESTCONF接
 | **版本控制缺失** | 没有 "撤销上一次变更" 的标准机制 |
 | **验证滞后** | 推送后才知道配置错了 |
 
-> 💡 **思考题**：如果你负责管理500台网络设备，每周需要变更30台，手动方式能保证零失误吗？自动化阈值在哪里？
+> <Icon name="lightbulb" color="cyan" /> **思考题**：如果你负责管理500台网络设备，每周需要变更30台，手动方式能保证零失误吗？自动化阈值在哪里？
 
 正是这些痛点，推动了 IETF (Internet Engineering Task Force) 在 2006 年发布 **RFC 4741**，定义了 **NETCONF (Network Configuration Protocol)**，并在此后形成了 NETCONF + YANG + RESTCONF 的完整标准化配置协议栈。
 
@@ -156,8 +156,8 @@ flowchart LR
 
     EDIT["edit-config"] -->|"写入"| C
     VALIDATE["validate"] -->|"验证"| C
-    COMMIT["commit"] -->|"原子提交 ✓"| R
-    ROLLBACK["rollback-on-error"] -->|"回滚 ✗"| C
+    COMMIT["commit"] -->|"原子提交 [v]"| R
+    ROLLBACK["rollback-on-error"] -->|"回滚 [x]"| C
     COPY["copy-config"] -->|"保存"| S
     R -->|"持久化"| S
 
@@ -305,7 +305,7 @@ module ietf-interfaces {
 | 维度 | 标准模型 (IETF/OpenConfig) | 厂商原生模型 (Vendor-Native) |
 |------|--------------------------|---------------------------|
 | **来源** | IETF RFC / OpenConfig 工作组 | Cisco/Juniper/华为自定义 |
-| **跨厂商兼容性** | ✅ 高，同一套代码适配多厂商 | ❌ 低，每家厂商独立代码 |
+| **跨厂商兼容性** | <Icon name="check-circle-2" color="green" /> 高，同一套代码适配多厂商 | <Icon name="x-circle" color="danger" /> 低，每家厂商独立代码 |
 | **功能覆盖** | 基础功能（BGP、接口、OSPF） | 完整覆盖，含私有特性 |
 | **代表模型** | `ietf-interfaces`, `ietf-routing` | `Cisco-IOS-XE-native`, `junos-config` |
 | **推荐场景** | 多厂商混合环境、标准化运营 | 单厂商深度功能、精细化运营 |
@@ -314,7 +314,7 @@ module ietf-interfaces {
 在企业架构设计中，优先使用 **IETF 或 OpenConfig 标准模型**覆盖基础配置（IP 地址、路由、BGP 基础参数），仅在需要厂商特有功能时才引入原生模型。这样可以在保持灵活性的同时最大化代码复用率。
 :::
 
-> 💡 **思考题**：OpenConfig 和 IETF YANG 模型都是标准化的，但两者有微妙差异。OpenConfig 是运营商驱动的，IETF 是协议标准化组织驱动的，在实际项目中你会如何选择？考虑哪些因素？
+> <Icon name="lightbulb" color="cyan" /> **思考题**：OpenConfig 和 IETF YANG 模型都是标准化的，但两者有微妙差异。OpenConfig 是运营商驱动的，IETF 是协议标准化组织驱动的，在实际项目中你会如何选择？考虑哪些因素？
 
 ---
 
@@ -529,7 +529,7 @@ def get_device_capabilities(conn):
     for cap in conn.server_capabilities:
         # 过滤显示重要能力
         if any(kw in cap for kw in ["candidate", "rollback", "validate", "yang"]):
-            print(f"  ✓ {cap}")
+            print(f"  [v] {cap}")
     print()
 
 
@@ -581,10 +581,10 @@ def configure_interface_with_transaction(conn, config_xml):
         # Step 4: 原子提交到 Running 配置库
         print("4. 提交配置 (Commit)...")
         conn.commit()
-        print("✅ 配置提交成功！")
+        print("[v] 配置提交成功！")
 
     except Exception as e:
-        print(f"❌ 配置失败，触发回滚: {e}")
+        print(f"[x] 配置失败，触发回滚: {e}")
         try:
             conn.discard_changes()
         except Exception:
@@ -732,7 +732,7 @@ quadrantChart
     Screen-Scraping: [0.40, 0.15]
 ```
 
-> 💡 **思考题**：YANG 数据模型在 NETCONF、RESTCONF、gNMI 三个协议中都扮演核心角色。如果你要从零构建企业网络自动化平台，你会优先投入哪个协议栈的能力建设？不同规模、不同厂商构成的企业答案会一样吗？
+> <Icon name="lightbulb" color="cyan" /> **思考题**：YANG 数据模型在 NETCONF、RESTCONF、gNMI 三个协议中都扮演核心角色。如果你要从零构建企业网络自动化平台，你会优先投入哪个协议栈的能力建设？不同规模、不同厂商构成的企业答案会一样吗？
 
 ### 5.4 学习路径建议
 

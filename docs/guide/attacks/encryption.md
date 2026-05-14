@@ -16,16 +16,16 @@ description: 讲解对称与非对称加密、TLS 及网络中的身份认证基
 ```mermaid
 graph LR
     subgraph "对称加密"
-        A1["明文"] -->|"密钥 K"| B1["🔒 加密"]
+        A1["明文"] -->|"密钥 K"| B1["[lock] 加密"]
         B1 --> C1["密文"]
-        C1 -->|"同一个密钥 K"| D1["🔓 解密"]
+        C1 -->|"同一个密钥 K"| D1["[unlock] 解密"]
         D1 --> E1["明文"]
     end
     
     subgraph "非对称加密"
-        A2["明文"] -->|"公钥"| B2["🔒 加密"]
+        A2["明文"] -->|"公钥"| B2["[lock] 加密"]
         B2 --> C2["密文"]
-        C2 -->|"私钥"| D2["🔓 解密"]
+        C2 -->|"私钥"| D2["[unlock] 解密"]
         D2 --> E2["明文"]
     end
 ```
@@ -42,7 +42,7 @@ graph LR
 
 ## TLS：互联网加密的基石
 
-TLS（Transport Layer Security）是 HTTPS 背后的协议。你在浏览器看到的 🔒 锁标志，就是 TLS 在工作。
+TLS（Transport Layer Security）是 HTTPS 背后的协议。你在浏览器看到的 <Icon name="lock" color="green" /> 锁标志，就是 TLS 在工作。
 
 ```mermaid
 sequenceDiagram
@@ -57,7 +57,7 @@ sequenceDiagram
     Note over C,S: 双方从预主密钥派生会话密钥
     C->>S: ⑥ Finished（加密验证）
     S->>C: ⑦ Finished（加密验证）
-    Note over C,S: 🔒 后续通信全部加密
+    Note over C,S: [lock] 后续通信全部加密
 ```
 
 ### TLS 1.3 的改进
@@ -123,12 +123,12 @@ graph TB
 
 ```mermaid
 graph TD
-    CA["🏛️ 证书颁发机构（CA）<br/>如 Let's Encrypt"]
-    CA -->|"签发证书"| Cert["📜 服务器证书"]
+    CA["[gov] 证书颁发机构（CA）<br/>如 Let's Encrypt"]
+    CA -->|"签发证书"| Cert["[scroll] 服务器证书"]
     Cert -->|"包含"| PK["公钥 + 域名 + 有效期"]
     Cert -->|"包含"| Sig["CA 的数字签名"]
     
-    Browser["🌐 浏览器"] -->|"验证签名"| Cert
+    Browser["[net] 浏览器"] -->|"验证签名"| Cert
     Browser -->|"信任链"| CA
     
     style CA fill:#fef3c7,stroke:#f59e0b

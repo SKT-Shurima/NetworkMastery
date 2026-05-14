@@ -3,8 +3,8 @@ title: 5G核心网：网络切片、边缘计算与企业专网
 description: 深入理解5G核心网（5GC）的SBA服务化架构、eMBB/uRLLC/mMTC三大场景、网络切片技术原理与企业5G专网的部署模式和应用价值
 ---
 
-> 📋 **前置知识**：[网络功能虚拟化（NFV）](/guide/datacenter/nfv)、[网络切片](/guide/advanced/network-slicing)
-> ⏱️ **阅读时间**：约20分钟
+> <Icon name="clipboard-list" color="cyan" /> **前置知识**：[网络功能虚拟化（NFV）](/guide/datacenter/nfv)、[网络切片](/guide/advanced/network-slicing)
+> ⏱ **阅读时间**：约20分钟
 
 # 5G核心网：网络切片、边缘计算与企业专网
 
@@ -19,9 +19,9 @@ description: 深入理解5G核心网（5GC）的SBA服务化架构、eMBB/uRLLC/
 ```mermaid
 graph TB
     subgraph 5G["5G三大场景 (IMT-2020)"]
-        eMBB["🚀 eMBB<br/>增强移动宽带<br/>Enhanced Mobile Broadband<br/>─────────────────<br/>峰值速率：20 Gbps<br/>用户体验速率：100 Mbps<br/>典型场景：高清视频、AR/VR<br/>云游戏、大型活动直播"]
-        uRLLC["⚡ uRLLC<br/>超可靠低时延通信<br/>Ultra-Reliable Low Latency<br/>─────────────────<br/>时延：< 1ms（空口）<br/>可靠性：99.9999%<br/>典型场景：工业控制<br/>自动驾驶、远程手术"]
-        mMTC["🌐 mMTC<br/>海量机器类通信<br/>Massive Machine Type<br/>─────────────────<br/>连接密度：100万设备/km²<br/>低功耗、低成本<br/>典型场景：智慧城市<br/>农业物联网、环境监测"]
+        eMBB["[run] eMBB<br/>增强移动宽带<br/>Enhanced Mobile Broadband<br/>─────────────────<br/>峰值速率：20 Gbps<br/>用户体验速率：100 Mbps<br/>典型场景：高清视频、AR/VR<br/>云游戏、大型活动直播"]
+        uRLLC["[fast] uRLLC<br/>超可靠低时延通信<br/>Ultra-Reliable Low Latency<br/>─────────────────<br/>时延：< 1ms（空口）<br/>可靠性：99.9999%<br/>典型场景：工业控制<br/>自动驾驶、远程手术"]
+        mMTC["[net] mMTC<br/>海量机器类通信<br/>Massive Machine Type<br/>─────────────────<br/>连接密度：100万设备/km²<br/>低功耗、低成本<br/>典型场景：智慧城市<br/>农业物联网、环境监测"]
     end
 
     style eMBB fill:#1a4a7a,stroke:#4a9eff,color:#e0f0ff

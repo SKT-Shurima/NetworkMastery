@@ -3,8 +3,8 @@ title: Kubernetes网络模型：从Pod通信到Ingress的深度解析
 description: 系统理解Kubernetes网络设计原则、CNI插件机制、Service的四种类型、Ingress控制器与Network Policy的完整网络体系
 ---
 
-> 📋 **前置知识**：[容器网络基础](/guide/cloud/container-networking)、[VXLAN技术](/guide/advanced/vxlan)
-> ⏱️ **阅读时间**：约22分钟
+> <Icon name="clipboard-list" color="cyan" /> **前置知识**：[容器网络基础](/guide/cloud/container-networking)、[VXLAN技术](/guide/advanced/vxlan)
+> ⏱ **阅读时间**：约22分钟
 
 # Kubernetes网络模型：从Pod通信到Ingress的深度解析
 
@@ -226,17 +226,17 @@ flowchart TD
     Q1 -->|是| Q2{是否需要<br/>Network Policy?}
     Q1 -->|否| Q3{对性能要求<br/>有多高?}
 
-    Q2 -->|不需要| FL_GW[Flannel host-gw<br/>✓ 高性能 ✓ 简单]
+    Q2 -->|不需要| FL_GW[Flannel host-gw<br/>[v] 高性能 [v] 简单]
     Q2 -->|需要| Q4{规模 > 1000节点<br/>或需要eBPF?}
 
-    Q4 -->|是| CIL2[Cilium<br/>✓ eBPF ✓ 可观测性]
-    Q4 -->|否| CAL2[Calico BGP<br/>✓ 成熟 ✓ Network Policy]
+    Q4 -->|是| CIL2[Cilium<br/>[v] eBPF [v] 可观测性]
+    Q4 -->|否| CAL2[Calico BGP<br/>[v] 成熟 [v] Network Policy]
 
-    Q3 -->|一般| FL_VX[Flannel VXLAN<br/>✓ 兼容性好]
+    Q3 -->|一般| FL_VX[Flannel VXLAN<br/>[v] 兼容性好]
     Q3 -->|高| Q5{有BGP基础设施?}
 
-    Q5 -->|有| CAL3[Calico BGP<br/>✓ 无封包开销]
-    Q5 -->|没有| CIL3[Cilium VXLAN<br/>✓ eBPF加速]
+    Q5 -->|有| CAL3[Calico BGP<br/>[v] 无封包开销]
+    Q5 -->|没有| CIL3[Cilium VXLAN<br/>[v] eBPF加速]
 
     style CIL2 fill:#8b5cf6,color:#fff
     style CIL3 fill:#8b5cf6,color:#fff

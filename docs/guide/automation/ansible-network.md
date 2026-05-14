@@ -3,8 +3,8 @@ title: Ansible网络自动化：批量配置管理实战
 description: 从零掌握Ansible网络自动化——inventory管理、network模块、playbook设计、角色复用，实现多厂商网络设备的批量运维与配置管理
 ---
 
-> 📋 **前置知识**：[Python网络编程](/guide/automation/python-networking)
-> ⏱️ **阅读时间**：约18分钟
+> <Icon name="clipboard-list" color="cyan" /> **前置知识**：[Python网络编程](/guide/automation/python-networking)
+> ⏱ **阅读时间**：约18分钟
 
 # Ansible网络自动化：批量配置管理实战
 
@@ -45,10 +45,10 @@ graph TB
 
     subgraph 被管理设备["被管理网络设备（无需 Agent）"]
         direction TB
-        CISCO["🔷 Cisco IOS/IOS-XE<br/>连接方式：network_cli"]
-        JUNOS["🔶 Juniper Junos<br/>连接方式：netconf"]
-        ARISTA["🟢 Arista EOS<br/>连接方式：httpapi / network_cli"]
-        HUAWEI["🔴 华为 VRP<br/>连接方式：network_cli"]
+        CISCO["[cyan] Cisco IOS/IOS-XE<br/>连接方式：network_cli"]
+        JUNOS["[org] Juniper Junos<br/>连接方式：netconf"]
+        ARISTA["(grn) Arista EOS<br/>连接方式：httpapi / network_cli"]
+        HUAWEI["(red) 华为 VRP<br/>连接方式：network_cli"]
     end
 
     subgraph 连接方式["传输层"]
@@ -406,10 +406,10 @@ sequenceDiagram
 ------------------------------------------------------
 Down 接口列表:
 {% if down_interfaces | length == 0 %}
-  ✓ 所有接口均正常
+  [v] 所有接口均正常
 {% else %}
 {% for intf in down_interfaces %}
-  ✗ {{ intf }}
+  [x] {{ intf }}
 {% endfor %}
 {% endif %}
 ======================================================
@@ -572,7 +572,7 @@ Down 接口列表:
         method: POST
         body_format: json
         body:
-          text: "✅ 设备 {{ inventory_hostname }} 配置回滚完成（工单号: {{ change_ticket_id }}）"
+          text: "[v] 设备 {{ inventory_hostname }} 配置回滚完成（工单号: {{ change_ticket_id }}）"
       delegate_to: localhost
       when: phase == 'rollback'
 ```

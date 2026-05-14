@@ -3,8 +3,8 @@ title: 服务网格：Istio架构与微服务通信治理
 description: 深入理解服务网格（Service Mesh）解决的核心问题、Istio控制平面与数据平面架构、流量管理、可观测性与mTLS零信任安全的落地实践
 ---
 
-> 📋 **前置知识**：[Kubernetes网络](/guide/cloud/container-networking)、[零信任安全](/guide/security/zero-trust)
-> ⏱️ **阅读时间**：约20分钟
+> <Icon name="clipboard-list" color="cyan" /> **前置知识**：[Kubernetes网络](/guide/cloud/container-networking)、[零信任安全](/guide/security/zero-trust)
+> ⏱ **阅读时间**：约20分钟
 
 # 服务网格：Istio架构与微服务通信治理
 
@@ -561,7 +561,7 @@ spec: {}   # 空spec = 拒绝所有
 | **数据平面** | Envoy (C++) | linkerd2-proxy (Rust) | Envoy |
 | **控制平面** | istiod (Go) | control plane (Go) | Consul (Go) |
 | **性能开销** | ~3-5ms p99延迟增加 | ~1ms，更轻量 | ~2-3ms |
-| **功能丰富度** | ★★★★★ | ★★★ | ★★★★ |
+| **功能丰富度** | <Icon name="star" color="cyan" /><Icon name="star" color="cyan" /><Icon name="star" color="cyan" /><Icon name="star" color="cyan" /><Icon name="star" color="cyan" /> | <Icon name="star" color="cyan" /><Icon name="star" color="cyan" /><Icon name="star" color="cyan" /> | <Icon name="star" color="cyan" /><Icon name="star" color="cyan" /><Icon name="star" color="cyan" /><Icon name="star" color="cyan" /> |
 | **运维复杂度** | 较高 | 低 | 中（需要Consul） |
 | **适用场景** | 大型企业，需要完整功能 | 追求简单性 | HashiCorp技术栈 |
 | **多集群支持** | 原生支持 | 有限 | 原生支持 |

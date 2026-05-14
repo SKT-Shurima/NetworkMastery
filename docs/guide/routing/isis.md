@@ -3,8 +3,8 @@ title: IS-IS：运营商骨干网首选的链路状态路由协议
 description: 深入理解IS-IS（中间系统到中间系统）协议的网络层无关设计、Level-1/Level-2区域划分、TLV扩展机制与在大规模骨干网及数据中心Underlay中的应用实践
 ---
 
-> 📋 **前置知识**：[OSPF路由协议](/guide/routing/ospf)、[BGP路由协议](/guide/routing/bgp)
-> ⏱️ **阅读时间**：约20分钟
+> <Icon name="clipboard-list" color="cyan" /> **前置知识**：[OSPF路由协议](/guide/routing/ospf)、[BGP路由协议](/guide/routing/bgp)
+> ⏱ **阅读时间**：约20分钟
 
 # IS-IS：运营商骨干网首选的链路状态路由协议
 

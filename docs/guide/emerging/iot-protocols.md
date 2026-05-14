@@ -3,8 +3,8 @@ title: IoT网络协议：MQTT、CoAP与Matter标准
 description: 深入理解物联网网络协议生态——MQTT发布/订阅模型、CoAP轻量级REST协议、Matter智能家居标准与LoRaWAN/NB-IoT低功耗广域网在企业IoT架构中的选型与应用
 ---
 
-> 📋 **前置知识**：[5G核心网](/guide/emerging/5g-networking)、[网络基础](/guide/basics/osi)
-> ⏱️ **阅读时间**：约18分钟
+> <Icon name="clipboard-list" color="cyan" /> **前置知识**：[5G核心网](/guide/emerging/5g-networking)、[网络基础](/guide/basics/osi)
+> ⏱ **阅读时间**：约18分钟
 
 # IoT网络协议：MQTT、CoAP与Matter标准
 
@@ -612,7 +612,7 @@ def create_resilient_client(broker, port, client_id, cert_path):
 | **安全机制** | TLS | DTLS | CASE/PASE+证书 | 网络/应用双密钥 | LTE 内置 |
 | **覆盖距离** | 依赖 IP 网络 | 依赖 IP 网络 | 100m | 15km | 10km+ |
 | **标准化程度** | OASIS MQTT 5.0 | IETF RFC 7252 | CSA 1.3 | LoRa Alliance | 3GPP |
-| **企业成熟度** | ★★★★★ | ★★★☆☆ | ★★★★☆ | ★★★☆☆ | ★★★★☆ |
+| **企业成熟度** | <Icon name="star" color="cyan" /><Icon name="star" color="cyan" /><Icon name="star" color="cyan" /><Icon name="star" color="cyan" /><Icon name="star" color="cyan" /> | <Icon name="star" color="cyan" /><Icon name="star" color="cyan" /><Icon name="star" color="cyan" /><Icon name="star" color="cyan" /><Icon name="star" color="cyan" /> | <Icon name="star" color="cyan" /><Icon name="star" color="cyan" /><Icon name="star" color="cyan" /><Icon name="star" color="cyan" /><Icon name="star" color="cyan" /> | <Icon name="star" color="cyan" /><Icon name="star" color="cyan" /><Icon name="star" color="cyan" /><Icon name="star" color="cyan" /><Icon name="star" color="cyan" /> | <Icon name="star" color="cyan" /><Icon name="star" color="cyan" /><Icon name="star" color="cyan" /><Icon name="star" color="cyan" /><Icon name="star" color="cyan" /> |
 
 物联网协议的选型没有银弹。企业应从**设备资源约束、网络覆盖、消息模式、安全合规和运营成本**五个维度综合评估。在多协议共存的混合架构中，边缘网关承担协议翻译和安全终结的双重职责，是 IoT 网络安全与效率的关键枢纽。
 

@@ -3,8 +3,8 @@ title: 段路由：SR-MPLS与SRv6的下一代流量工程
 description: 理解段路由（Segment Routing）的源路由设计哲学、MPLS实现（SR-MPLS）与IPv6实现（SRv6）的差异，以及基于SR的流量工程（TE）在5G传输与广域网优化中的应用
 ---
 
-> 📋 **前置知识**：[MPLS技术](/guide/advanced/mpls)、[BGP路由协议](/guide/routing/bgp)、[IPv6基础](/guide/basics/ipv6)
-> ⏱️ **阅读时间**：约20分钟
+> <Icon name="clipboard-list" color="cyan" /> **前置知识**：[MPLS技术](/guide/advanced/mpls)、[BGP路由协议](/guide/routing/bgp)、[IPv6基础](/guide/basics/ipv6)
+> ⏱ **阅读时间**：约20分钟
 
 # 段路由：SR-MPLS 与 SRv6 的下一代流量工程
 

@@ -3,8 +3,8 @@ title: 意图驱动网络（IBN）：用业务语言管理网络
 description: 理解意图驱动网络（Intent-Based Networking）的四大核心能力、自然语言到网络策略的转译机制、持续验证闭环与Cisco DNA Center/Apstra等平台的企业实践
 ---
 
-> 📋 **前置知识**：[SDN基础](/guide/sdn/fundamentals)、[网络自动化CI/CD](/guide/automation/network-cicd)
-> ⏱️ **阅读时间**：约16分钟
+> <Icon name="clipboard-list" color="cyan" /> **前置知识**：[SDN基础](/guide/sdn/fundamentals)、[网络自动化CI/CD](/guide/automation/network-cicd)
+> ⏱ **阅读时间**：约16分钟
 
 # 意图驱动网络（IBN）：用业务语言管理网络
 

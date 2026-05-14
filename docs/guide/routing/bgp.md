@@ -265,11 +265,11 @@ AS 1000 再向其他 eBGP 邻居转发时，可能变为 [1000, 2000, 3000]
   :headers="['步骤', 'Route A', 'Route B', 'Route C', '选择结果']"
   :rows="[
     ['目的网络', '10.1.0.0/16', '10.1.0.0/16', '10.1.0.0/16', '三条路由到同一目的地'],
-    ['下一跳可达性', '✓ 可达', '✓ 可达', '✗ 不可达', 'Route C 被淘汰'],
+    ['下一跳可达性', '<span class=&quot;ic-check&quot;></span> 可达', '<span class=&quot;ic-check&quot;></span> 可达', '<span class=&quot;ic-x&quot;></span> 不可达', 'Route C 被淘汰'],
     ['LOCAL_PREF', '150', '100', '-', 'Route A 获胜 (150 > 100)'],
     ['AS_PATH 长度', '3 (65001-100-200)', '4 (65001-300-400-200)', '-', 'Route A 继续领先'],
     ['ORIGIN', 'IGP (i)', 'EGP (e)', '-', 'Route A 确认最优'],
-    ['<strong>最终选择</strong>', '<strong>✓ 最佳路由</strong>', '备用路由', '无效路由', '<strong>Route A 被安装到路由表</strong>']
+    ['<strong>最终选择</strong>', '<strong><span class=&quot;ic-check&quot;></span> 最佳路由</strong>', '备用路由', '无效路由', '<strong>Route A 被安装到路由表</strong>']
   ]"
   :columnWidths="['20%', '25%', '25%', '20%', '10%']"
 />

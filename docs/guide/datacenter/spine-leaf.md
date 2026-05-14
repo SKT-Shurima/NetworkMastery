@@ -3,8 +3,8 @@ title: Spine-Leaf架构：现代数据中心网络的基石
 description: 深入理解Spine-Leaf两层架构的设计原理、等价多路径（ECMP）路由、VXLAN Overlay集成与超大规模数据中心的网络设计实践
 ---
 
-> 📋 **前置知识**：[以太网交换](/guide/basics/switching)、[VXLAN技术](/guide/advanced/vxlan)、[OSPF路由](/guide/routing/ospf)
-> ⏱️ **阅读时间**：约20分钟
+> <Icon name="clipboard-list" color="cyan" /> **前置知识**：[以太网交换](/guide/basics/switching)、[VXLAN技术](/guide/advanced/vxlan)、[OSPF路由](/guide/routing/ospf)
+> ⏱ **阅读时间**：约20分钟
 
 # Spine-Leaf架构：现代数据中心网络的基石
 

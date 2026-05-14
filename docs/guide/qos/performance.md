@@ -121,9 +121,9 @@ SD-WAN 在传统 WAN 优化的基础上增加了：
 
 ```mermaid
 graph LR
-    M["📊 测量基线"] --> A["📋 分析瓶颈"]
-    A --> O["🔧 优化实施"]
-    O --> V["✅ 验证效果"]
+    M["[chart] 测量基线"] --> A["[list] 分析瓶颈"]
+    A --> O["[fix] 优化实施"]
+    O --> V["[v] 验证效果"]
     V --> M
     
     style M fill:#dbeafe,stroke:#3b82f6

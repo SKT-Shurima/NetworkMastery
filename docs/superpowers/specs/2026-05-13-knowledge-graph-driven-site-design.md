@@ -271,7 +271,7 @@ docs/guide/**/*.md ──→  term-scanner (md-it plugin) ──→  编译期 w
 
 ```
 ┌─────────────────────────────────────────┐
-│  ⚡ SD-WAN · L2       关闭 ✕           │
+│  <Icon name="zap" color="cyan" /> SD-WAN · L2       关闭 <Icon name="x" color="cyan" />           │
 │  Software-Defined WAN                   │
 ├─────────────────────────────────────────┤
 │                                         │
@@ -287,7 +287,7 @@ docs/guide/**/*.md ──→  term-scanner (md-it plugin) ──→  编译期 w
 │  ━ 入门线  ━ SD-WAN主线  ━ 进阶线        │
 │                                         │
 │  ┌─────────────────────────────────┐    │
-│  │  ⛶ 展开全屏  │  深入阅读 →     │    │
+│  │  <Icon name="maximize-2" color="cyan" /> 展开全屏  │  深入阅读 →     │    │
 │  └─────────────────────────────────┘    │
 └─────────────────────────────────────────┘
 
@@ -357,11 +357,11 @@ docs/guide/**/*.md ──→  term-scanner (md-it plugin) ──→  编译期 w
 
 | Phase | 范围 | 风险 | 可独立发布 |
 |-------|------|------|-----------|
-| P0 · 基础设施 | yaml schema / build 脚本 / MiniSearch / `_template.yaml` / 空图谱组件 | 低 | ✅ |
-| P1 · SD-WAN 域优先 | 写 SD-WAN 域 ~40 个概念 + 布局 + 3 条 metro 线 + `/graph` 路由 | 中（内容工作量） | ✅ |
-| P2 · 其他 6 域 | 基础 / 安全 / 云原生 / 运维 / 进阶 / 前沿 | 中 | ✅ |
-| P3 · 术语 hover + 搜索 | term-scanner / MiniSearch UI / TermTooltip | 中（误匹配） | ✅ |
-| P4 · 抛光 | 移动端 pinch zoom / 路线动画微调 / 深链接 / SEO meta | 低 | ✅ |
+| P0 · 基础设施 | yaml schema / build 脚本 / MiniSearch / `_template.yaml` / 空图谱组件 | 低 | [v] |
+| P1 · SD-WAN 域优先 | 写 SD-WAN 域 ~40 个概念 + 布局 + 3 条 metro 线 + `/graph` 路由 | 中（内容工作量） | [v] |
+| P2 · 其他 6 域 | 基础 / 安全 / 云原生 / 运维 / 进阶 / 前沿 | 中 | [v] |
+| P3 · 术语 hover + 搜索 | term-scanner / MiniSearch UI / TermTooltip | 中（误匹配） | [v] |
+| P4 · 抛光 | 移动端 pinch zoom / 路线动画微调 / 深链接 / SEO meta | 低 | [v] |
 
 每个 Phase 单独 commit + 部署，可独立回滚。
 

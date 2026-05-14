@@ -3,8 +3,8 @@ title: SDN 软件定义网络：网络控制的革命
 description: 介绍 SDN 核心概念、控制面与数据面分离，以及可编程网络带来的灵活性与创新。
 ---
 
-> 📋 **前置知识**：[IP 寻址与路由](/guide/basics/routing)、[网络拓扑详解](/guide/architecture/topology)
-> ⏱️ **阅读时间**：约 12 分钟
+> <Icon name="clipboard-list" color="cyan" /> **前置知识**：[IP 寻址与路由](/guide/basics/routing)、[网络拓扑详解](/guide/architecture/topology)
+> ⏱ **阅读时间**：约 12 分钟
 
 # SDN 软件定义网络：网络控制的革命
 
@@ -380,11 +380,11 @@ SDN 带来新的安全挑战：
   title="SDN 实施场景评估" 
   :headers="['场景类型', '适用度', '关键收益', '实施建议']"
   :rows="[
-    ['数据中心网络', '★★★★★', '动态资源调度<br/>多租户隔离<br/>自动化运维', '从叶脊架构开始<br/>逐步引入 SDN 控制'],
-    ['企业园区网', '★★★☆☆', '策略统一管理<br/>网络可视化<br/>安全增强', '混合部署<br/>渐进式迁移'],
-    ['分支网络连接', '★★★★☆', '成本降低<br/>敏捷部署<br/>集中管控', '采用 SD-WAN 方案<br/>云化控制器'],
-    ['运营商网络', '★★★☆☆', 'NFV 支撑<br/>服务创新<br/>网络切片', '从边缘开始<br/>核心网逐步演进'],
-    ['云网络服务', '★★★★★', '弹性扩缩容<br/>资源池化<br/>服务自动化', '原生云设计<br/>微服务架构']
+    ['数据中心网络', '<span class=&quot;ic-star&quot;></span><span class=&quot;ic-star&quot;></span><span class=&quot;ic-star&quot;></span><span class=&quot;ic-star&quot;></span><span class=&quot;ic-star&quot;></span>', '动态资源调度<br/>多租户隔离<br/>自动化运维', '从叶脊架构开始<br/>逐步引入 SDN 控制'],
+    ['企业园区网', '<span class=&quot;ic-star&quot;></span><span class=&quot;ic-star&quot;></span><span class=&quot;ic-star&quot;></span><span class=&quot;ic-star&quot;></span><span class=&quot;ic-star&quot;></span>', '策略统一管理<br/>网络可视化<br/>安全增强', '混合部署<br/>渐进式迁移'],
+    ['分支网络连接', '<span class=&quot;ic-star&quot;></span><span class=&quot;ic-star&quot;></span><span class=&quot;ic-star&quot;></span><span class=&quot;ic-star&quot;></span><span class=&quot;ic-star&quot;></span>', '成本降低<br/>敏捷部署<br/>集中管控', '采用 SD-WAN 方案<br/>云化控制器'],
+    ['运营商网络', '<span class=&quot;ic-star&quot;></span><span class=&quot;ic-star&quot;></span><span class=&quot;ic-star&quot;></span><span class=&quot;ic-star&quot;></span><span class=&quot;ic-star&quot;></span>', 'NFV 支撑<br/>服务创新<br/>网络切片', '从边缘开始<br/>核心网逐步演进'],
+    ['云网络服务', '<span class=&quot;ic-star&quot;></span><span class=&quot;ic-star&quot;></span><span class=&quot;ic-star&quot;></span><span class=&quot;ic-star&quot;></span><span class=&quot;ic-star&quot;></span>', '弹性扩缩容<br/>资源池化<br/>服务自动化', '原生云设计<br/>微服务架构']
   ]"
   :columnWidths="['25%', '15%', '30%', '30%']"
 />
@@ -436,4 +436,4 @@ graph TD
 | 适用场景 | 数据中心网络、云计算平台、大规模网络自动化 |
 | 局限性 | 控制器单点风险、南向接口标准化不足、传统设备兼容问题 |
 
-> 📖 **下一步学习**：[SDN 控制器架构](/guide/sdn/controllers) — 深入了解 SDN 的"大脑"如何实现与选型
+> <Icon name="book-open" color="cyan" /> **下一步学习**：[SDN 控制器架构](/guide/sdn/controllers) — 深入了解 SDN 的"大脑"如何实现与选型

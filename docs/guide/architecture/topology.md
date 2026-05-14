@@ -35,11 +35,11 @@ graph TB
 ```
 
 **特点**：
-- ✓ 简单易管理
-- ✓ 低成本（分支少时）
-- ✗ 单点故障（总部故障全网瘫痪）
-- ✗ 分支间通信需经过总部（Hair Pinning）
-- ✓ 最常见的企业网络
+- <Icon name="check" color="green" /> 简单易管理
+- <Icon name="check" color="green" /> 低成本（分支少时）
+- <Icon name="x" color="danger" /> 单点故障（总部故障全网瘫痪）
+- <Icon name="x" color="danger" /> 分支间通信需经过总部（Hair Pinning）
+- <Icon name="check" color="green" /> 最常见的企业网络
 
 ### 2. 网状（Mesh）拓扑
 
@@ -66,10 +66,10 @@ graph TB
 ```
 
 **特点**：
-- ✓ 极高可靠性
-- ✓ 最优路由
-- ✗ 成本巨高（N 个节点需 N×(N-1)/2 条链路）
-- ✗ 管理复杂
+- <Icon name="check" color="green" /> 极高可靠性
+- <Icon name="check" color="green" /> 最优路由
+- <Icon name="x" color="danger" /> 成本巨高（N 个节点需 N×(N-1)/2 条链路）
+- <Icon name="x" color="danger" /> 管理复杂
 
 #### 部分网状
 
@@ -102,10 +102,10 @@ graph TB
 ```
 
 **特点**：
-- ✓ 高可靠（任一线路故障不影响）
-- ✓ 负载均衡（两条链路都工作）
-- ✓ 成本适中
-- ✓ SD-WAN 时代的标准配置
+- <Icon name="check" color="green" /> 高可靠（任一线路故障不影响）
+- <Icon name="check" color="green" /> 负载均衡（两条链路都工作）
+- <Icon name="check" color="green" /> 成本适中
+- <Icon name="check" color="green" /> SD-WAN 时代的标准配置
 
 ---
 
@@ -257,10 +257,10 @@ graph TB
 ├──────────┬────────┬────────┬────────────┤
 │ 拓扑     │ 成本   │ 延迟   │ 可靠性     │
 ├──────────┼────────┼────────┼────────────┤
-│ Star     │ 低 💰  │ 中等   │ 低 🔴      │
-│ Mesh     │ 高 💰💰│ 最低   │ 高 🟢      │
-│ DP       │ 中 💰  │ 低     │ 中高 🟡    │
-│ Hybrid   │ 中 💰  │ 低     │ 中 🟡      │
+│ Star     │ 低 [$]  │ 中等   │ 低 (red)      │
+│ Mesh     │ 高 [$][$]│ 最低   │ 高 (grn)      │
+│ DP       │ 中 [$]  │ 低     │ 中高 (ylw)    │
+│ Hybrid   │ 中 [$]  │ 低     │ 中 (ylw)      │
 └──────────┴────────┴────────┴────────────┘
 ```
 

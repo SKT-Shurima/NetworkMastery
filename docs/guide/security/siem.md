@@ -3,8 +3,8 @@ title: SIEM与安全运营中心：企业威胁检测与响应体系
 description: 构建企业级SIEM（安全信息与事件管理）平台——日志采集架构、关联规则、威胁检测、SOAR自动化响应与SOC运营指标，打造有效的安全运营能力
 ---
 
-> 📋 **前置知识**：[IDS/IPS系统](/guide/security/ids-ips)、[网络监控](/guide/ops/monitoring)
-> ⏱️ **阅读时间**：约20分钟
+> <Icon name="clipboard-list" color="cyan" /> **前置知识**：[IDS/IPS系统](/guide/security/ids-ips)、[网络监控](/guide/ops/monitoring)
+> ⏱ **阅读时间**：约20分钟
 
 # SIEM与安全运营中心：企业威胁检测与响应体系
 

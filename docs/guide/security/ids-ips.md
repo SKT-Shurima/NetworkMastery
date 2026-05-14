@@ -3,8 +3,8 @@ title: IDS/IPS：入侵检测与防御系统深度解析
 description: 全面理解入侵检测系统（IDS）与入侵防御系统（IPS）的检测引擎原理、部署模式、特征规则管理与在企业纵深防御体系中的实战配置
 ---
 
-> 📋 **前置知识**：[防火墙技术](/guide/security/firewall)、[网络安全架构](/guide/attacks/security-arch)
-> ⏱️ **阅读时间**：约18分钟
+> <Icon name="clipboard-list" color="cyan" /> **前置知识**：[防火墙技术](/guide/security/firewall)、[网络安全架构](/guide/attacks/security-arch)
+> ⏱ **阅读时间**：约18分钟
 
 # IDS/IPS：入侵检测与防御系统深度解析
 

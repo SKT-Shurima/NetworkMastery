@@ -3,8 +3,8 @@ title: 企业Wi-Fi规划与射频优化
 description: 系统掌握无线网络容量规划、AP选型部署、信道规划、射频优化与无线控制器架构设计的工程方法论
 ---
 
-> 📋 **前置知识**：[Wi-Fi 6/7标准](/guide/wireless/wifi-standards)、[企业网络架构](/guide/enterprise/traditional)
-> ⏱️ **阅读时间**：约20分钟
+> <Icon name="clipboard-list" color="cyan" /> **前置知识**：[Wi-Fi 6/7标准](/guide/wireless/wifi-standards)、[企业网络架构](/guide/enterprise/traditional)
+> ⏱ **阅读时间**：约20分钟
 
 # 企业Wi-Fi规划与射频优化
 

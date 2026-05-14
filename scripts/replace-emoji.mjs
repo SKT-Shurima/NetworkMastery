@@ -36,7 +36,16 @@ if (targets.length === 0) {
 // so we can strip orphaned modifiers.
 const EMOJI_PATTERN = /([\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}\u{1F000}-\u{1F2FF}])\u{FE0F}?|\u{FE0F}/gu
 
+// Paths to skip even when found inside the requested target.
+// These contain authored references to emoji that must NOT be replaced.
+const SKIP_PATHS = ['superpowers/specs', 'superpowers/brainstorm']
+
+function shouldSkip(path) {
+  return SKIP_PATHS.some((s) => path.includes(s))
+}
+
 function collectFiles(target) {
+  if (shouldSkip(target)) return []
   const stat = statSync(target)
   if (stat.isFile()) {
     return target.endsWith('.md') ? [target] : []
@@ -47,6 +56,7 @@ function collectFiles(target) {
       // Skip build output and vendored content
       if (entry.name === 'dist' || entry.name === 'node_modules' || entry.name.startsWith('.')) continue
       const full = join(target, entry.name)
+      if (shouldSkip(full)) continue
       if (entry.isDirectory()) {
         out.push(...collectFiles(full))
       } else if (entry.isFile() && extname(entry.name) === '.md') {

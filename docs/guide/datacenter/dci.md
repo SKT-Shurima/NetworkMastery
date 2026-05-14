@@ -3,8 +3,8 @@ title: 数据中心互联（DCI）：多站点网络架构深度解析
 description: 掌握数据中心互联的核心技术——VXLAN DCI、EVPN多站点、OTV、暗光纤与波分复用，构建高可用的多数据中心网络基础设施
 ---
 
-> 📋 **前置知识**：[Spine-Leaf架构](/guide/datacenter/spine-leaf)、[VXLAN技术](/guide/advanced/vxlan)、[EVPN](/guide/routing/evpn)
-> ⏱️ **阅读时间**：约18分钟
+> <Icon name="clipboard-list" color="cyan" /> **前置知识**：[Spine-Leaf架构](/guide/datacenter/spine-leaf)、[VXLAN技术](/guide/advanced/vxlan)、[EVPN](/guide/routing/evpn)
+> ⏱ **阅读时间**：约18分钟
 
 # 数据中心互联（DCI）：多站点网络架构深度解析
 
@@ -332,8 +332,8 @@ flowchart LR
   DC-B ←── 仲裁链路 ──→ Quorum
 
 DCI链路断开：
-  DC-A → 联系Quorum → 获得仲裁权 → 继续服务 ✅
-  DC-B → 联系Quorum → 未获仲裁权 → 主动降级 ⏸️
+  DC-A → 联系Quorum → 获得仲裁权 → 继续服务 [v]
+  DC-B → 联系Quorum → 未获仲裁权 → 主动降级 ⏸
 ```
 
 **2. 延迟感知（RTT-based Failover）**

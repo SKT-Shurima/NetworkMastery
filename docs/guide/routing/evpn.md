@@ -3,8 +3,8 @@ title: EVPN：以太网VPN与数据中心Overlay融合方案
 description: 深入理解EVPN（Ethernet VPN）的BGP控制平面设计、五大Route Type的功能、VXLAN EVPN的MAC/IP学习机制与对称/不对称IRB路由模式
 ---
 
-> 📋 **前置知识**：[BGP路由协议](/guide/routing/bgp)、[VXLAN技术](/guide/advanced/vxlan)、[Spine-Leaf架构](/guide/architecture/topology)
-> ⏱️ **阅读时间**：约22分钟
+> <Icon name="clipboard-list" color="cyan" /> **前置知识**：[BGP路由协议](/guide/routing/bgp)、[VXLAN技术](/guide/advanced/vxlan)、[Spine-Leaf架构](/guide/architecture/topology)
+> ⏱ **阅读时间**：约22分钟
 
 # EVPN：以太网VPN与数据中心Overlay融合方案
 
@@ -264,7 +264,7 @@ graph TB
         VM_A1["VM-A<br/>VNI 100"] -->|"① L3路由"| VTEP1_A["VTEP-1<br/>执行路由+桥接"]
         VTEP1_A -->|"② VXLAN VNI 200"| VTEP2_A["VTEP-2<br/>仅桥接"]
         VTEP2_A --> VM_B1["VM-B<br/>VNI 200"]
-        VTEP1_A -.->|"需要本地配置 VNI 200"| VNI200_note["⚠️ 所有VTEP需全量VNI"]
+        VTEP1_A -.->|"需要本地配置 VNI 200"| VNI200_note["[!] 所有VTEP需全量VNI"]
     end
 
     subgraph "对称 IRB（Symmetric IRB）"
@@ -272,7 +272,7 @@ graph TB
         VM_A2["VM-A<br/>VNI 100"] -->|"① 桥接到L2 VNI 100"| VTEP1_B["VTEP-1<br/>路由至L3 VNI"]
         VTEP1_B -->|"② VXLAN L3 VNI 9999<br/>（VRF标识）"| VTEP2_B["VTEP-2<br/>路由至L2 VNI 200"]
         VTEP2_B --> VM_B2["VM-B<br/>VNI 200"]
-        VTEP1_B -.->|"每VTEP只需本地VNI + L3 VNI"| L3VNI_note["✅ 无需全量VNI配置"]
+        VTEP1_B -.->|"每VTEP只需本地VNI + L3 VNI"| L3VNI_note["[v] 无需全量VNI配置"]
     end
 
     style VNI200_note fill:#4a1010,color:#ffcccc

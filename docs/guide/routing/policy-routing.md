@@ -3,8 +3,8 @@ title: 策略路由与路由重分发：精细化流量控制
 description: 掌握策略路由（PBR）的原理与配置，理解路由重分发的场景、种子度量值与路由环路防护，实现多协议环境下的精细化流量工程
 ---
 
-> 📋 **前置知识**：[IP路由基础](/guide/basics/routing)、[OSPF协议](/guide/routing/ospf)、[BGP协议](/guide/routing/bgp)
-> ⏱️ **阅读时间**：约18分钟
+> <Icon name="clipboard-list" color="cyan" /> **前置知识**：[IP路由基础](/guide/basics/routing)、[OSPF协议](/guide/routing/ospf)、[BGP协议](/guide/routing/bgp)
+> ⏱ **阅读时间**：约18分钟
 
 # 策略路由与路由重分发：精细化流量控制
 

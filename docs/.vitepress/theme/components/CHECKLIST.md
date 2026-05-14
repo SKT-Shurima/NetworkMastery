@@ -48,12 +48,12 @@
 **原因**: 标签未闭合
 
 ```vue
-<!-- ❌ 错误 -->
+<!-- [错误] -->
 <script setup>
 ...
 <template>
 
-<!-- ✅ 正确 -->
+<!-- [正确] -->
 <script setup>
 ...
 </script>
@@ -66,10 +66,10 @@
 **原因**: import 路径错误
 
 ```vue
-<!-- ❌ 错误 -->
+<!-- [错误] -->
 import { foo } from './bar'  // 文件不存在
 
-<!-- ✅ 正确 -->
+<!-- [正确] -->
 import { foo } from '../bar.js'  // 正确相对路径
 ```
 
@@ -78,12 +78,12 @@ import { foo } from '../bar.js'  // 正确相对路径
 **原因**: 语法错误（多余逗号、括号不匹配）
 
 ```vue
-<!-- ❌ 错误 -->
+<!-- [错误] -->
 const props = defineProps({
   title: String,
 })  // 多余逗号
 
-<!-- ✅ 正确 -->
+<!-- [正确] -->
 const props = defineProps({
   title: String
 })

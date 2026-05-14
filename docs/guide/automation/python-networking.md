@@ -3,8 +3,8 @@ title: Python网络编程：Netmiko与NAPALM实战
 description: 掌握Python网络自动化的核心库——Netmiko多厂商SSH连接、NAPALM统一抽象层，从脚本化运维到批量配置管理的完整实践
 ---
 
-> 📋 **前置知识**：[网络运维基础](/guide/ops/monitoring)、[NETCONF/YANG](/guide/automation/netconf-yang)
-> ⏱️ **阅读时间**：约20分钟
+> <Icon name="clipboard-list" color="cyan" /> **前置知识**：[网络运维基础](/guide/ops/monitoring)、[NETCONF/YANG](/guide/automation/netconf-yang)
+> ⏱ **阅读时间**：约20分钟
 
 # Python网络编程：Netmiko与NAPALM实战
 
@@ -630,15 +630,15 @@ if result['status'] == 'dry_run_ok' and input("确认提交？(y/n): ") == "y":
 
 | Getter方法 | IOS | IOS-XR | NX-OS | JunOS | EOS |
 |-----------|:---:|:------:|:-----:|:-----:|:---:|
-| get_facts | ✅ | ✅ | ✅ | ✅ | ✅ |
-| get_interfaces | ✅ | ✅ | ✅ | ✅ | ✅ |
-| get_bgp_neighbors | ✅ | ✅ | ✅ | ✅ | ✅ |
-| get_arp_table | ✅ | ✅ | ✅ | ✅ | ✅ |
-| get_route_to | ✅ | ✅ | ✅ | ✅ | ✅ |
-| get_lldp_neighbors | ✅ | ✅ | ✅ | ✅ | ✅ |
-| get_mac_address_table | ✅ | ❌ | ✅ | ✅ | ✅ |
-| load_replace_candidate | ✅ | ✅ | ✅ | ✅ | ✅ |
-| rollback | ✅ | ✅ | ✅ | ✅ | ✅ |
+| get_facts | <Icon name="check-circle-2" color="green" /> | <Icon name="check-circle-2" color="green" /> | <Icon name="check-circle-2" color="green" /> | <Icon name="check-circle-2" color="green" /> | <Icon name="check-circle-2" color="green" /> |
+| get_interfaces | <Icon name="check-circle-2" color="green" /> | <Icon name="check-circle-2" color="green" /> | <Icon name="check-circle-2" color="green" /> | <Icon name="check-circle-2" color="green" /> | <Icon name="check-circle-2" color="green" /> |
+| get_bgp_neighbors | <Icon name="check-circle-2" color="green" /> | <Icon name="check-circle-2" color="green" /> | <Icon name="check-circle-2" color="green" /> | <Icon name="check-circle-2" color="green" /> | <Icon name="check-circle-2" color="green" /> |
+| get_arp_table | <Icon name="check-circle-2" color="green" /> | <Icon name="check-circle-2" color="green" /> | <Icon name="check-circle-2" color="green" /> | <Icon name="check-circle-2" color="green" /> | <Icon name="check-circle-2" color="green" /> |
+| get_route_to | <Icon name="check-circle-2" color="green" /> | <Icon name="check-circle-2" color="green" /> | <Icon name="check-circle-2" color="green" /> | <Icon name="check-circle-2" color="green" /> | <Icon name="check-circle-2" color="green" /> |
+| get_lldp_neighbors | <Icon name="check-circle-2" color="green" /> | <Icon name="check-circle-2" color="green" /> | <Icon name="check-circle-2" color="green" /> | <Icon name="check-circle-2" color="green" /> | <Icon name="check-circle-2" color="green" /> |
+| get_mac_address_table | <Icon name="check-circle-2" color="green" /> | <Icon name="x-circle" color="danger" /> | <Icon name="check-circle-2" color="green" /> | <Icon name="check-circle-2" color="green" /> | <Icon name="check-circle-2" color="green" /> |
+| load_replace_candidate | <Icon name="check-circle-2" color="green" /> | <Icon name="check-circle-2" color="green" /> | <Icon name="check-circle-2" color="green" /> | <Icon name="check-circle-2" color="green" /> | <Icon name="check-circle-2" color="green" /> |
+| rollback | <Icon name="check-circle-2" color="green" /> | <Icon name="check-circle-2" color="green" /> | <Icon name="check-circle-2" color="green" /> | <Icon name="check-circle-2" color="green" /> | <Icon name="check-circle-2" color="green" /> |
 
 ---
 

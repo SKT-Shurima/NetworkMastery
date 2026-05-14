@@ -3,8 +3,8 @@ title: 基础设施即代码：Terraform网络资源管理
 description: 掌握IaC理念与Terraform核心原理，通过声明式配置管理云网络资源（VPC、子网、安全组、路由），实现版本化、可审计的网络基础设施
 ---
 
-> 📋 **前置知识**：[云网络基础](/guide/cloud/hybrid-networking)、[网络CI/CD](/guide/automation/network-cicd)
-> ⏱️ **阅读时间**：约18分钟
+> <Icon name="clipboard-list" color="cyan" /> **前置知识**：[云网络基础](/guide/cloud/hybrid-networking)、[网络CI/CD](/guide/automation/network-cicd)
+> ⏱ **阅读时间**：约18分钟
 
 # 基础设施即代码：Terraform 网络资源管理
 
@@ -832,7 +832,7 @@ jobs:
             github.rest.issues.create({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              title: '🚨 生产网络配置漂移检测到变化',
+              title: '[!!] 生产网络配置漂移检测到变化',
               body: '请检查 terraform plan 输出，确认是否有未经审批的手动变更。',
               labels: ['infrastructure', 'drift']
             })

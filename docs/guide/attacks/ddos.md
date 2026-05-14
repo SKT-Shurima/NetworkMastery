@@ -18,9 +18,9 @@ DDoS 攻击按照攻击的"目标层级"可以分为三类：
 ```mermaid
 graph TD
     subgraph "DDoS 攻击分类"
-        A["🌊 流量型攻击<br/>Layer 3-4"]
-        B["🔗 协议型攻击<br/>Layer 3-4"]
-        C["🎯 应用型攻击<br/>Layer 7"]
+        A["[wave] 流量型攻击<br/>Layer 3-4"]
+        B["[link] 协议型攻击<br/>Layer 3-4"]
+        C["[target] 应用型攻击<br/>Layer 7"]
     end
 
     A --> A1["UDP Flood"]

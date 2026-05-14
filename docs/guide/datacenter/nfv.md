@@ -3,8 +3,8 @@ title: 网络功能虚拟化（NFV）：从专用硬件到软件定义
 description: 深入理解NFV架构体系（ETSI NFV框架）、VNF生命周期管理、服务链（SFC）编排，以及NFV在运营商与企业网络中的落地实践
 ---
 
-> 📋 **前置知识**：[SDN基础](/guide/sdn/fundamentals)、[Spine-Leaf架构](/guide/datacenter/spine-leaf)、[容器网络](/guide/cloud/container-networking)
-> ⏱️ **阅读时间**：约18分钟
+> <Icon name="clipboard-list" color="cyan" /> **前置知识**：[SDN基础](/guide/sdn/fundamentals)、[Spine-Leaf架构](/guide/datacenter/spine-leaf)、[容器网络](/guide/cloud/container-networking)
+> ⏱ **阅读时间**：约18分钟
 
 # 网络功能虚拟化（NFV）：从专用硬件到软件定义
 

@@ -3,8 +3,8 @@ title: Azure云网络：虚拟网络与混合云架构
 description: 深入掌握Azure虚拟网络（VNet）设计、VNet Peering、Virtual WAN、ExpressRoute专线与Azure Firewall的企业级云网络架构实践
 ---
 
-> 📋 **前置知识**：[AWS云网络](/guide/cloud/aws-networking)、[混合云网络](/guide/cloud/hybrid-networking)
-> ⏱️ **阅读时间**：约18分钟
+> <Icon name="clipboard-list" color="cyan" /> **前置知识**：[AWS云网络](/guide/cloud/aws-networking)、[混合云网络](/guide/cloud/hybrid-networking)
+> ⏱ **阅读时间**：约18分钟
 
 # Azure云网络：虚拟网络与混合云架构
 

@@ -3,8 +3,8 @@ title: eBPF网络可观测性：内核级流量洞察
 description: 深入理解eBPF（扩展伯克利包过滤器）技术架构、XDP高性能包处理、TC流量控制与基于eBPF的网络可观测性工具（Cilium、Pixie、bpftrace）的应用实践
 ---
 
-> 📋 **前置知识**：[Kubernetes网络](/guide/cloud/kubernetes-networking)、[网络监控](/guide/ops/monitoring)
-> ⏱️ **阅读时间**：约18分钟
+> <Icon name="clipboard-list" color="cyan" /> **前置知识**：[Kubernetes网络](/guide/cloud/kubernetes-networking)、[网络监控](/guide/ops/monitoring)
+> ⏱ **阅读时间**：约18分钟
 
 # eBPF网络可观测性：内核级流量洞察
 
@@ -53,9 +53,9 @@ graph TB
 
     subgraph KernelSpace["内核空间 (Kernel Space)"]
         subgraph BPF_SUBSYS["eBPF 子系统"]
-            VERIFIER["🔒 Verifier 验证器<br/>(安全、终止性、内存检查)"]
-            JIT["⚡ JIT 编译器<br/>(字节码 → 本机机器码)"]
-            MAPS["📊 BPF Maps<br/>(数据共享存储)"]
+            VERIFIER["[lock] Verifier 验证器<br/>(安全、终止性、内存检查)"]
+            JIT["[fast] JIT 编译器<br/>(字节码 → 本机机器码)"]
+            MAPS["[chart] BPF Maps<br/>(数据共享存储)"]
         end
 
         subgraph HOOKS["挂载点 (Hook Points)"]
@@ -129,7 +129,7 @@ flowchart LR
     SRC["BPF C 源码"] --> CLANG["Clang 编译<br/>(-target bpf)"]
     CLANG --> BC["BPF 字节码<br/>(.o ELF 文件)"]
     BC --> LOAD["bpf() 系统调用<br/>加载到内核"]
-    LOAD --> VER{{"🔒 Verifier<br/>验证"}}
+    LOAD --> VER{{"[lock] Verifier<br/>验证"}}
     VER -->|"通过"| JIT["JIT 编译<br/>→ 本机码"]
     VER -->|"拒绝"| ERR["返回错误<br/>(-EINVAL)"]
     JIT --> ATTACH["attach 到<br/>Hook Point"]
@@ -560,7 +560,7 @@ tetra getevents -o compact --pods frontend \
   --event-types PROCESS_KPROBE
 
 # 示例输出：
-# 🔴 SIGKILL  nginx/pod-abc  tcp_connect  dst=203.0.113.1:4444
+# (red) SIGKILL  nginx/pod-abc  tcp_connect  dst=203.0.113.1:4444
 #    (已检测到矿池连接，Tetragon 自动终止进程)
 ```
 

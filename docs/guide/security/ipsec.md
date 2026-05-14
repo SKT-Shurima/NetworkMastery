@@ -25,9 +25,9 @@ IPSec：
   应用无感知，完全透明
   
 正因如此，IPSec 是：
-  ✓ ISP 用来连接分支机构
-  ✓ 政府用来保护机密通信
-  ✓ 企业 VPN 的标准选择
+  [v] ISP 用来连接分支机构
+  [v] 政府用来保护机密通信
+  [v] 企业 VPN 的标准选择
 ```
 
 ---
@@ -59,9 +59,9 @@ graph TD
 加密后：[IP 报头][ESP 报头][TCP 报头][数据][ESP 尾][认证]
 
 特点：
-  ✓ 开销小（只加密上层协议）
-  ✓ 不改变 IP 报头（防火墙友好）
-  ✗ 报头泄露（能看到源 IP、目标 IP、端口号）
+  [v] 开销小（只加密上层协议）
+  [v] 不改变 IP 报头（防火墙友好）
+  [x] 报头泄露（能看到源 IP、目标 IP、端口号）
   
 用途：
   - 端到端 VPN（两台电脑直接通信）
@@ -78,9 +78,9 @@ graph TD
         [ESP 尾][认证]
 
 特点：
-  ✓ 完全隐藏原始包（包括源/目标 IP）
-  ✗ 开销大（多了一层 IP 报头）
-  ✓ 支持非直连的路由器（重新封装 IP 报头）
+  [v] 完全隐藏原始包（包括源/目标 IP）
+  [x] 开销大（多了一层 IP 报头）
+  [v] 支持非直连的路由器（重新封装 IP 报头）
   
 用途：
   - VPN 网关之间（站点到站点）
@@ -179,8 +179,8 @@ AH（Authentication Header）：
 
 功能：只提供"完整性验证"和"身份验证"，不加密
 特点：
-  ✓ 轻量级
-  ✗ 数据还是明文，隐私性差
+  [v] 轻量级
+  [x] 数据还是明文，隐私性差
 
 
 ESP（Encapsulating Security Payload）：
@@ -198,9 +198,9 @@ ESP（Encapsulating Security Payload）：
 
 功能：加密 + 完整性检查
 特点：
-  ✓ 既保密又验证
-  ✓ 功能完整
-  ✓ 开销适中
+  [v] 既保密又验证
+  [v] 功能完整
+  [v] 开销适中
 
 现实中，99% 的 IPSec 部署都用 ESP
 因为它既要安全（加密），也要验证（完整性）
@@ -390,9 +390,9 @@ show crypto engine connections active
    原因：加密/解密是 CPU 密集操作
    诊断：top 命令看 CPU 使用率，esp/ah 进程占用 100%
    解决：
-     ✓ 启用硬件加速（AES-NI 指令集）
-     ✓ 降低加密强度（AES-128 而非 AES-256）
-     ✓ 升级更强的 CPU
+     [v] 启用硬件加速（AES-NI 指令集）
+     [v] 降低加密强度（AES-128 而非 AES-256）
+     [v] 升级更强的 CPU
    
 2. MTU 问题
    原因：IPSec 报头增加开销，导致包超过 MTU
@@ -400,19 +400,19 @@ show crypto engine connections active
    诊断：ping -M do -s 1400 目标
         看是否能通过
    解决：
-     ✓ 调整 MTU = 1500 - IPSec开销（通常50-60字节）
+     [v] 调整 MTU = 1500 - IPSec开销（通常50-60字节）
         ip link set dev eth0 mtu 1440
-     ✓ 启用 Path MTU Discovery
-     ✓ 防火墙允许 ICMP "Fragmentation Needed"
+     [v] 启用 Path MTU Discovery
+     [v] 防火墙允许 ICMP "Fragmentation Needed"
 
 3. 重传过多
    原因：IPSec 报文丢失，需要重新协商
    诊断：show crypto engine connections active
         看 #pkts compressed 和 #pkts dropped
    解决：
-     ✓ 检查网络质量（丢包、延迟）
-     ✓ 增加 IKE 超时时间
-     ✓ 改用 UDP 4500（NAT-T），穿透更好
+     [v] 检查网络质量（丢包、延迟）
+     [v] 增加 IKE 超时时间
+     [v] 改用 UDP 4500（NAT-T），穿透更好
 ```
 
 ---

@@ -5,8 +5,8 @@ description: 全面理解存储区域网络（SAN）的三大技术路线——i
 
 # 存储网络：iSCSI、FC与NVMe-oF深度解析
 
-> 📋 **前置知识**：[Spine-Leaf架构](/guide/datacenter/spine-leaf)、[以太网交换](/guide/basics/switching)
-> ⏱️ **阅读时间**：约18分钟
+> <Icon name="clipboard-list" color="cyan" /> **前置知识**：[Spine-Leaf架构](/guide/datacenter/spine-leaf)、[以太网交换](/guide/basics/switching)
+> ⏱ **阅读时间**：约18分钟
 
 ---
 

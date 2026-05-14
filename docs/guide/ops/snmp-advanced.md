@@ -3,8 +3,8 @@ title: SNMP v3与MIB管理：企业级网络监控基础
 description: 深入理解SNMP协议演进、SNMPv3安全模型（认证+加密）、MIB对象树导航、Trap告警设计与基于Net-SNMP和Prometheus SNMP Exporter的现代监控集成方案
 ---
 
-> 📋 **前置知识**：[网络监控体系](/guide/ops/monitoring)、[网络运维基础](/guide/ops/troubleshooting)
-> ⏱️ **阅读时间**：约16分钟
+> <Icon name="clipboard-list" color="cyan" /> **前置知识**：[网络监控体系](/guide/ops/monitoring)、[网络运维基础](/guide/ops/troubleshooting)
+> ⏱ **阅读时间**：约16分钟
 
 # SNMP v3 与 MIB 管理：企业级网络监控基础
 
