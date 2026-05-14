@@ -844,3 +844,90 @@ html {
 .VPNavBarSearchButton .search:hover {
   border-color: var(--nm-500) !important;
 }
+
+/* ============================================================ */
+/* MERMAID · Cyberpunk Container & Refinements                   */
+/* ============================================================ */
+
+/* 装框：每个 mermaid 图加深空底 + 霓虹边 + 内阴影 */
+.mermaid,
+div.language-mermaid,
+.vp-doc .mermaid {
+  background: radial-gradient(ellipse at center, #0b1230 0%, #050818 80%) !important;
+  border: 1px solid rgba(0, 212, 255, 0.18) !important;
+  border-radius: 12px !important;
+  padding: 24px !important;
+  margin: 24px 0 !important;
+  box-shadow:
+    0 0 40px rgba(0, 212, 255, 0.06),
+    inset 0 0 60px rgba(0, 0, 0, 0.4) !important;
+  position: relative;
+}
+
+/* 左上角小标识 */
+.mermaid::before,
+.vp-doc .mermaid::before {
+  content: '◫ DIAGRAM';
+  position: absolute;
+  top: 10px;
+  left: 14px;
+  font-family: 'JetBrains Mono', 'SF Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 2.5px;
+  color: rgba(0, 212, 255, 0.45);
+  pointer-events: none;
+}
+
+/* 让 SVG 文本可读性更好 */
+.mermaid svg {
+  background: transparent !important;
+}
+.mermaid svg text,
+.mermaid svg foreignObject {
+  font-family: 'JetBrains Mono', 'PingFang SC', sans-serif !important;
+}
+.mermaid svg .label foreignObject div,
+.mermaid svg .nodeLabel,
+.mermaid svg .edgeLabel {
+  color: #ffffff !important;
+  background-color: transparent !important;
+}
+.mermaid svg .edgeLabel rect,
+.mermaid svg .label rect {
+  fill: #050818 !important;
+  stroke: rgba(0, 212, 255, 0.3) !important;
+}
+/* 节点 hover 时的小高亮 */
+.mermaid svg .node:hover rect,
+.mermaid svg .node:hover circle,
+.mermaid svg .node:hover polygon,
+.mermaid svg .node:hover ellipse {
+  filter: drop-shadow(0 0 8px rgba(0, 212, 255, 0.6));
+  transition: filter 200ms ease;
+}
+
+/* 流向箭头加色 */
+.mermaid svg marker path {
+  fill: #00d4ff !important;
+  stroke: #00d4ff !important;
+}
+
+/* Sequence: 演员条加发光 */
+.mermaid svg line.actor-line,
+.mermaid svg .actor-line {
+  stroke-dasharray: 3 4;
+}
+
+/* 调一下加载占位 */
+.mermaid:not([data-processed="true"]) {
+  min-height: 60px;
+  color: rgba(0, 212, 255, 0.5);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.mermaid:not([data-processed="true"])::after {
+  content: '渲染中…';
+}

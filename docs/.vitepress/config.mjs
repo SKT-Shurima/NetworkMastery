@@ -470,29 +470,98 @@ export default withMermaid(
       },
     },
 
-    // ─── Mermaid 配置 (优化视觉效果) ───
+    // ─── Mermaid 配置 · Cyberpunk Theme ───
+    // 与 ConceptMap / KnowledgeGraph 视觉统一：
+    //   青 #00d4ff = 主节点 / 主线
+    //   洋红 #ec4899 = 强调节点
+    //   绿 #10b981 = 辅助 / 成功
+    //   深空蓝 #050818 / #0b1230 = 背景
     mermaid: {
       theme: 'base',
       themeVariables: {
-        primaryColor: '#0ea5e9',
+        // 全局背景与字体
+        background: '#0b1230',
+        fontFamily: '"JetBrains Mono", "Helvetica Neue", Helvetica, sans-serif',
+        fontSize: '14px',
+
+        // 主节点：深蓝底 + 青色霓虹边
+        primaryColor: '#1a1f3a',
         primaryTextColor: '#ffffff',
-        primaryBorderColor: '#0284c7',
-        lineColor: '#475569',
-        secondaryColor: '#06b6d4',
+        primaryBorderColor: '#00d4ff',
+
+        // 次节点：深紫底 + 洋红边
+        secondaryColor: '#2a1a3f',
         secondaryTextColor: '#ffffff',
-        secondaryBorderColor: '#0891b2',
-        tertiaryColor: '#10b981',
+        secondaryBorderColor: '#ec4899',
+
+        // 三级节点：深绿底 + 绿边
+        tertiaryColor: '#0a2218',
         tertiaryTextColor: '#ffffff',
-        tertiaryBorderColor: '#059669',
-        fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
-        fontSize: '16px',
-        fontSizeLarge: '18px',
-        borderRadius: '8px',
-        lineStrokeWidth: '2px',
-        accentColor: '#f59e0b',
-        dangerColor: '#ef4444',
-        warningColor: '#f59e0b',
+        tertiaryBorderColor: '#10b981',
+
+        // 线 / 边 / 默认主框
+        lineColor: '#00d4ff',
+        nodeBorder: '#00d4ff',
+        mainBkg: '#1a1f3a',
+        nodeTextColor: '#ffffff',
+        edgeLabelBackground: '#050818',
+        textColor: '#cfe8ff',
+        titleColor: '#ffffff',
+
+        // 分组（subgraph）：半透明青底 + 虚线边
+        clusterBkg: 'rgba(0, 212, 255, 0.06)',
+        clusterBorder: 'rgba(0, 212, 255, 0.4)',
+
+        // Sequence diagram
+        actorBkg: '#1a1f3a',
+        actorBorder: '#00d4ff',
+        actorTextColor: '#ffffff',
+        actorLineColor: 'rgba(0, 212, 255, 0.4)',
+        signalColor: '#5cdcff',
+        signalTextColor: '#cfe8ff',
+        labelBoxBkgColor: '#050818',
+        labelBoxBorderColor: '#ec4899',
+        labelTextColor: '#ff6bb6',
+        loopTextColor: '#cfe8ff',
+        noteBkgColor: '#2a1a3f',
+        noteBorderColor: '#ec4899',
+        noteTextColor: '#ffe4f0',
+        activationBkgColor: 'rgba(236, 72, 153, 0.18)',
+        activationBorderColor: '#ec4899',
+        sequenceNumberColor: '#0b1230',
+
+        // Gantt
+        sectionBkgColor: 'rgba(0, 212, 255, 0.06)',
+        altSectionBkgColor: 'rgba(236, 72, 153, 0.06)',
+        sectionBkgColor2: 'rgba(16, 185, 129, 0.06)',
+        taskBkgColor: '#1a1f3a',
+        taskTextColor: '#cfe8ff',
+        taskTextOutsideColor: '#cfe8ff',
+        taskTextLightColor: '#ffffff',
+        taskBorderColor: '#00d4ff',
+        gridColor: 'rgba(0, 212, 255, 0.15)',
+        doneTaskBkgColor: '#0a2218',
+        doneTaskBorderColor: '#10b981',
+        critBkgColor: 'rgba(236, 72, 153, 0.3)',
+        critBorderColor: '#ec4899',
+        todayLineColor: '#fbbf24',
+
+        // State diagram
+        labelColor: '#ffffff',
+        errorBkgColor: 'rgba(236, 72, 153, 0.2)',
+        errorTextColor: '#ff6bb6',
+
+        // Class diagram
+        classText: '#cfe8ff',
+
+        // 语义色 (success/warn/danger)
+        accentColor: '#fbbf24',
+        dangerColor: '#ec4899',
+        warningColor: '#fbbf24',
         successColor: '#10b981',
+
+        borderRadius: '6px',
+        lineStrokeWidth: '1.8px',
       },
       securityLevel: 'loose',
       startOnLoad: true,
@@ -504,7 +573,15 @@ export default withMermaid(
         htmlLabels: true,
         useMaxWidth: true,
         padding: 20,
-      }
+        curve: 'basis',
+      },
+      sequence: {
+        diagramMarginX: 50,
+        diagramMarginY: 16,
+        actorMargin: 64,
+        useMaxWidth: true,
+        showSequenceNumbers: false,
+      },
     },
     mermaidPlugin: {
       class: 'mermaid'
