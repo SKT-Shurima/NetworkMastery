@@ -63,6 +63,7 @@ function isCore(c) {
             :x1="seg.x1" :y1="seg.y1" :x2="seg.x2" :y2="seg.y2"
             :color="seg.color"
             :delay="i * -0.3"
+            :dimmed="seg.dimmed"
           />
         </g>
         <g class="cells">
