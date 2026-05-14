@@ -8,13 +8,14 @@ outline: false
 
 <script setup>
 import { onMounted, ref } from 'vue'
+import { withBase } from 'vitepress'
 
 const graphData = ref(null)
 const error = ref(null)
 
 onMounted(async () => {
   try {
-    const resp = await fetch('/data/graph.json')
+    const resp = await fetch(withBase('/data/graph.json'))
     if (!resp.ok) throw new Error(`HTTP ${resp.status}`)
     graphData.value = await resp.json()
   } catch (e) {

@@ -1,5 +1,6 @@
 <script setup>
-import { ref, computed, onMounted, watch } from 'vue'
+import { ref, computed, onMounted } from 'vue'
+import { withBase } from 'vitepress'
 import MiniSearch from 'minisearch'
 
 const props = defineProps({
@@ -25,7 +26,7 @@ const results = computed(() => {
 
 onMounted(async () => {
   try {
-    const resp = await fetch('/data/search-index.json')
+    const resp = await fetch(withBase('/data/search-index.json'))
     if (!resp.ok) throw new Error(`HTTP ${resp.status}`)
     const json = await resp.json()
     ms.value = MiniSearch.loadJSON(JSON.stringify(json), {
