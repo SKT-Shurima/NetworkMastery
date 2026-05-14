@@ -1,0 +1,16 @@
+# 安全域 hex 布局
+security:
+  hex_size: 26
+  origin: [320, 160]
+  cells:
+    # ROW 0
+    - { id: tls,      row: 0, col: -1 }
+    - { id: ipsec,    row: 0, col:  0 }
+
+    # ROW 1 (offset)
+    - { id: pki,      row: 1, col: -1 }
+    - { id: firewall, row: 1, col:  0 }
+    - { id: ddos,     row: 1, col:  1 }
+
+    # ROW 2
+    - { id: nac,      row: 2, col:  0 }
