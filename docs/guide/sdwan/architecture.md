@@ -3,6 +3,8 @@ title: SD-WAN 架构与控制面
 description: 讲解 SD-WAN 三平面分离、Controller、Orchestrator、vEdge 职责与企业级部署思路。
 ---
 
+<ConceptMap id="sdwan-arch" />
+
 > 📋 **前置知识**：[SD-WAN 概念与价值](/guide/sdwan/concepts)、[SDN 控制器架构](/guide/sdn/controllers)
 > ⏱️ **阅读时间**：约 15 分钟
 

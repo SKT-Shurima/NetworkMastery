@@ -730,9 +730,9 @@ onMounted(() => {
 
 .feature-card {
   position: relative;
-  background: rgba(10, 14, 39, 0.9);
+  background: linear-gradient(155deg, rgba(20, 27, 52, 0.96) 0%, rgba(8, 12, 32, 0.98) 100%);
   backdrop-filter: blur(16px);
-  border: 2px solid rgba(0, 240, 255, 0.4);
+  border: 1px solid rgba(0, 240, 255, 0.25);
   padding: 36px 28px;
   clip-path: polygon(20px 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%, 0 20px);
   transition: all 0.4s ease;
@@ -832,28 +832,30 @@ onMounted(() => {
 }
 
 .card-icon {
-  font-size: 4rem;
-  margin-bottom: 20px;
-  filter: drop-shadow(0 0 25px rgba(0, 240, 255, 0.8));
+  font-size: 3.2rem;
+  margin-bottom: 16px;
+  filter: drop-shadow(0 0 18px rgba(0, 240, 255, 0.55));
 }
 
 .card-title {
   font-family: var(--font-display);
-  font-size: 1.4rem;
+  font-size: 1.45rem;
   font-weight: 800;
-  color: var(--neon-cyan);
-  text-shadow: 0 0 20px rgba(0, 240, 255, 0.6);
+  color: #ffffff;
+  text-shadow: 0 0 1px rgba(0, 240, 255, 0.25);
   text-transform: uppercase;
-  letter-spacing: 0.1em;
-  margin: 0 0 16px 0;
+  letter-spacing: 0.08em;
+  margin: 0 0 14px 0;
   line-height: 1.3;
+  border-left: 3px solid var(--neon-cyan);
+  padding-left: 12px;
 }
 
 .card-details {
   font-family: var(--font-body);
-  font-size: 1.05rem;
-  color: rgba(255, 255, 255, 0.9);
-  line-height: 1.8;
+  font-size: 1rem;
+  color: rgba(203, 213, 225, 0.95);
+  line-height: 1.75;
   margin: 0 0 24px 0;
 }
 

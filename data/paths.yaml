@@ -1,0 +1,35 @@
+paths:
+  - id: entry
+    name_zh: 入门线
+    name_en: Getting Started
+    color: '#00d4ff'
+    description: 从 OSI 到 SD-WAN 的零基础路径
+    # osi(0,-2)→tcpip(0,-1) E
+    # tcpip(0,-1)→ip-routing(0,0) E
+    # ip-routing(0,0)→wan(1,0) SE (even row)
+    # wan(1,0)→sdwan-core(2,0) SW (odd row)
+    stops: [osi, tcpip, ip-routing, wan, sdwan-core]
+
+  - id: sdwan-deep
+    name_zh: SD-WAN 主线
+    name_en: SD-WAN Deep Dive
+    color: '#ec4899'
+    description: SD-WAN 五篇深度文章环绕核心
+    # concept(1,1)→arch(2,1) SW
+    # arch(2,1)→routing(3,1) SE
+    # routing(3,1)→security(3,0) W
+    # security(3,0)→zero-trust(3,-1) W
+    # zero-trust(3,-1)→sdwan-case(2,-1) NW
+    # sdwan-case(2,-1)→sdwan-core(2,0) E
+    stops: [sdwan-concept, sdwan-arch, sdwan-routing, sdwan-security, zero-trust, sdwan-case, sdwan-core]
+
+  - id: advanced
+    name_zh: 进阶线
+    name_en: Advanced
+    color: '#10b981'
+    description: 从 SDN 起步穿过 SD-WAN 到容器网络
+    # sdn(1,-1)→sdwan-case(2,-1) SW
+    # sdwan-case(2,-1)→sdwan-core(2,0) E
+    # sdwan-core(2,0)→sdwan-arch(2,1) E
+    # sdwan-arch(2,1)→container-network(2,2) E
+    stops: [sdn, sdwan-case, sdwan-core, sdwan-arch, container-network]

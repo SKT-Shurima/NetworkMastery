@@ -3,6 +3,8 @@ title: SD-WAN 安全设计：零信任架构在实践中
 description: 剖析 SD-WAN 安全模型与零信任落地，对比传统边界安全与多层防护实践。
 ---
 
+<ConceptMap id="sdwan-security" />
+
 > 📋 **前置知识**：[SD-WAN 智能路由](/guide/sdwan/routing)、[IPSec 协议详解](/guide/security/ipsec)
 > ⏱️ **阅读时间**：约 12 分钟
 

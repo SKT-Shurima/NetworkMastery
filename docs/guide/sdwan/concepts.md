@@ -3,6 +3,8 @@ title: SD-WAN 概念与价值
 description: 介绍 SD-WAN 诞生的背景、核心价值与工作原理，帮助理解为何需要 SD-WAN。
 ---
 
+<ConceptMap id="sdwan-concept" />
+
 > 📋 **前置知识**：[广域网 (WAN)](/guide/enterprise/wan)、[SDN 基础理论](/guide/sdn/fundamentals)
 > ⏱️ **阅读时间**：约 18 分钟
 

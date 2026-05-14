@@ -1,0 +1,26 @@
+# 概念定义模板。复制此文件改名为 <domain>.yaml 后填写。
+# 文件名以 _ 开头会被 build 跳过。
+
+domain:
+  id: example                    # 域 id（与文件名匹配），全局唯一
+  name_zh: 示例域
+  name_en: Example Domain
+  color: cyan                    # cyan | magenta | green | purple | amber
+  default: false                 # 是否为默认进入的 tab（最多 1 个 yaml 设 true）
+  order: 99                      # tab 排列顺序
+
+concepts:
+  - id: example-concept              # 全局唯一 id（kebab-case）
+    name_zh: 示例概念
+    name_en: Example Concept         # 可选
+    short: 一句话通俗解释，hover 显示。 # 必填，1-2 句
+    long: |                          # 可选段落级展开（drawer 显示）
+      多行内容。可用 markdown。
+    level: L1                        # L1/L2/L3/L4
+    aliases: [近义词1, 近义词2]        # 可选，模糊搜索同义词
+    neighbors:                       # 必填，邻居概念 id 列表
+      - other-concept-id
+    canonical:                       # 可选，深度阅读跳转
+      file: /guide/xxx/yyy.md
+      anchor: '#some-heading'
+    is_hub: false                    # 可选，是否本域核心节点

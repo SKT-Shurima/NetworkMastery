@@ -470,29 +470,184 @@ export default withMermaid(
       },
     },
 
-    // ─── Mermaid 配置 (优化视觉效果) ───
+    // ─── Mermaid 配置 · Cyberpunk Theme ───
+    // 与 ConceptMap / KnowledgeGraph 视觉统一
+    //
+    // 关键策略：
+    // 1) htmlLabels: false  → 强制走 SVG <text>，避免 foreignObject 里的内联 style 干扰
+    // 2) themeCSS 内联到 SVG 内部 → 优先级最高，绕开所有外部覆盖问题
     mermaid: {
-      theme: 'base',
+      theme: 'dark',                // 用 mermaid 内置 dark 主题做基础，对比度天然高
+      themeCSS: `
+        /* === Force node fills + text === */
+        g.node rect, g.node circle, g.node ellipse, g.node polygon, g.node path,
+        .nodes g rect, .nodes g circle, .nodes g ellipse, .nodes g polygon {
+          fill: #233156 !important;
+          stroke: #00d4ff !important;
+          stroke-width: 1.8px !important;
+        }
+        g.node:hover rect, g.node:hover circle, g.node:hover ellipse, g.node:hover polygon {
+          fill: #2f4373 !important;
+        }
+        /* Text inside nodes — fill is what matters for SVG text */
+        g.node text, g.node tspan, g.node .nodeLabel,
+        text.nodeLabel, .nodeLabel, .label text, .label tspan {
+          fill: #ffffff !important;
+          color: #ffffff !important;
+          stroke: none !important;
+          font-weight: 700 !important;
+          font-size: 14px !important;
+          font-family: 'JetBrains Mono', 'PingFang SC', sans-serif !important;
+        }
+        /* Edge / arrow / line */
+        path.flowchart-link, .edgePath .path, path.edge {
+          stroke: #5cdcff !important;
+          stroke-width: 2 !important;
+          fill: none !important;
+        }
+        defs marker path, marker path {
+          fill: #5cdcff !important;
+          stroke: #5cdcff !important;
+        }
+        /* Edge labels (the small text on arrows) */
+        .edgeLabel, .edgeLabel rect, g.edgeLabel rect {
+          background-color: transparent !important;
+          fill: #050818 !important;
+          stroke: rgba(0,212,255,0.4) !important;
+        }
+        .edgeLabel text, .edgeLabel tspan, g.edgeLabel text {
+          fill: #5cdcff !important;
+          font-weight: 600 !important;
+          font-size: 12px !important;
+        }
+        /* Cluster (subgraph) */
+        .cluster rect, .cluster polygon {
+          fill: rgba(0,212,255,0.05) !important;
+          stroke: rgba(0,212,255,0.4) !important;
+          stroke-dasharray: 4 4 !important;
+        }
+        .cluster text, .cluster-label text, .cluster .nodeLabel {
+          fill: #5cdcff !important;
+          font-size: 12px !important;
+          font-weight: 700 !important;
+          letter-spacing: 1.5px !important;
+          text-transform: uppercase !important;
+        }
+        /* Sequence diagram */
+        .actor { fill: #233156 !important; stroke: #00d4ff !important; }
+        text.actor, text.actor tspan { fill: #ffffff !important; font-weight: 700 !important; }
+        line.actor-line, .actor-line { stroke: rgba(0,212,255,0.4) !important; stroke-dasharray: 3 5 !important; }
+        .messageLine0, .messageLine1, line.messageLine0, line.messageLine1 {
+          stroke: #5cdcff !important; stroke-width: 1.8 !important;
+        }
+        text.messageText, .messageText { fill: #cfe8ff !important; font-weight: 500 !important; }
+        rect.activation0, rect.activation1, rect.activation2 {
+          fill: rgba(236,72,153,0.25) !important; stroke: #ec4899 !important;
+        }
+        rect.note, .note rect { fill: rgba(236,72,153,0.18) !important; stroke: #ec4899 !important; }
+        text.noteText, .noteText { fill: #ffe4f0 !important; font-style: italic !important; }
+        rect.labelBox { fill: rgba(236,72,153,0.22) !important; stroke: #ec4899 !important; }
+        text.labelText, .labelText { fill: #ff6bb6 !important; font-weight: 700 !important; }
+        .loopLine { stroke: rgba(236,72,153,0.5) !important; stroke-dasharray: 3 4 !important; }
+        /* Class / State */
+        .classGroup rect, .stateGroup rect { fill: #233156 !important; stroke: #00d4ff !important; }
+        .classTitle, .classLabel, .stateLabel,
+        g.stateGroup text, g.classGroup text { fill: #ffffff !important; font-weight: 600 !important; }
+        /* Pie */
+        text.pieTitleText { fill: #ffffff !important; font-size: 17px !important; font-weight: 700 !important; }
+        text.slice { fill: #ffffff !important; font-weight: 600 !important; }
+        .legend text { fill: #cfe8ff !important; }
+        /* Gantt */
+        rect.task { fill: #2f4373 !important; stroke: #00d4ff !important; }
+        rect.task.done { fill: #0a2218 !important; stroke: #10b981 !important; }
+        rect.task.crit { fill: rgba(236,72,153,0.35) !important; stroke: #ec4899 !important; }
+        .taskText, .taskTextOutsideRight, .taskTextOutsideLeft { fill: #ffffff !important; font-weight: 600 !important; }
+        .grid .tick line { stroke: rgba(0,212,255,0.15) !important; }
+      `,
       themeVariables: {
-        primaryColor: '#0ea5e9',
+        // 全局背景与字体
+        background: '#0b1230',
+        fontFamily: '"JetBrains Mono", "Helvetica Neue", Helvetica, sans-serif',
+        fontSize: '14px',
+
+        // 主节点：深蓝底 + 青色霓虹边
+        primaryColor: '#1a1f3a',
         primaryTextColor: '#ffffff',
-        primaryBorderColor: '#0284c7',
-        lineColor: '#475569',
-        secondaryColor: '#06b6d4',
+        primaryBorderColor: '#00d4ff',
+
+        // 次节点：深紫底 + 洋红边
+        secondaryColor: '#2a1a3f',
         secondaryTextColor: '#ffffff',
-        secondaryBorderColor: '#0891b2',
-        tertiaryColor: '#10b981',
+        secondaryBorderColor: '#ec4899',
+
+        // 三级节点：深绿底 + 绿边
+        tertiaryColor: '#0a2218',
         tertiaryTextColor: '#ffffff',
-        tertiaryBorderColor: '#059669',
-        fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
-        fontSize: '16px',
-        fontSizeLarge: '18px',
-        borderRadius: '8px',
-        lineStrokeWidth: '2px',
-        accentColor: '#f59e0b',
-        dangerColor: '#ef4444',
-        warningColor: '#f59e0b',
+        tertiaryBorderColor: '#10b981',
+
+        // 线 / 边 / 默认主框
+        lineColor: '#00d4ff',
+        nodeBorder: '#00d4ff',
+        mainBkg: '#1a1f3a',
+        nodeTextColor: '#ffffff',
+        edgeLabelBackground: '#050818',
+        textColor: '#cfe8ff',
+        titleColor: '#ffffff',
+
+        // 分组（subgraph）：半透明青底 + 虚线边
+        clusterBkg: 'rgba(0, 212, 255, 0.06)',
+        clusterBorder: 'rgba(0, 212, 255, 0.4)',
+
+        // Sequence diagram
+        actorBkg: '#1a1f3a',
+        actorBorder: '#00d4ff',
+        actorTextColor: '#ffffff',
+        actorLineColor: 'rgba(0, 212, 255, 0.4)',
+        signalColor: '#5cdcff',
+        signalTextColor: '#cfe8ff',
+        labelBoxBkgColor: '#050818',
+        labelBoxBorderColor: '#ec4899',
+        labelTextColor: '#ff6bb6',
+        loopTextColor: '#cfe8ff',
+        noteBkgColor: '#2a1a3f',
+        noteBorderColor: '#ec4899',
+        noteTextColor: '#ffe4f0',
+        activationBkgColor: 'rgba(236, 72, 153, 0.18)',
+        activationBorderColor: '#ec4899',
+        sequenceNumberColor: '#0b1230',
+
+        // Gantt
+        sectionBkgColor: 'rgba(0, 212, 255, 0.06)',
+        altSectionBkgColor: 'rgba(236, 72, 153, 0.06)',
+        sectionBkgColor2: 'rgba(16, 185, 129, 0.06)',
+        taskBkgColor: '#1a1f3a',
+        taskTextColor: '#cfe8ff',
+        taskTextOutsideColor: '#cfe8ff',
+        taskTextLightColor: '#ffffff',
+        taskBorderColor: '#00d4ff',
+        gridColor: 'rgba(0, 212, 255, 0.15)',
+        doneTaskBkgColor: '#0a2218',
+        doneTaskBorderColor: '#10b981',
+        critBkgColor: 'rgba(236, 72, 153, 0.3)',
+        critBorderColor: '#ec4899',
+        todayLineColor: '#fbbf24',
+
+        // State diagram
+        labelColor: '#ffffff',
+        errorBkgColor: 'rgba(236, 72, 153, 0.2)',
+        errorTextColor: '#ff6bb6',
+
+        // Class diagram
+        classText: '#cfe8ff',
+
+        // 语义色 (success/warn/danger)
+        accentColor: '#fbbf24',
+        dangerColor: '#ec4899',
+        warningColor: '#fbbf24',
         successColor: '#10b981',
+
+        borderRadius: '6px',
+        lineStrokeWidth: '1.8px',
       },
       securityLevel: 'loose',
       startOnLoad: true,
@@ -501,10 +656,18 @@ export default withMermaid(
         fontSize: 14,
       },
       flowchart: {
-        htmlLabels: true,
+        htmlLabels: true,         // 必须 true：节点标签里有 <br/> 换行
         useMaxWidth: true,
         padding: 20,
-      }
+        curve: 'basis',
+      },
+      sequence: {
+        diagramMarginX: 50,
+        diagramMarginY: 16,
+        actorMargin: 64,
+        useMaxWidth: true,
+        showSequenceNumbers: false,
+      },
     },
     mermaidPlugin: {
       class: 'mermaid'

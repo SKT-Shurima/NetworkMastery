@@ -1,0 +1,31 @@
+# SD-WAN tab 的 hex 布局。
+# row 偶数：col 直接对应。row 奇数：自动向右偏半宽。
+# 中心 (320, 160) = row 2, col 0
+sdwan:
+  hex_size: 26
+  origin: [320, 160]
+  cells:
+    # ROW 0 (basics 横栏)
+    - { id: osi,               row: 0, col: -2 }
+    - { id: tcpip,             row: 0, col: -1 }
+    - { id: ip-routing,        row: 0, col:  0 }
+
+    # ROW 1 (offset, 过渡层)
+    - { id: sdn,               row: 1, col: -1 }
+    - { id: wan,               row: 1, col:  0 }
+    - { id: sdwan-concept,     row: 1, col:  1 }
+
+    # ROW 2 (核心层 SD-WAN 横腰)
+    - { id: sdwan-case,        row: 2, col: -1 }
+    - { id: sdwan-core,        row: 2, col:  0 }
+    - { id: sdwan-arch,        row: 2, col:  1 }
+    - { id: container-network, row: 2, col:  2 }
+
+    # ROW 3 (offset, 安全/路由)
+    - { id: zero-trust,        row: 3, col: -1 }
+    - { id: sdwan-security,    row: 3, col:  0 }
+    - { id: sdwan-routing,     row: 3, col:  1 }
+
+    # ROW 4 (深入细节)
+    - { id: link-scoring,      row: 4, col:  1 }
+    - { id: dpi,               row: 4, col:  2 }

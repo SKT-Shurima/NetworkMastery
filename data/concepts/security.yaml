@@ -1,0 +1,75 @@
+domain:
+  id: security
+  name_zh: 安全
+  name_en: Security
+  color: cyan
+  default: false
+  order: 4
+
+concepts:
+  - id: tls
+    name_zh: TLS 协议
+    name_en: Transport Layer Security
+    short: HTTPS 背后的加密协议，对传输内容做端到端保护。
+    long: |
+      握手阶段协商加密算法和密钥，之后用对称密钥加密所有数据。
+      握手内部用非对称加密（公钥/私钥）传递主密钥，证书由 PKI 体系签发。
+    level: L2
+    aliases: [HTTPS, SSL]
+    neighbors: [ipsec, pki]
+    canonical:
+      file: /guide/security/tls.md
+
+  - id: ipsec
+    name_zh: IPSec 协议
+    name_en: Internet Protocol Security
+    short: 网络层端到端加密，VPN 隧道的核心协议。
+    long: |
+      AH 提供完整性，ESP 提供加密 + 完整性。两种工作模式：传输模式只加密载荷，
+      隧道模式整个 IP 包再封装。IKE 协议负责密钥交换。
+    level: L2
+    aliases: [IPSec, IPsec]
+    neighbors: [tls, firewall, pki]
+    canonical:
+      file: /guide/security/ipsec.md
+    is_hub: true
+
+  - id: firewall
+    name_zh: 防火墙
+    name_en: Firewall
+    short: 按规则筛选流量的关卡，分包过滤、状态检测、应用网关三代。
+    level: L2
+    aliases: [Firewall, NGFW]
+    neighbors: [ipsec, pki, ddos, nac]
+    canonical:
+      file: /guide/security/firewall.md
+
+  - id: pki
+    name_zh: PKI 公钥基础设施
+    name_en: Public Key Infrastructure
+    short: 基于 CA 证书的信任体系，TLS 和 IPSec 都靠它发放身份。
+    level: L3
+    aliases: [PKI, 证书体系]
+    neighbors: [tls, ipsec, firewall, nac]
+    canonical:
+      file: /guide/security/pki.md
+
+  - id: ddos
+    name_zh: DDoS 攻击与防御
+    name_en: Distributed Denial of Service
+    short: 用海量流量打垮目标，防御靠流量清洗 + CDN + 限速。
+    level: L3
+    aliases: [DDoS, 分布式拒绝服务]
+    neighbors: [firewall]
+    canonical:
+      file: /guide/attacks/ddos.md
+
+  - id: nac
+    name_zh: NAC 网络准入控制
+    name_en: Network Access Control
+    short: 设备接入网络前先验明身份和健康度，达不到就隔离。
+    level: L3
+    aliases: [NAC, 802.1X]
+    neighbors: [pki, firewall]
+    canonical:
+      file: /guide/security/nac.md

@@ -13,7 +13,9 @@
       "Bash(npm run dev)",
       "Bash(npm run build)",
       "Bash(git add docs/.vitepress/theme/index.js)",
-      "Bash(git commit -m \"🔧 修复构建错误 - DefaultTheme 导入问题\n\n✅ 修复内容:\n- 修正 docs/.vitepress/theme/index.js 中的 DefaultTheme 导入\n- 构建测试成功通过\n- 开发服务器正常启动\n\n🎯 项目状态: 远程同步完成，功能正常\")"
+      "Bash(git commit -m \"🔧 修复构建错误 - DefaultTheme 导入问题\n\n✅ 修复内容:\n- 修正 docs/.vitepress/theme/index.js 中的 DefaultTheme 导入\n- 构建测试成功通过\n- 开发服务器正常启动\n\n🎯 项目状态: 远程同步完成，功能正常\")",
+      "Bash(git add *)",
+      "Bash(git commit *)"
     ],
     "deny": [],
     "ask": []
