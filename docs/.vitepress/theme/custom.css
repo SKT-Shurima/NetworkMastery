@@ -896,11 +896,13 @@ div.language-mermaid,
 .mermaid svg .node > path,
 .mermaid svg g.nodes g.node rect,
 .mermaid svg g.nodes g.node circle,
-.mermaid svg g.nodes g.node polygon {
+.mermaid svg g.nodes g.node polygon,
+.mermaid svg .nodes rect,
+.mermaid svg .nodes circle {
   fill: #233156 !important;             /* 中蓝灰：明显比背景亮 */
   stroke: #00d4ff !important;            /* 青霓虹边 */
-  stroke-width: 1.6 !important;
-  filter: drop-shadow(0 0 6px rgba(0, 212, 255, 0.25));
+  stroke-width: 1.8 !important;
+  filter: drop-shadow(0 0 8px rgba(0, 212, 255, 0.35));
   transition: filter 200ms ease, fill 200ms ease;
 }
 
@@ -913,26 +915,32 @@ div.language-mermaid,
   filter: drop-shadow(0 0 14px rgba(0, 212, 255, 0.65));
 }
 
-/* ============ 文字：纯白 + 黑色描边阴影确保可读 ============ */
+/* ============ 文字：无差别白字大法 ============ */
+/* 一切 SVG text + foreignObject 后代都纯白加粗 */
 .mermaid svg text,
-.mermaid svg .nodeLabel,
+.mermaid svg tspan,
+.mermaid svg foreignObject *,
+.mermaid svg foreignObject,
 .mermaid svg foreignObject div,
+.mermaid svg foreignObject span,
+.mermaid svg foreignObject p,
+.mermaid svg .nodeLabel,
+.mermaid svg .nodeLabel *,
 .mermaid svg .label,
-.mermaid svg .label foreignObject,
-.mermaid svg .label foreignObject div {
+.mermaid svg .label * {
   color: #ffffff !important;
   fill: #ffffff !important;
-  font-family: 'JetBrains Mono', 'PingFang SC', -apple-system, sans-serif !important;
-  font-size: 13.5px !important;
-  font-weight: 600 !important;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.85), 0 0 1px rgba(0, 0, 0, 1);
-}
-/* 节点内 div 包装 (htmlLabels 模式) */
-.mermaid svg .node .nodeLabel,
-.mermaid svg .node foreignObject div,
-.mermaid svg .node foreignObject span {
   background: transparent !important;
-  color: #ffffff !important;
+  background-color: transparent !important;
+  font-family: 'JetBrains Mono', 'PingFang SC', -apple-system, sans-serif !important;
+  font-size: 14px !important;
+  font-weight: 700 !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.95), 0 0 4px rgba(0, 0, 0, 0.85);
+  line-height: 1.4 !important;
+}
+/* foreignObject 容器本身保持可见 */
+.mermaid svg foreignObject {
+  overflow: visible !important;
 }
 
 /* ============ 边 / 箭头 ============ */
@@ -949,20 +957,33 @@ div.language-mermaid,
   fill: #5cdcff !important;
   stroke: #5cdcff !important;
 }
-/* 边的文本（hold edge labels） */
-.mermaid svg .edgeLabel,
-.mermaid svg .edgeLabel rect,
-.mermaid svg .edgeLabel foreignObject div {
-  background-color: rgba(5, 8, 24, 0.92) !important;
-  fill: #050818 !important;
-  color: #5cdcff !important;
-  font-size: 12px !important;
-  font-weight: 500 !important;
-  padding: 2px 6px !important;
-  border-radius: 4px !important;
+/* 边的文本（edge labels）：青色文字 + 深底小药丸 */
+.mermaid svg .edgeLabel {
+  background-color: transparent !important;
 }
-.mermaid svg .edgeLabel rect {
-  stroke: rgba(0, 212, 255, 0.35) !important;
+.mermaid svg .edgeLabel rect,
+.mermaid svg g.edgeLabel rect,
+.mermaid svg .label rect {
+  fill: #02040c !important;
+  stroke: rgba(0, 212, 255, 0.45) !important;
+  rx: 6 !important;
+  ry: 6 !important;
+}
+.mermaid svg .edgeLabel foreignObject,
+.mermaid svg .edgeLabel foreignObject div,
+.mermaid svg .edgeLabel foreignObject span,
+.mermaid svg g.edgeLabel text,
+.mermaid svg g.edgeLabel tspan {
+  color: #5cdcff !important;
+  fill: #5cdcff !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  text-shadow: none !important;
+  padding: 1px 6px !important;
+  background: #02040c !important;
+  background-color: #02040c !important;
+  border: 1px solid rgba(0, 212, 255, 0.4) !important;
+  border-radius: 5px !important;
 }
 
 /* ============ 分组 (subgraph) ============ */

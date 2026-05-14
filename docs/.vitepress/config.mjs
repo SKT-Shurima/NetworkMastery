@@ -477,7 +477,7 @@ export default withMermaid(
     // 1) htmlLabels: false  → 强制走 SVG <text>，避免 foreignObject 里的内联 style 干扰
     // 2) themeCSS 内联到 SVG 内部 → 优先级最高，绕开所有外部覆盖问题
     mermaid: {
-      theme: 'base',
+      theme: 'dark',                // 用 mermaid 内置 dark 主题做基础，对比度天然高
       themeCSS: `
         /* === Force node fills + text === */
         g.node rect, g.node circle, g.node ellipse, g.node polygon, g.node path,
@@ -656,7 +656,7 @@ export default withMermaid(
         fontSize: 14,
       },
       flowchart: {
-        htmlLabels: false,
+        htmlLabels: true,         // 必须 true：节点标签里有 <br/> 换行
         useMaxWidth: true,
         padding: 20,
         curve: 'basis',
