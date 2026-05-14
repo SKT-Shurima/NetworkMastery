@@ -3,6 +3,8 @@ title: SD-WAN 实战案例：真实企业场景深度分析
 description: 通过制造业等真实企业场景，展示 SD-WAN 如何解决成本、扩展与业务问题。
 ---
 
+<ConceptMap id="sdwan-case" />
+
 > 📋 **前置知识**：[SD-WAN 概念与价值](/guide/sdwan/concepts)、[SD-WAN 架构设计](/guide/sdwan/architecture)
 > ⏱️ **阅读时间**：约 20 分钟
 

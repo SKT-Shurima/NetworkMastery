@@ -100,7 +100,7 @@ concepts:
 
   - id: zero-trust
     name_zh: 零信任
-    short: "永远验证，从不信任"——SD-WAN 安全模型的基石。
+    short: '"永远验证，从不信任"——SD-WAN 安全模型的基石。'
     level: L3
     aliases: [Zero Trust, ZTNA]
     neighbors: [sdwan-security]

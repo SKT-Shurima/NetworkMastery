@@ -4,6 +4,7 @@ import RoughDiagram from './components/RoughDiagram.vue'
 import WideTable from './components/WideTable.vue'
 import CyberpunkHome from './components/CyberpunkHome.vue'
 import KnowledgeGraph from './components/KnowledgeGraph.vue'
+import ConceptMap from './components/ConceptMap.vue'
 
 export default {
   extends: DefaultTheme,
@@ -12,5 +13,6 @@ export default {
     app.component('WideTable', WideTable)
     app.component('CyberpunkHome', CyberpunkHome)
     app.component('KnowledgeGraph', KnowledgeGraph)
+    app.component('ConceptMap', ConceptMap)
   }
 }

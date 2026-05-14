@@ -3,6 +3,8 @@ title: 智能路由与流量优化
 description: 掌握 SD-WAN 应用感知路由、路径选择与流量工程，设计与优化企业流量策略。
 ---
 
+<ConceptMap id="sdwan-routing" />
+
 > 📋 **前置知识**：[SD-WAN 架构与控制面](/guide/sdwan/architecture)、[IP 寻址与路由](/guide/basics/routing)
 > ⏱️ **阅读时间**：约 15 分钟
 
