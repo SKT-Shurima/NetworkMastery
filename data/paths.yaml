@@ -1,0 +1,12 @@
+paths:
+  - id: entry
+    name_zh: 入门线
+    name_en: Getting Started
+    color: '#00d4ff'
+    description: 从 OSI 到 SD-WAN 的零基础路径
+    # 验证每对相邻 stop 是 layout 中的 hex 邻居
+    # osi(0,-2)→tcpip(0,-1) E
+    # tcpip(0,-1)→ip-routing(0,0) E
+    # ip-routing(0,0)→wan(1,0) SE (even row)
+    # wan(1,0)→sdwan-core(2,0) SW (odd row)
+    stops: [osi, tcpip, ip-routing, wan, sdwan-core]

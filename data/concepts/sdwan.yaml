@@ -17,7 +17,7 @@ concepts:
       链路打分（延迟/丢包/抖动），按业务类型动态选路。
     level: L2
     aliases: [软件定义广域网, sd wan, sdwan]
-    neighbors: [wan, sdwan-concept, sdwan-arch, sdwan-routing, sdwan-security, sdwan-case]
+    neighbors: [wan, sdn, sdwan-concept, sdwan-arch, sdwan-routing, sdwan-security, sdwan-case]
     canonical:
       file: /guide/sdwan/concepts.md
     is_hub: true
@@ -58,7 +58,7 @@ concepts:
     name_zh: 安全设计
     short: 隧道加密 + 零信任 + 分段，端到端保护。
     level: L2
-    neighbors: [sdwan-core, sdwan-routing, sdwan-case]
+    neighbors: [sdwan-core, sdwan-routing, sdwan-case, zero-trust]
     canonical:
       file: /guide/sdwan/security.md
 
