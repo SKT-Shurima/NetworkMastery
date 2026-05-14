@@ -1,0 +1,108 @@
+domain:
+  id: sdwan
+  name_zh: SD-WAN
+  name_en: Software-Defined WAN
+  color: magenta
+  default: true
+  order: 3
+
+concepts:
+  - id: sdwan-core
+    name_zh: SD-WAN
+    name_en: Software-Defined WAN
+    short: 用软件智能调度多条物理链路的广域网技术。
+    long: |
+      想象你管 200 家门店的网络，每家有 MPLS 专线 + 普通宽带 + 4G 备份。
+      传统路由器只会按 IP 选路，不知道视频会议应该走哪条。SD-WAN 给每条
+      链路打分（延迟/丢包/抖动），按业务类型动态选路。
+    level: L2
+    aliases: [软件定义广域网, sd wan, sdwan]
+    neighbors: [wan, sdwan-concept, sdwan-arch, sdwan-routing, sdwan-security, sdwan-case]
+    canonical:
+      file: /guide/sdwan/concepts.md
+    is_hub: true
+
+  - id: sdwan-concept
+    name_zh: 概念与价值
+    short: SD-WAN 解决了哪 5 个传统网络痛点。
+    level: L1
+    neighbors: [sdwan-core, sdwan-arch]
+    canonical:
+      file: /guide/sdwan/concepts.md
+
+  - id: sdwan-arch
+    name_zh: 架构与控制面
+    short: Controller + CPE + 隧道网络的三层架构。
+    long: |
+      Controller 是大脑：拓扑发现、应用识别、链路评分、动态选路决策。
+      CPE 是手脚：在分支建立隧道、按 Controller 指令转发、本地 QoS。
+    level: L2
+    aliases: [Controller, CPE]
+    neighbors: [sdwan-core, sdwan-concept, sdwan-routing, container-network]
+    canonical:
+      file: /guide/sdwan/architecture.md
+
+  - id: sdwan-routing
+    name_zh: 智能路由
+    short: 按应用类型 + 链路质量动态选路，不再只看 IP。
+    long: |
+      关键能力：DPI 识别应用 → 链路评分（延迟/抖动/丢包）→ 策略匹配 →
+      选最优路径。视频走低延迟链路，文件走大带宽链路，4G 作兜底。
+    level: L2
+    aliases: [动态路由, 智能选路]
+    neighbors: [sdwan-core, sdwan-arch, sdwan-security, link-scoring, dpi]
+    canonical:
+      file: /guide/sdwan/routing.md
+
+  - id: sdwan-security
+    name_zh: 安全设计
+    short: 隧道加密 + 零信任 + 分段，端到端保护。
+    level: L2
+    neighbors: [sdwan-core, sdwan-routing, sdwan-case]
+    canonical:
+      file: /guide/sdwan/security.md
+
+  - id: sdwan-case
+    name_zh: 实战案例
+    short: 连锁零售、跨境企业、混合云三类典型场景落地。
+    level: L3
+    neighbors: [sdwan-core, sdwan-security]
+    canonical:
+      file: /guide/sdwan/cases.md
+
+  - id: dpi
+    name_zh: 深度包检测 DPI
+    name_en: Deep Packet Inspection
+    short: 不只看 IP 头，还看应用层内容，识别这是视频/文件/网页。
+    level: L3
+    aliases: [DPI, 应用识别]
+    neighbors: [sdwan-routing, link-scoring]
+    canonical:
+      file: /guide/sdwan/routing.md
+      anchor: '#dpi-深度包检测'
+
+  - id: link-scoring
+    name_zh: 链路评分
+    short: 实时测量延迟、抖动、丢包率，给每条链路打个综合分。
+    level: L3
+    neighbors: [sdwan-routing, dpi]
+    canonical:
+      file: /guide/sdwan/routing.md
+      anchor: '#链路评分算法'
+
+  - id: container-network
+    name_zh: 容器网络
+    short: SD-WAN 与 Kubernetes / 服务网格的融合点。
+    level: L3
+    neighbors: [sdwan-arch]
+    canonical:
+      file: /guide/cloud/container-networking.md
+
+  - id: zero-trust
+    name_zh: 零信任
+    short: "永远验证，从不信任"——SD-WAN 安全模型的基石。
+    level: L3
+    aliases: [Zero Trust, ZTNA]
+    neighbors: [sdwan-security]
+    canonical:
+      file: /guide/security/zero-trust.md
